@@ -4,7 +4,7 @@ This repository contains dotfiles for my system.
 
 ## Installation
 
-* Install `git` and `stow` on your system.
+* Install `git` and `stow` on your system. For arch, use:
 ```
 pacman -S git stow --needed
 ```
