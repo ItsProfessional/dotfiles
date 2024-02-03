@@ -1,0 +1,19 @@
+#!/bin/sh
+
+send_notification() {
+  brightness=$(printf "%.0f\n" "$(brillo -G)")
+
+  #notify-send -a "change-brightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%"
+  echo $brightness > /tmp/wobpipe
+}
+
+case $1 in
+up)
+  brillo -q -u 150000 -A 0.3
+  send_notification
+  ;;
+down)
+  brillo -q -u 150000 -U 0.3
+  send_notification
+  ;;
+esac

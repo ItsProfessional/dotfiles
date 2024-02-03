@@ -1,0 +1,25 @@
+#!/bin/sh
+
+for name in $(awk 'END { for (name in ENVIRON) { print name; } }' < /dev/null)
+do
+  val="$(awk 'END { printf "%s", ENVIRON["'"$NAME"'"]; }' < /dev/null)"
+
+  # SystemD
+  systemctl --user import-environment "$name"
+
+  # Tmux
+  #tmux setenv -g "$name" "$val"
+done
+
+# DBUS
+dbus-update-activation-environment --systemd --all
+
+# Zsh
+# Note: this requires a trap function (preferably in .zshenv): (without it, zsh will just exit)
+  # TRAPUSR1() {
+  #  if [[ -o INTERACTIVE ]]; then
+  #     exec zsh
+  #  fi
+  #}
+#killall -USR1 zsh
+

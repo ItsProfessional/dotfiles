@@ -1,0 +1,15 @@
+#!/bin/sh
+
+case $1 in
+dim)
+  # save brightness
+  brillo -q -G > /tmp/prev_backlight
+
+  # dim
+  brillo -q -u 150000 -S 40
+	;;
+undim)
+  # set brightness from saved value
+  brillo -q -u 150000 -S $(/usr/bin/cat /tmp/prev_backlight)
+	;;
+esac

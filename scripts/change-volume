@@ -1,0 +1,54 @@
+#!/bin/sh
+
+send_notification() {
+  if wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q "[MUTED]"; then
+    volume=0
+  else 
+    volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed -n 's/Volume: \([0-9.]*\).*/\1/p' | awk '{printf "%.0f", $1 * 100}')
+  fi
+
+  #notify-send -a "changevolume" -u low -r 9993 -h int:value:"$volume" -i "speaker-volume" "Volume: ${volume}%"
+  echo $volume > /tmp/wobpipe
+}
+
+send_notification_mic() {
+  if wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q "[MUTED]"; then
+    volume=0
+  else 
+    volume=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed -n 's/Volume: \([0-9.]*\).*/\1/p' | awk '{printf "%.0f", $1 * 100}')
+  fi
+
+  #notify-send -a "changevolume" -u low -r 9993 -h int:value:"$volume" -i "mic-volume" "Volume: ${volume}%"
+  echo $volume > /tmp/wobpipe
+}
+
+case $1 in
+up)
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+  wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+  send_notification
+  ;;
+down)
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+  wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%-
+  send_notification
+  ;;
+micup)
+  wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+  wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%+
+  send_notification_mic
+  ;;
+micdown)
+  wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0
+  wpctl set-volume -l 1 @DEFAULT_AUDIO_SOURCE@ 5%-
+  send_notification_mic
+  ;;
+deafen)
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+  send_notification
+;;
+mute)
+  wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+  send_notification_mic
+  ;;
+esac

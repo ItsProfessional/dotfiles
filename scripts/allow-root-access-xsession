@@ -1,0 +1,5 @@
+#!/bin/sh
+
+xhost +SI:localuser:$(whoami)
+xhost +SI:localuser:root
+

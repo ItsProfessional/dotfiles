@@ -1,0 +1,9 @@
+#!/bin/sh
+
+TMPFILE="$(mktemp)"
+rate-mirrors --allow-root --save=$TMPFILE arch --max-delay=21600
+mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+mv $TMPFILE /etc/pacman.d/mirrorlist
+chmod 644 /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+paccache-clear
+pacman -Syyuu
