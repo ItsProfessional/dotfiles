@@ -1,0 +1,64 @@
+import = ["/home/iprf/.config/alacritty/catppuccin/catppuccin-mocha.toml"]
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[font]
+size = 11
+
+[font.bold]
+family = "JetBrainsMono"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrainsMono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Super|Shift"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mods = "Shift"
+mouse = "Middle"
+
+[[mouse.bindings]]
+action = "Paste"
+mods = "Shift"
+mouse = "Right"
+
+[[mouse.bindings]]
+action = "None"
+mouse = "Middle"
+
+[[mouse.bindings]]
+action = "None"
+mouse = "Right"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = false
+
+[window]
+opacity = 1
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 10
+y = 10

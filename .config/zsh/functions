@@ -1,0 +1,90 @@
+# lfcd
+lfcd () {
+    tmp="$(mktemp)"
+    # `command` is needed in case `lfcd` is aliased to `lf`
+    command lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        command rm -f "$tmp" # command is needed in case rm is verbose via aliases
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+
+
+
+preload() {
+  PID=$(/bin/pgrep $1 | head -n 1)
+  if [[ ! $PID ]]; then
+    echo "$1" is not running
+    return
+  fi
+
+  # Get rid of "COMMAND" prefix using sed
+  COMMAND=$(/bin/ps -p $PID -o args | sed -e 's/COMMAND//g')
+
+  # Get rid of leading "\n"
+  COMMAND="${COMMAND//[$'\t\r\n']}"
+
+  pkill "$1"
+  hyprctl dispatch exec "$COMMAND"
+}
+
+
+# quick edit configs
+c() {
+  # zsh
+  if [ "$1" = "zr" ]; then $EDITOR ~/.config/zsh/.zshrc; fi
+  if [ "$1" = "ze" ]; then $EDITOR ~/.config/zsh/.zshenv; fi
+  if [ "$1" = "zp" ]; then $EDITOR ~/.config/zsh/.zprofile; fi
+  if [ "$1" = "zl" ]; then $EDITOR ~/.config/zsh/.zlogin; fi
+
+  # wms
+  if [ "$1" = "sw" ]; then $EDITOR ~/.config/sway/config; fi
+  if [ "$1" = "hl" ]; then $EDITOR ~/.config/hypr/hyprland.conf; fi
+  if [ "$1" = "qt" ]; then $EDITOR ~/.config/qtile/config.py.; fi
+  if [ "$1" = "wb" ]; then $EDITOR ~/.config/waybar/config; fi
+  if [ "$1" = "wbs" ]; then $EDITOR ~/.config/waybar/style.css; fi
+
+  # wallpaper daemons
+  if [ "$1" = "hp" ]; then $EDITOR ~/.config/hypr/hyprpaper.conf; fi
+  if [ "$1" = "wp" ]; then $EDITOR ~/.config/wpaperd/wallpaper.toml; fi
+
+
+  if [ "$1" = "si" ]; then $EDITOR ~/.config/swayidle/config; fi
+  if [ "$1" = "wls" ]; then $EDITOR ~/.config/wlogout/style.css; fi
+  if [ "$1" = "han" ]; then $EDITOR ~/.config/hyprland-autoname-workspaces/config.toml; fi
+  if [ "$1" = "lf" ]; then $EDITOR ~/.config/lf/lfrc; fi
+  if [ "$1" = "bm" ]; then $EDITOR ~/.config/bemenu/config; fi
+
+  # common shell files
+  if [ "$1" = "a" ]; then $EDITOR ~/.config/zsh/aliases; fi
+  if [ "$1" = "env" ]; then $EDITOR ~/.config/zsh/.zshenv; fi
+  if [ "$1" = "fn" ]; then $EDITOR ~/.config/zsh/functions; fi
+  if [ "$1" = "ce" ]; then $EDITOR ~/.config/zsh/.zshenv; fi
+  if [ "$1" = "cfn" ]; then $EDITOR ~/.config/zsh/functions; fi
+  if [ "$1" = "cl" ]; then $EDITOR ~/.config/zsh/.zlogin; fi
+  if [ "$1" = "cp" ]; then $EDITOR ~/.config/zsh/.zprofile; fi
+  if [ "$1" = "cr" ]; then $EDITOR ~/.config/zsh/.zshrc; fi
+
+  # programs
+  if [ "$1" = "ac" ]; then $EDITOR ~/.config/alacritty/alacritty.yml; fi
+  if [ "$1" = "wt" ]; then $EDITOR ~/.config/wezterm/wezterm.lua; fi
+  if [ "$1" = "p10k" ]; then $EDITOR ~/.config/zsh/.p10k.zsh; fi
+  if [ "$1" = "tm" ]; then $EDITOR ~/.config/tmux/tmux.conf; fi
+  if [ "$1" = "ff" ]; then $EDITOR ~/.config/fastfetch/config.conf; fi
+  if [ "$1" = "pf" ]; then $EDITOR ~/.config/pfetchrc; fi
+  if [ "$1" = "tofi" ]; then $EDITOR ~/.config/tofi/config; fi
+  if [ "$1" = "xm" ]; then $EDITOR ~/.config/xremap/config.yml; fi
+  if [ "$1" = "sl" ]; then $EDITOR ~/.config/swaylock/config; fi
+  if [ "$1" = "nv" ]; then $EDITOR ~/.config/nvim/init.lua; fi
+
+  # syste wide configuration files
+  if [ "$1" = "doas" ]; then sudo $EDITOR /etc/doas.conf; fi
+  if [ "$1" = "greetd" ]; then sudo $EDITOR /etc/greetd/config.toml; fi
+  if [ "$1" = "pac" ]; then sudo $EDITOR /etc/pacman.conf; fi
+
+}

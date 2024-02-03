@@ -1,0 +1,5 @@
+[General]
+theme=Nordic-Darker#
+
+[Applications]
+Catppuccin-Mocha-Blue=kate

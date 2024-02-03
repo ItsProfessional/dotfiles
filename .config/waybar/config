@@ -1,0 +1,143 @@
+{
+    "layer": "top",
+    "height": 31,
+    "spacing": 0,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "backlight", "disk", "battery", "clock", "tray"],
+
+    "backlight": {
+      "tooltip": false,
+      "device": "intel_backlight",
+      "format": "{icon} {percent}%",
+      "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+
+    "wlr/workspaces": {
+         "on-click": "activate",
+         "all-outputs": true,
+    },
+
+    "hyprland/window": {
+         "max-length": 120,
+         "rewrite": {
+          "^(.*) — (?:Mozilla Firefox|Firefox Developer Edition)( Private Browsing)?$": "$1",
+          "^(.*) - Discord$": "$1",
+          "^(.*) • - Sublime Text$": "$1",
+        },
+    },
+
+
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+
+    "idle_inhibitor": {
+    	"tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        //"format-bluetooth": "{icon} {volume}% {format_source}",
+        //"format-bluetooth-muted": " {icon} {format_source}",
+        "format": "{icon} {volume}% {format_source}",
+        "format-muted": " {format_source}",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": " {icon}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+
+    "network": {
+        // "format-wifi": "{essid} ({signalStrength}%)",
+        // "format-ethernet": "{ipaddr}/{cidr}",
+        "format": "",
+        "format-disconnected": "󰖪",
+        "tooltip-format": "{ifname} via {gwaddr}",
+    },
+
+    "memory": {
+        "format": "{percentage}%"
+    },
+
+    "cpu": {
+        "format": "{usage}%",
+        "tooltip": false
+    },
+
+    "disk": {
+        "format": "󰋊 {percentage_used}%",
+    },
+
+    "battery": {
+        "states": {
+            "good": 85,
+            "warning": 40,
+            "critical": 30
+        },
+        //"format": "{capacity}%",
+        //"format-charging": "{capacity}%^",
+        //"format-plugged": "{capacity}%!",
+
+        "format": "{icon}  {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""],
+	      "interval": 1
+    },
+
+    "clock": {
+        "tooltip": false,
+        //"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%I/%H:%M:%S %d/%m/%y}",
+	//"timezones": ["Asia/Kolkata", "Universal", "US/Pacific", "US/Eastern"],
+        "interval": 1
+    },
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    }
+}

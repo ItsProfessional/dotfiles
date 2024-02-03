@@ -1,0 +1,76 @@
+modmap:
+  - name: Global
+    remap:
+      CapsLock: Esc
+
+      # Remap RightAlt to Super
+      RightAlt: RightMeta
+
+      # Disable middle click to paste
+      BTN_MIDDLE:
+        press: { launch: ["sh", "-c", "wl-copy -pc && xsel -nc"] }
+        release: { launch: ["sh", "-c", "wl-copy -pc && xsel -nc"] }
+      
+keymap:
+  - name: Global
+    exact_match: true 
+    remap:
+
+      # Have the ctrl+alt+fn hotkeys work with my mapped right super key
+      Ctrl-RightMeta-F1: Ctrl-LeftAlt-F1
+      Ctrl-RightMeta-F2: Ctrl-LeftAlt-F2
+      Ctrl-RightMeta-F3: Ctrl-LeftAlt-F3
+      Ctrl-RightMeta-F4: Ctrl-LeftAlt-F4
+      Ctrl-RightMeta-F5: Ctrl-LeftAlt-F5
+      Ctrl-RightMeta-F6: Ctrl-LeftAlt-F6
+      Ctrl-RightMeta-F7: Ctrl-LeftAlt-F7
+      Ctrl-RightMeta-F8: Ctrl-LeftAlt-F8
+      Ctrl-RightMeta-F9: Ctrl-LeftAlt-F9
+      Ctrl-RightMeta-F10: Ctrl-LeftAlt-F10
+      Ctrl-RightMeta-F11: Ctrl-LeftAlt-F11
+      Ctrl-RightMeta-F12: Ctrl-LeftAlt-F12
+
+  - name: Firefox
+    remap:
+
+      # Enable Alt+Left/Right on firefox on linux just like windows
+      Alt-Left: Ctrl-LeftBrace
+      Alt-Right: Ctrl-RightBrace
+
+      # block dumb hotkeys
+      Ctrl-Q: Reserved
+      Ctrl-LeftMeta-Q: Reserved
+      Ctrl-RightMeta-Q: Reserved
+
+      # for my instinct of using ctrl+shift+c in terminal
+      Ctrl-Shift-C: Ctrl-C
+
+      # always force a hard page refresh
+      Ctrl-R: Ctrl-Shift-R
+
+      # On windows, firefox uses ctrl+num to switch to tabs, but on linux it uses alt instead. this ports the windows hotkeys to linux
+      Ctrl-1: Alt-1
+      Ctrl-2: Alt-2
+      Ctrl-3: Alt-3
+      Ctrl-4: Alt-4
+      Ctrl-5: Alt-5
+      Ctrl-6: Alt-6
+      Ctrl-7: Alt-7
+      Ctrl-8: Alt-8
+      Ctrl-9: Alt-9
+
+      # alt-9 switches to the last tab, instead of the 9th tab. so to easily go to the first tab near the 9 key, I have this
+      Alt-0: Alt-1
+      Ctrl-0: Alt-1
+
+    application:
+      only: firefox
+  - name: Chromium
+    exact_match: true
+    remap:
+      # Firefox-like hotkeys for chromium
+      Ctrl-LeftBrace: Alt-Left
+      Ctrl-RightBrace: Alt-Right
+
+    application:
+      only: chromium

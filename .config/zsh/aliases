@@ -1,0 +1,313 @@
+# command flags
+# verbose and interactive
+alias cp='cp -v' #-iv
+alias mv='mv -v' #-iv
+alias rm='rm -v' #-vI
+alias mkdir='mkdir -pv'
+alias trash='trash -v'
+alias trash-put='trash-put -v'
+
+# colored output
+alias ls='eza --icons --group-directories-first'
+alias grep='grep --color=always'
+alias less='less -R --use-color -Dd+r\$Du+b\$'
+alias ip='ip -color=auto'
+
+# core stuff
+alias ps='ps auxf'
+alias ping='ping -c 10'
+alias tree='tree -CAhF --dirsfirst'
+alias treed='tree -CAFd'
+alias df='df -hT'
+alias du='du -sh'
+alias date='date "+%a %d/%m/%y %I:%M:%S:%3N %p"'
+
+# other programs
+alias multitail='multitail --no-repeat -c'
+alias xsettingsd='xsettingsd -c ~/.config/xsettingsd'
+alias fd='fd -u'
+alias adb='HOME="$XDG_DATA_HOME"/android adb'
+alias dust='dust --reverse'
+
+# replace programs
+alias cat='bat'
+alias locate='plocate'
+alias code='codium'
+alias edit="$EDITOR"
+alias exa="eza"
+alias yay='paru'
+alias neofetch='fastfetch'
+alias grimshot='grimblast'
+alias lf='lfcd'
+alias sxiv='nsxiv'
+
+
+# shell commands
+alias history='history 0' # show full history
+alias cd='z'
+
+# auto-elevate commands
+alias ufw='sudo ufw'
+alias updatedb='sudo updatedb'
+alias downgrade='sudo downgrade'
+
+
+
+
+
+# program aliases
+# core utils
+alias open='xdg-open'
+alias path='realpath'
+alias ren='mv -v' #-iv
+alias cls='clear'
+alias updb='sudo updatedb'
+alias py='python3'
+alias fix='fuck'
+alias f='fuck'
+alias rdd='rmdir'
+alias rd='rm -rfv'
+alias md='mkdir'
+alias ex='export'
+alias cmd='type'
+alias fdu='du -h --max-depth=1'
+alias sc='systemctl'
+alias s='sudo'
+alias egrep='grep -E'
+alias fgrep='grep -F'
+
+# editor
+alias vi="$EDITOR"
+alias vim="$EDITOR"
+alias v="$EDITOR"
+alias vv="sudoedit"
+alias nv='nvim'
+alias sv="sudoedit"
+alias vf='vim $(fzf)'
+alias intellij='idea'
+
+# package manager
+alias pc='pacman'
+alias p='paru'
+
+# sudo aliases
+#alias sudo='doas'
+#alias sudoedit='doasedit'
+
+# trash
+alias tp='trash-put -v'
+alias trr='trash-restore'
+alias trl='trash-list'
+alias tre='trash-empty'
+
+# interpretors and compilers
+alias python='python3'
+
+# youtube dl
+alias youtube-dl='yt-dlp'
+alias yt-dl='yt-dlp'
+
+# media programs
+alias nb='newsboat'
+alias za='zathura'
+
+# other programs
+alias tm='tmux'
+alias nf='fastfetch' # neofetch
+alias pp='fpp'
+
+# typos
+# cd
+alias cd..='cd ..'
+alias cd...='cd ../..'
+alias cd....='cd ../../..'
+alias cd.....='cd ../../../..'
+
+# shell
+alias '$'=''
+
+# clear
+alias claer='clear'
+alias clar='clear'
+alias celar='clear'
+alias caler='clear'
+alias cler='clear'
+alias clre='clear'
+alias clera='clear'
+alias lcear='clear'
+alias lcera='clear'
+alias lcrea='clear'
+alias iclear='clear'
+
+# ls
+alias sl='ls'
+alias l='ls'
+
+# cd
+alias dc='cd'
+
+
+
+
+
+
+
+
+
+# git aliases
+alias g='git'
+alias gst='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gpl='git pull'
+alias gpom='git pull origin master'
+alias gpu='git push'
+alias gpuom='git push origin master'
+alias gd='git diff'
+alias gch='git checkout'
+alias gnb='git checkout -b'
+alias gac='git add . && git commit'
+alias grs='git restore --staged .'
+alias gre='git restore'
+alias gam='git commit --ammend --no-edit'
+alias gamm='git commit --ammend'
+alias gr='git remote'
+alias gcl='git clone'
+alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold green)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias gt='git ls-tree -r master --name-only'
+alias grm='git remote'
+alias gb='git branch'
+alias gf='git fetch'
+alias gdelbak='git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d'
+
+# aliases for dotfiles git bare repo
+alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dfs='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dfss='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME status'
+alias dfa='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME add'
+alias dfc='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME commit'
+alias dfp='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME push'
+
+# ls aliases
+alias la='eza -la' # alphabetical sort
+alias ls='eza -aF --color=always' # add colors and file type extensions
+alias lx='eza -lah -s extension' # sort by extension
+alias lk='eza -larhs size' # sort by size
+alias lc='eza -larhs changed' # sort by change time
+alias lu='eza -larhs accessed' # sort by access time
+alias lr='eza -laRh' # recursive ls
+alias lt='eza -lahs modified' # sort by date
+alias lm='eza -alh | more' # pipe to more
+# alias lw='eza -xAh' # wide listing format # todo
+
+# alias ll="eza -Fls" # long listing format # todo
+alias lfile='eza -la' # files only
+alias ldir='eza -lDa' # directories only
+alias ltr='tree' # tree
+
+# rm aliases
+rdc() { # remove current directory
+  rm $(realpath .) -r
+  cd ..
+}
+
+
+# cd aliases
+alias home='cd ~'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias bd='cd "$OLDPWD"'
+alias back='cd "$OLDPWD"'
+
+# chmod
+alias mx='chmod a+x'
+alias 000='chmod -R 000'
+alias 644='chmod -R 644'
+alias 666='chmod -R 666'
+alias 755='chmod -R 755'
+alias 777="chmod -R 777"
+
+alias chget='stat -c %a'
+
+# tar
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf'
+alias mkgz='tar -cvzf'
+alias untar='tar -xvf'
+alias unbz2='tar -xvjf'
+alias ungz='tar -xvzf'
+
+# tmux
+alias tma='tmux attach-session'
+alias tmat='tmux attach-session -t'
+alias tmr='tmux source ~/.config/tmux/tmux.conf'
+alias tk='tmux kill-ses'
+alias tka="tmux kill-ses -a && tmux kill-ses" # kill all
+alias tko='tmux kill-ses -a' # kill others
+alias tml='tmux list-sessions'
+alias tmn='tmux new-session -s'
+
+# pacman
+alias install='paru -S --needed'
+alias ins='paru -S --needed'
+
+# update grub config
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+
+
+
+
+
+
+# remove commands
+alias rp='r' # I remap the "r" command later, so I map the original "r" command to "rp"
+
+# reload/restart stuff
+alias relocate='sudo updatedb && plocate'
+alias r='exec zsh' # restart zsh
+
+# power control
+alias dpms='hyprctl dispatch dpms'
+alias pexec='hyprctl dispatch exec'
+alias logout='~/scripts/logout'
+alias logoff='~/scripts/logout'
+alias lo='~/scripts/logout'
+alias sd='shutdown now'
+alias sdd='shutdown -n now'
+alias rb='shutdown -r now'
+alias rbb='shutdown -r -n now'
+
+# search history
+alias hs='history | grep '
+
+# search files in the current folder
+alias sf='find . | grep '
+
+# count all files recursively in the current folder
+alias countf='for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null'
+
+# show all logs in /var/log
+alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
+
+# help alias
+alias bathelp='bat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}
+alias h='help'
+
+# https://unix.stackexchange.com/questions/296967/how-to-recursively-remove-execute-permissions-from-files-without-touching-folder
+alias fixntfsperms='chmod -R -x+X --' # removes executable perms from files, and enables it for directories (fixing up the problems that ntfs causes in linux)
+
+alias undirty-ntfs-device='sudo ntfsfix --clear-dirty'
+
+alias timesync='sudo chronyc -a "burst 4/4"'
+
+# fernflower
+alias fernflower='java -jar /usr/share/idea/plugins/java-decompiler/lib/java-decompiler.jar'
+
+# usage: <your command which has a colored output> | remove-colors 
+alias remove-colors='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g"'

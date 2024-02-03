@@ -1,0 +1,55 @@
+# general
+ignore-empty-password
+show-failed-attempts
+line-uses-inside
+clock
+indicator-caps-lock
+indicator-idle-visible
+
+# wallpaper
+#image=~/pictures/wallpapers/Black-Landscape-Dark-Nature-Colorized.png
+scaling=fill
+color=181825
+
+# time/date formats
+timestr=%r
+datestr=%x
+
+# indicator
+indicator-radius=90
+indicator-thickness=8
+
+# font
+font=JetBrainsMono
+font-size=15
+
+# text color
+text-color=ffffff
+text-clear-color=ffffff
+text-caps-lock-color=ffffff
+text-ver-color=ffffff
+text-wrong-color=ffffff
+
+# inside color
+inside-color=1e1e2e
+inside-clear-color=1e1e2e
+inside-caps-lock-color=1e1e2e
+inside-ver-color=1e1e2e
+inside-wrong-color=1e1e2e
+
+# ring color
+ring-color=181825
+ring-clear-color=181825
+separator-color=181825
+ring-ver-color=181825
+ring-caps-lock-color=cba6f7
+ring-wrong-color=f38ba8
+
+# segment colors
+key-hl-color=89b4fa
+bs-hl-color=89b4fa
+caps-lock-key-hl-color=cba6f7
+caps-lock-bs-hl-color=cba6f7
+
+# effects
+#effect-blur=4x2

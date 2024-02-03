@@ -1,0 +1,16 @@
+[Default Applications]
+text/html=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+application/x-xpinstall=firefox.desktop
+application/pdf=firefox.desktop
+inode/directory=nemo.desktop
+text/plain=org.kde.kate.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-M10DH2.desktop
+message/rfc822=userapp-Thunderbird-M10DH2.desktop
+x-scheme-handler/mid=userapp-Thunderbird-M10DH2.desktop
+image/png=firefox.desktop
+
+[Added Associations]
+x-scheme-handler/mailto=userapp-Thunderbird-M10DH2.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-M10DH2.desktop;
