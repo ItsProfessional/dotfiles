@@ -32,7 +32,8 @@ alias dust='dust --reverse'
 # replace programs
 alias cat='bat'
 alias locate='plocate'
-alias code='codium'
+#alias code='codium'
+alias codium='code'
 alias edit="$EDITOR"
 alias exa="eza"
 alias yay='paru'
