@@ -180,14 +180,6 @@ alias gb='git branch'
 alias gf='git fetch'
 alias gdelbak='git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d'
 
-# aliases for dotfiles git bare repo
-alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-alias dfs='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
-alias dfss='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME status'
-alias dfa='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME add'
-alias dfc='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME commit'
-alias dfp='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME push'
-
 # ls aliases
 alias la='eza -la' # alphabetical sort
 alias ls='eza -aF --color=always' # add colors and file type extensions
