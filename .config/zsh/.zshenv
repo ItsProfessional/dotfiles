@@ -125,3 +125,6 @@ export XDG_CONFIG_DIRS=/etc/xdg
     # Java
     export JAVA_HOME=/usr/lib/jvm/default
 
+    # GPG key: https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
+    export GPG_TTY=$(tty)
+
