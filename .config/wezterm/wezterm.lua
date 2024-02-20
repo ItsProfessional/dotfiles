@@ -37,6 +37,13 @@ config.keys = {
   { key = "7", mods = "CTRL", action = act.SendString '\x1b[27;5;55~' },
   { key = "8", mods = "CTRL", action = act.SendString '\x1b[27;5;56~' },
   { key = "9", mods = "CTRL", action = act.SendString '\x1b[27;5;57~' },
+
+  -- Disable alt+enter: https://github.com/wez/wezterm/discussions/2891
+  {
+    key = 'Enter',
+    mods = 'ALT',
+    action = wezterm.action.DisableDefaultAssignment
+  },
 }
 
 config.mouse_bindings = {
