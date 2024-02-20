@@ -82,6 +82,9 @@ typeset -U path
 # terminal file manager (lf)
 bindkey -s '^o' 'lf\n'
 
+# zoxide interactive
+#bindkey -s '^i' 'zi\n'
+
 # history substring search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
