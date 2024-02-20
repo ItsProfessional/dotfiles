@@ -76,6 +76,7 @@ alias sc='systemctl'
 alias s='sudo'
 alias egrep='grep -E'
 alias fgrep='grep -F'
+alias hyprland='Hyprland'
 
 # editor
 alias vi="$EDITOR"
