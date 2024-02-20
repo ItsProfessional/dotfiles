@@ -25,6 +25,7 @@
           "^(.*) — (?:Mozilla Firefox|Firefox Developer Edition)( Private Browsing)?$": "$1",
           "^(.*) - Discord$": "$1",
           "^(.*) • - Sublime Text$": "$1",
+          "^(.*) - Code - OSS$": "$1"
         },
     },
 
