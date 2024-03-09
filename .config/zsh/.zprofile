@@ -46,8 +46,7 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       export QT_QPA_PLATFORMTHEME=kde
       exec startplasma-wayland
     else
-      #export QT_QPA_PLATFORMTHEME=qt5ct
-      export QT_QPA_PLATFORMTHEME=kde
+      export QT_QPA_PLATFORMTHEME=qt5ct
       if [ "$environment" = "hyprland" ]; then
           exec Hyprland
       elif [ "$environment" = "qtile" ]; then
