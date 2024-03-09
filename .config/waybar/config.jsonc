@@ -132,8 +132,7 @@
     "clock": {
         "tooltip": false,
         //"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%I/%H:%M:%S %d/%m/%y}",
-	//"timezones": ["Asia/Kolkata", "Universal", "US/Pacific", "US/Eastern"],
+        "format": "{:%I:%M:%S %p %d/%m/%y}",
         "interval": 1
     },
 

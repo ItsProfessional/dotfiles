@@ -46,7 +46,7 @@ c() {
   if [ "$1" = "sw" ]; then $EDITOR ~/.config/sway/config; fi
   if [ "$1" = "hl" ]; then $EDITOR ~/.config/hypr/hyprland.conf; fi
   if [ "$1" = "qt" ]; then $EDITOR ~/.config/qtile/config.py.; fi
-  if [ "$1" = "wb" ]; then $EDITOR ~/.config/waybar/config; fi
+  if [ "$1" = "wb" ]; then $EDITOR ~/.config/waybar/config.jsonc; fi
   if [ "$1" = "wbs" ]; then $EDITOR ~/.config/waybar/style.css; fi
 
   # wallpaper daemons

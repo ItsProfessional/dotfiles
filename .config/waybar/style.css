@@ -1,13 +1,13 @@
 @import "catppuccin/themes/mocha.css";
 
 * {
-  font-family: JetbrainsMono, "Font Awesome 6 Free", Noto Sans;
+  font-family: JetbrainsMono, Noto Sans;
   font-size: 12px;
 }
 
 window#waybar {
   background-color: @base;
-  border-bottom: 1.2px solid @mantle;
+  border-bottom: 1.2px solid @surface0;
   color: @text;
   transition-property: background-color;
   transition-duration: .5s;
