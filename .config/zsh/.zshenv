@@ -73,7 +73,8 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export CALCHISTFILE="$XDG_CACHE_HOME"/calc_history
     
     # Data directories
-    export ANDROID_HOME="$XDG_DATA_HOME"/android
+    export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
+    export ANDROID_HOME="$XDG_DATA_HOME"/android/sdk
     export CARGO_HOME="$XDG_DATA_HOME"/cargo
     export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
     export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
