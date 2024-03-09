@@ -175,6 +175,9 @@ pre_validation() {
 #autoload -U add-zsh-hook
 #add-zsh-hook preexec pre_validation
 
+# Atuin
+eval "$(atuin init zsh --disable-up-arrow)"
+
 # powerlevel10k
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
