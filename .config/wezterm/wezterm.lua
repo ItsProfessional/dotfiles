@@ -16,7 +16,7 @@ config.default_cursor_style = 'SteadyBar'
 config.color_scheme = 'Catppuccin Mocha'
 
 -- font
-config.font = wezterm.font_with_fallback {'JetBrainsMono', 'Font Awesome 6 Free', 'Noto Serif'}
+config.font = wezterm.font_with_fallback {'JetBrainsMono', {family="Font Awesome 6 Free", weight="Black", stretch="Normal", style="Normal"}, 'Noto Serif'}
 config.font_size = 11
 
 config.keys = {
