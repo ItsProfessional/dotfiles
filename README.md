@@ -12,7 +12,7 @@ $ pacman -S git stow --needed
 * Clone the repository.
 ```sh
 $ cd $HOME
-$ git clone git@github.com/ItsProfessional/dotfiles.git
+$ git clone https://github.com/ItsProfessional/dotfiles
 $ cd dotfiles
 ```
 
