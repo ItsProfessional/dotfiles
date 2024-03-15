@@ -3,5 +3,14 @@
 if [ "$XDG_CURRENT_DESKTOP" = "sway" ]; then
   swaymsg exit
 elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-  hyprctl dispatch exit 0
+  # hyprctl dispatch exit 0
+  # https://github.com/hyprwm/Hyprland/issues/3558#issuecomment-1950015566 --- remove when issue is fixed
+  if pgrep -x Hyprland >/dev/null; then
+    hyprctl dispatch exit 0
+    sleep 2
+    if pgrep -x Hyprland >/dev/null; then
+      killall -9 Hyprland
+    fi
+  fi
 fi
+
