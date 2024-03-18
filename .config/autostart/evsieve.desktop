@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/home/iprf/scripts/evsieve
+Icon=application-x-shellscript
+Name=evsieve
+Type=Application
+X-KDE-AutostartScript=true

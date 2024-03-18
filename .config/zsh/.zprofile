@@ -1,8 +1,7 @@
-environment=hyprland
+environment=plasma
 
 # Start the graphical environment
 if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && [ "$(tty)" = "/dev/tty1" ]; then
-
 
     # XDG Session: https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
     export XDG_SESSION_TYPE=wayland
@@ -11,11 +10,11 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       export XDG_CURRENT_DESKTOP=Hyprland
       export XDG_SESSION_DESKTOP=Hyprland
     elif [ "$environment" = "sway" ]; then
-      export XDG_CURRENT_DESKTOP=sway
-      export XDG_SESSION_DESKTOP=sway
+      export XDG_CURRENT_DESKTOP=$environment
+      export XDG_SESSION_DESKTOP=$environment
     elif [ "$environment" = "qtile" ]; then
-      export XDG_CURRENT_DESKTOP=qtile
-      export XDG_SESSION_DESKTOP=qtile
+      export XDG_CURRENT_DESKTOP=$environment
+      export XDG_SESSION_DESKTOP=$environment
     fi
 
     # Force native wayland
@@ -41,7 +40,7 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
     # Force libreoffice to use gtk
     export SAL_USE_VCLPLUGIN=gtk4
 
-    # Execute the environment
+    # Start the environment
     if [ "$environment" = "plasma" ]; then
       export QT_QPA_PLATFORMTHEME=kde
       exec startplasma-wayland
