@@ -11,6 +11,8 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.hide_mouse_cursor_when_typing = false
 config.default_cursor_style = 'SteadyBar'
+config.initial_rows = 34
+config.initial_cols = 140
 
 -- color
 config.color_scheme = 'Catppuccin Mocha'
@@ -73,6 +75,5 @@ config.mouse_bindings = {
   { event = { Up = { streak = 2, button = 'Left' } }, mods = 'SHIFT', action = act.CompleteSelection('ClipboardAndPrimarySelection'), },
   { event = { Up = { streak = 3, button = 'Left' } }, mods = 'SHIFT', action = act.CompleteSelection('ClipboardAndPrimarySelection'), },
 }
-
 
 return config
