@@ -1,5 +1,5 @@
 # Tmux
-if [[ "$(tty)" != "/dev/tty"* ]] && [ -z "$TMUX" ]; then
+if [[ "$(tty)" != "/dev/tty"* ]] && [ -z "$TMUX" ] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
   exec tmux
 fi
 
