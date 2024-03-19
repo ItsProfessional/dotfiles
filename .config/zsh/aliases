@@ -79,6 +79,7 @@ alias s='sudo'
 alias egrep='grep -E'
 alias fgrep='grep -F'
 alias hyprland='Hyprland'
+alias copy='wl-copy'
 
 # editor
 alias vi="$EDITOR"
