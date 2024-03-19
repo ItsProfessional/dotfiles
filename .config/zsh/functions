@@ -49,16 +49,15 @@ c() {
   if [ "$1" = "wb" ]; then $EDITOR ~/.config/waybar/config.jsonc; fi
   if [ "$1" = "wbs" ]; then $EDITOR ~/.config/waybar/style.css; fi
 
-  # wallpaper daemons
+  # wms-related
   if [ "$1" = "hp" ]; then $EDITOR ~/.config/hypr/hyprpaper.conf; fi
   if [ "$1" = "wp" ]; then $EDITOR ~/.config/wpaperd/wallpaper.toml; fi
-
-
   if [ "$1" = "si" ]; then $EDITOR ~/.config/swayidle/config; fi
   if [ "$1" = "wls" ]; then $EDITOR ~/.config/wlogout/style.css; fi
   if [ "$1" = "han" ]; then $EDITOR ~/.config/hyprland-autoname-workspaces/config.toml; fi
   if [ "$1" = "lf" ]; then $EDITOR ~/.config/lf/lfrc; fi
   if [ "$1" = "bm" ]; then $EDITOR ~/.config/bemenu/config; fi
+  if [ "$1" = "du" ]; then $EDITOR ~/.config/dunst/dunstrc; fi
 
   # common shell files
   if [ "$1" = "a" ]; then $EDITOR ~/.config/zsh/aliases; fi
