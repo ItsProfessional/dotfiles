@@ -2,4 +2,7 @@ TODO
 .zcompdump
 .ssh/*
 !.ssh/config
+.config/sublime-text/*
+!.config/sublime-text/Installed\ Packages
+!.config/sublime-text/Packages
 
