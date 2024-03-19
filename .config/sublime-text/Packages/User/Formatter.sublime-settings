@@ -1,0 +1,24 @@
+// Do NOT edit anything in the left-hand pane.
+// Pick up items you need, but make sure to maintain the structure.
+{
+    "formatters": {
+        "jsbeautifier": {
+            "info": "https://github.com/beautify-web/js-beautify",
+            "disable": false,
+            "format_on_save": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js", "css", "html", "json", "tsx", "vue"],
+            "executable_path": "/home/proferk/.local/share/npm/bin/js-beautify",
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/jsbeautify_rc.json"
+            }
+        },
+    }
+}

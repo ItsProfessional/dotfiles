@@ -1,0 +1,8 @@
+[
+    { "keys": ["alt+left"], "command": "jump_back" },
+    { "keys": ["alt+right"], "command": "jump_forward" },
+
+    // https://stackoverflow.com/questions/36020571/switching-between-tabs-in-sublime-ctrltab
+    { "keys": ["ctrl+tab"], "command": "next_view" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+]
