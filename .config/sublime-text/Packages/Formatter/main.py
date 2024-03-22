@@ -11,14 +11,12 @@ import time
 import json
 import shutil
 import base64
-import struct
 import logging
 import zipfile
 import tempfile
 import traceback
 import importlib
 import threading
-import urllib.request
 from datetime import datetime
 
 import sublime
@@ -40,9 +38,10 @@ def has_package_control():
         loader = importlib.util.find_spec('package_control')
     return loader is not None
 
-def copyfiles(api):
+def merge(api):
     packages_path = sublime.packages_path()
     custom_modules = common.config.get('custom_modules', {})
+    seen = set()
 
     for k, v in custom_modules.items():
         if k in ['config', 'modules', 'libs'] and isinstance(v, list):
@@ -56,20 +55,24 @@ def copyfiles(api):
                     dst_md5 = api.md5f(dst) if os.path.exists(dst) else None
                     if src_md5 != dst_md5:
                         shutil.copy2(src, dst, follow_symlinks=True)
+                        seen.add(True)
                 elif os.path.isdir(src):
                     src_sum = api.md5d(src)
                     dst_sum = api.md5d(dst) if os.path.exists(dst) else None
                     if src_sum != dst_sum:
                         try:
                             shutil.copytree(src, dst)
+                            seen.add(True)
                         except FileExistsError:
                             shutil.rmtree(dst)
                             shutil.copytree(src, dst)
+                            seen.add(True)
+
+    if any(seen):
+        api.reload_modules(print_tree=False)
 
 def entry(api):
-    copyfiles(api)
-    api.reload_modules(print_tree=False)
-
+    merge(api)
     api.remove_junk()
     ready = configurator.create_package_config_files()
     if ready:
@@ -87,11 +90,11 @@ def plugin_loaded():
 
     if has_package_control():
         from package_control import events
-        if events.post_upgrade(common.PACKAGE_NAME):
-            sublime.set_timeout_async(lambda: entry(api), 150)
+        if events.install(common.PACKAGE_NAME) or events.post_upgrade(common.PACKAGE_NAME):
+            sublime.set_timeout_async(lambda: entry(api), 100)
             done = True
     if not done:
-        sublime.set_timeout_async(lambda: entry(api), 150)
+        sublime.set_timeout_async(lambda: entry(api), 100)
 
 
 class ShowVersionCommand(sublime_plugin.WindowCommand):
@@ -268,7 +271,9 @@ class QuickOptionsCommand(sublime_plugin.WindowCommand, common.Base):
                 self.run()
 
     def show_prioritize_project_config_menu(self):
-        uid_list = list(common.config.get('formatters', {}).keys())
+        uid_list = [key for key in common.config.get('formatters', {}).keys()
+                    if 'name' not in common.config.get('formatters', {}).get(key, {})  # exclude generic methods
+                    and 'type' not in common.config.get('formatters', {}).get(key, {})]
         uid_list.append('<< Back')
         self.window.show_quick_panel(uid_list, lambda uid_index: self.on_prioritize_project_config_menu_done(uid_list, uid_index))
 
@@ -466,7 +471,7 @@ class RunFormatCommand(sublime_plugin.TextCommand, common.Base):
     def run_recursive_formatting(self, **kwargs):
         if self.view.file_name():
             with threading.Lock():
-                log.debug('Starting the main thread for recursive folder formatting ...')
+                log.debug('Starting recursive formatting ...')
                 recursive_format = RecursiveFormat(self.view, **kwargs)
                 recursive_format_thread = threading.Thread(target=recursive_format.run)
                 recursive_format_thread.start()
@@ -475,7 +480,7 @@ class RunFormatCommand(sublime_plugin.TextCommand, common.Base):
 
     def run_single_formatting(self, **kwargs):
         with threading.Lock():
-            log.debug('Starting the main thread for single file formatting ...')
+            log.debug('Starting single file formatting ...')
             single_format = SingleFormat(self.view, **kwargs)
             single_format_thread = threading.Thread(target=single_format.run)
             single_format_thread.start()
@@ -572,16 +577,16 @@ class SingleFormat(common.Base):
         src_window = self.view.window()
         gfx_vref = self.view.id()
 
-        for window in sublime.windows():
-            dst_view = next((v for v in window.views() if v.settings().get('gfx_vref', None) == gfx_vref), None)
+        dst_view = next((v for window in sublime.windows() for v in window.views() if v.settings().get('gfx_vref', None) == gfx_vref), None)
 
         if dst_view:
-            window.focus_view(dst_view)
+            dst_view.window().focus_view(dst_view)
             dst_view.set_read_only(False)
             self.set_graphic_phantom(dst_view)
         else:
             src_window.focus_group(1)
-            dst_view = src_window.new_file(syntax=self.view.settings().get('syntax', None))
+            dst_view = src_window.new_file(flags=sublime.TRANSIENT, syntax=self.view.settings().get('syntax', None))
+            dst_view.run_command('append', {'characters': ''})  # magic to assign a tab
             dst_view.settings().set('gfx_vref', gfx_vref)
             self.set_graphic_phantom(dst_view)
             dst_view.set_scratch(True)
@@ -589,32 +594,6 @@ class SingleFormat(common.Base):
                 dst_view.retarget(path)
 
         dst_view.set_read_only(True)
-
-    @staticmethod
-    def get_image_size(data):
-        if data.startswith(b'\211PNG\r\n\032\n') and (data[12:16] == b'IHDR'):
-            width, height = struct.unpack('>LL', data[16:24])
-            return int(width), int(height)
-        elif data.startswith(b'\211PNG\r\n\032\n'):
-            width, height = struct.unpack('>LL', data[8:16])
-            return int(width), int(height)
-        else:
-            return None, None
-
-    @staticmethod
-    def image_scale_fit(view, image_width, image_height):
-        image_width = image_width or 100  # default to 100 if None
-        image_height = image_height or 100
-        scrollbar_width = 20  # adjust this if needed
-
-        view_width, view_height = view.viewport_extent()
-        width_scale = view_width / image_width
-        height_scale = view_height / image_height
-        scale_factor = min(width_scale, height_scale)
-        image_width = round(int(image_width * scale_factor)) - scrollbar_width
-        image_height = round(int(image_height * scale_factor)) - scrollbar_width
-
-        return image_width, image_height
 
     def get_extended_data(self):
         if self.is_quick_options_mode():
@@ -644,10 +623,10 @@ class SingleFormat(common.Base):
                 image_width, image_height = self.get_image_size(data)
                 image_data = base64.b64encode(data).decode('utf-8')
 
-            image_width, image_height = self.image_scale_fit(dst_view, image_width, image_height)
+            fit_image_width, fit_image_height = self.image_scale_fit(dst_view, image_width, image_height)
             extended_data = self.get_extended_data()
 
-            html = self.set_html_phantom(dst_view, image_data, image_width, image_height, extended_data)
+            html = self.set_html_phantom(dst_view, image_data, image_width, image_height, fit_image_width, fit_image_height, extended_data)
             data = {'dst_view_id': dst_view.id(), 'image_data': image_data, 'image_width': image_width, 'image_height': image_height, 'extended_data': extended_data}
 
             dst_view.erase_phantoms('graphic')
@@ -665,10 +644,14 @@ class SingleFormat(common.Base):
             save_path = os.path.join(self.get_downloads_folder(), stem + '.' + href.split('/')[1].split(';')[0])
 
             try:
-                urllib.request.urlretrieve(href, save_path)
+                mime_type, base64_data = href.split(',', 1)
+                decoded_data = base64.b64decode(base64_data)
+                with open(save_path, 'wb') as f:
+                    f.write(decoded_data)
+
                 self.popup_message('Image successfully saved to:\n%s' % save_path, 'INFO', dialog=True)
             except Exception as e:
-                self.popup_message('Could not save file:\n%s' % save_path, 'ERROR')
+                self.popup_message('Could not save file:\n%s\nError: %s' % (save_path, e), 'ERROR')
 
     def get_layout_and_suffix(self, uid, mode):
         if mode == 'qo':
@@ -693,7 +676,7 @@ class ReplaceViewContentCommand(sublime_plugin.TextCommand):
 
 
 class ZoomCommand(sublime_plugin.WindowCommand, common.Base):
-    ZOOM_LEVELS = ['10%', '25%', '50%', '75%', '100%', '125%', '150%', '175%', '200%', '225%', '250%', '275%', '300%', '325%', '350%', '375%', '400%']
+    ZOOM_LEVELS = ['Fit', '10%', '25%', '50%', '75%', '100%', '125%', '150%', '175%', '200%', '225%', '250%', '275%', '300%', '325%', '350%', '375%', '400%']
 
     def run(self, **kwargs):
         self.window.show_quick_panel(self.ZOOM_LEVELS, lambda index: self.on_done(index, **kwargs))
@@ -701,7 +684,7 @@ class ZoomCommand(sublime_plugin.WindowCommand, common.Base):
     def on_done(self, index, **kwargs):
         if index != -1:
             zoom_level = self.ZOOM_LEVELS[index]
-            if zoom_level == '100%' or zoom_level == '-100%':
+            if zoom_level == 'Fit' or zoom_level == '100%' or zoom_level == '-100%':
                 zoom_factor = 1.0
             else:
                 zoom_factor = float(zoom_level[:-1]) / 100
@@ -713,9 +696,14 @@ class ZoomCommand(sublime_plugin.WindowCommand, common.Base):
             extended_data = kwargs.get('extended_data')
 
             dst_view = self.find_view_by_id(dst_view_id) or self.window.active_view()
+            if zoom_level == 'Fit':
+                fit_image_width, fit_image_height = self.image_scale_fit(dst_view, image_width, image_height)
+            else:
+                fit_image_width = image_width * zoom_factor
+                fit_image_height = image_height * zoom_factor
 
             try:
-                html = super().set_html_phantom(dst_view, image_data, image_width * zoom_factor, image_height * zoom_factor, extended_data)
+                html = super().set_html_phantom(dst_view, image_data, image_width, image_height, fit_image_width, fit_image_height, extended_data)
                 data = {'dst_view_id': dst_view.id(), 'image_data': image_data, 'image_width': image_width, 'image_height': image_height, 'extended_data': extended_data}
 
                 dst_view.erase_phantoms('graphic')
@@ -731,10 +719,14 @@ class ZoomCommand(sublime_plugin.WindowCommand, common.Base):
             save_path = os.path.join(self.get_downloads_folder(), stem + '.' + href.split('/')[1].split(';')[0])
 
             try:
-                urllib.request.urlretrieve(href, save_path)
+                mime_type, base64_data = href.split(',', 1)
+                decoded_data = base64.b64decode(base64_data)
+                with open(save_path, 'wb') as f:
+                    f.write(decoded_data)
+
                 self.popup_message('Image successfully saved to:\n%s' % save_path, 'INFO', dialog=True)
             except Exception as e:
-                self.popup_message('Could not save file:\n%s' % save_path, 'ERROR')
+                self.popup_message('Could not save file:\n%s\nError: %s' % (save_path, e), 'ERROR')
 
     def find_view_by_id(self, dst_view_id):
         for window in sublime.windows():
@@ -762,16 +754,16 @@ class TransferViewContentCommand(sublime_plugin.TextCommand, common.Base):
         src_window = src_view.window()
         txt_vref = src_view.id()
 
-        for window in sublime.windows():
-            dst_view = next((v for v in window.views() if v.settings().get('txt_vref', None) == txt_vref), None)
+        dst_view = next((v for window in sublime.windows() for v in window.views() if v.settings().get('txt_vref', None) == txt_vref), None)
 
         if dst_view:
-            window.focus_view(dst_view)
+            dst_view.window().focus_view(dst_view)
             dst_view.run_command('select_all')
             dst_view.run_command('right_delete')
         else:
             src_window.focus_group(1)
-            dst_view = src_window.new_file(syntax=src_view.settings().get('syntax', None))
+            dst_view = src_window.new_file(flags=sublime.TRANSIENT, syntax=src_view.settings().get('syntax', None))
+            dst_view.run_command('append', {'characters': ''})  # magic to assign a tab
             dst_view.settings().set('txt_vref', txt_vref)
             if path:
                 dst_view.retarget(path)
@@ -1087,9 +1079,11 @@ class FormatterListener(sublime_plugin.EventListener, common.Base):
 
     def stop_sync_scroll(self):
         with self.sync_scroll_lock:
+            self.sync_scroll_running = False
             if self.sync_scroll_thread and self.sync_scroll_thread.is_alive():
-                self.sync_scroll_running = False
-                self.sync_scroll_thread.join()
+                self.sync_scroll_thread.join(timeout=0.4)
+                if self.sync_scroll_thread.is_alive():
+                    self.sync_scroll_thread = None
 
     def sync_scroll(self, target_type, active_view, target_view):
         while self.sync_scroll_running:
@@ -1199,4 +1193,4 @@ class FormatterListener(sublime_plugin.EventListener, common.Base):
         if common.config.get('debug') and common.config.get('dev'):
             # For development only
             self.stop_sync_scroll()
-            self.reload_modules(print_tree=False)  # hitting save twice for python < 3.4 (imp.reload upstream bug)
+            self.reload_modules(print_tree=False)

@@ -29,4 +29,5 @@
 	"index_files": true,
 	"preview_on_click": false,
 	"hide_pointer_while_typing": false,
+	"mini_diff": false,
 }
