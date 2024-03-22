@@ -103,7 +103,7 @@ export XDG_CONFIG_DIRS=/etc/xdg
     --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
     # fzf
-    export BEMENU_OPTS="--ignorecase --no-cursor --prompt > --border 1 --list 10 --hp 8 \
+    export BEMENU_OPTS="--ignorecase --no-cursor --prompt \">\" --border 1 --hp 8 \
       --ch 20 --cw 1 \
       --binding vim --vim-esc-exits \
       --fn \"JetbrainsMono 10\" \
