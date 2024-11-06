@@ -1,15 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module, log
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['mmdc']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/mermaid-js/mermaid-cli',
     'name': 'Mermaid',
@@ -25,7 +17,7 @@ MODULE_CONFIG = {
 }
 
 
-class MermaidFormatter(common.Module):
+class MermaidFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -44,15 +36,10 @@ class MermaidFormatter(common.Module):
 
         cmd.extend(['--input', '-', '--outputFormat', 'png', '--output', self.get_output_image()])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -66,10 +53,10 @@ class MermaidFormatter(common.Module):
                         self.exec_cmd(cmd)
                         log.debug('Current extended arguments: %s', cmd)
                     except Exception as e:
-                        log.error('An error occurred while executing extended cmd: %s Details: %s', cmd, e)
+                        log.error('Error while executing extended cmd: %s Details: %s', cmd, e)
 
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

@@ -1,18 +1,12 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from os.path import basename
 
-import logging
-from ..core import common
+from ..core import Module
 
-log = logging.getLogger(__name__)
 EXECUTABLES = ['rebar3', 'erlfmt']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/WhatsApp/erlfmt',
-    'name': 'Erlang erlfmt',
+    'name': 'Erlfmt',
     'uid': 'erlfmt',
     'type': 'beautifier',
     'syntaxes': ['erlang'],
@@ -20,11 +14,11 @@ MODULE_CONFIG = {
     'executable_path': '/path/to/erlfmt (standalone bin) or /path/to/rebar3',
     'args': None,
     'config_path': None,
-    'comment': 'opinionated, no config'
+    'comment': 'Opinionated, no config.'
 }
 
 
-class ErlfmtFormatter(common.Module):
+class ErlfmtFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -33,7 +27,7 @@ class ErlfmtFormatter(common.Module):
         if not executable:
             return None
 
-        if common.basename(executable) == 'rebar3':
+        if basename(executable) == 'rebar3':
             cmd = [executable, 'fmt']
         else:
             cmd = [executable]
@@ -42,15 +36,10 @@ class ErlfmtFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -59,7 +48,7 @@ class ErlfmtFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

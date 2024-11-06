@@ -1,0 +1,1055 @@
+[
+    {
+        "caption": "Tools",
+        "id": "tools",
+        "mnemonic": "T",
+        "children": [
+            {
+                "caption": "Formatter",
+                "mnemonic": "F",
+                "id": "formatter",
+                "children": [
+                    {
+                        "caption": "☰ Quick Options",
+                        "mnemonic": "Q",
+                        "command": "quick_options"
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Apple Swift Format",
+                        "mnemonic": "A",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "appleswiftformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "ASMfmt",
+                        "mnemonic": "A",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "asmfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Artistic Style",
+                        "mnemonic": "A",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "astyle",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Autopep8",
+                        "mnemonic": "A",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "autopep8",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Beautysh",
+                        "mnemonic": "B",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "beautysh",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "BibTeX-tidy",
+                        "mnemonic": "B",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "bibtextidy",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Black",
+                        "mnemonic": "B",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "black",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Cabal-fmt",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "cabalfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Caddy-fmt",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "caddyfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "ClangFormat",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "clangformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "CLJfmt",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "cljfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "CMake-format",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "cmakeformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Crystal",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "crystal",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "CSScomb",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "csscomb",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "D2-fmt",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "d2fmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Dart Format",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "dartformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Deno",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "deno",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Dhall format",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "dhallformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Docformatter",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "docformatter",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Dockfmt",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "dockfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Dprint",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "dprint",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Erlang efmt",
+                        "mnemonic": "E",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "efmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Elixir mix",
+                        "mnemonic": "E",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "elixirmix",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Elm-format",
+                        "mnemonic": "E",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "elmformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Erlang erlfmt",
+                        "mnemonic": "E",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "erlfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "ESLint",
+                        "mnemonic": "E",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "eslint",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "ESLintd",
+                        "mnemonic": "E",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "eslintd",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Floskell",
+                        "mnemonic": "F",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "floskell",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "FormatR",
+                        "mnemonic": "F",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "formatr",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Fourmolu",
+                        "mnemonic": "F",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "fourmolu",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Fortran fprettify",
+                        "mnemonic": "F",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "fprettify",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Gleam",
+                        "mnemonic": "G",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "gleam",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Gofmt",
+                        "mnemonic": "G",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "gofmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Gofumpt",
+                        "mnemonic": "G",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "gofumpt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Goimports",
+                        "mnemonic": "G",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "goimports",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Google Java Format",
+                        "mnemonic": "G",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "googlejavaformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "HCLfmt",
+                        "mnemonic": "H",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "hclfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Hindent",
+                        "mnemonic": "H",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "hindent",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "HTML Tidy",
+                        "mnemonic": "H",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "htmltidy",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Isort",
+                        "mnemonic": "I",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "isort",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "JS Beautifier",
+                        "mnemonic": "J",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "jsbeautifier",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "JSON",
+                        "mnemonic": "J",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "jsonmax",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Ktlint",
+                        "mnemonic": "K",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "ktlint",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "LaTeXindent",
+                        "mnemonic": "L",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "latexindent",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "LuaFormatter",
+                        "mnemonic": "L",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "luaformatter",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "NASMfmt",
+                        "mnemonic": "N",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "nasmfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "NGINXfmt",
+                        "mnemonic": "N",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "nginxfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "OCamlformat",
+                        "mnemonic": "O",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "ocamlformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "OCP-indent",
+                        "mnemonic": "O",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "ocpindent",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Ormolu",
+                        "mnemonic": "O",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "ormolu",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Perltidy",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "perltidy",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "PgFormatter",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "pgformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "PHP CodeSniffer",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "phpcbf",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "PHP CS Fixer",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "phpcsfixer",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Plantuml ASCII",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "plantumlascii",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Prettier",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "prettier",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Prettierd",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "prettierd",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Pretty Diff",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "prettydiffmax",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "PrettyTable",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "prettytable",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Pyment",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "pyment",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Racofmt",
+                        "mnemonic": "R",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "racofmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "RuboCop",
+                        "mnemonic": "R",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "rubocop",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Rubyfmt",
+                        "mnemonic": "R",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "rubyfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Ruff",
+                        "mnemonic": "R",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "ruff",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Rufo",
+                        "mnemonic": "R",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "rufo",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Rustfmt",
+                        "mnemonic": "R",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "rustfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Scalafmt",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "scalafmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Scalariform",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "scalariform",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Semistandard JS",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "semistandardjs",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "ShellCheck",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "shellcheck",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Shfmt",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "shfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "SQL Formatter",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sqlformatter",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "SQLparse",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sqlparse",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Standard JS",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "standardjs",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Standard RB",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "standardrb",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Standardx JS",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "standardxjs",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Stylefmt",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "stylefmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Stylelint",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "stylelint",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Styler",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "styler",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Stylish Haskell",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "stylishhaskell",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "StyLua",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "stylua",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "SVGO",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "svgomax",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "SwiftFormat",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "swiftformat",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Taplo",
+                        "mnemonic": "T",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "taplo",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Terraform fmt",
+                        "mnemonic": "T",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "terraformfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Topiary",
+                        "mnemonic": "T",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "topiary",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "TSfmt",
+                        "mnemonic": "T",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "tsfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "TS Standard",
+                        "mnemonic": "T",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "tsstandard",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Uncrustify",
+                        "mnemonic": "U",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "uncrustify",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "YAPF",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yapf",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Zigfmt",
+                        "mnemonic": "Z",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "zigfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Zprint",
+                        "mnemonic": "Z",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "zprint",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "Clean CSS (min)",
+                        "mnemonic": "C",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "cleancss",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "HTMLMinifier (min)",
+                        "mnemonic": "H",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "htmlminifier",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "JSON (min)",
+                        "mnemonic": "J",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "jsonmin",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "Pretty Diff (min)",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "prettydiffmin",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "Python Minifier (min)",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "pythonminifier",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "Shfmt (min)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "shfmtmin",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "SQLMin (min)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sqlmin",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "SVGO (min)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "svgomin",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "Terser (min)",
+                        "mnemonic": "T",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "terser",
+                            "type": "minifier"
+                        }
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
+                        "caption": "D2",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "d2",
+                            "type": "graphic"
+                        }
+                    },
+                    {
+                        "caption": "Graphviz",
+                        "mnemonic": "G",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "graphviz",
+                            "type": "graphic"
+                        }
+                    },
+                    {
+                        "caption": "Mermaid",
+                        "mnemonic": "M",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "mermaid",
+                            "type": "graphic"
+                        }
+                    },
+                    {
+                        "caption": "Plantuml",
+                        "mnemonic": "P",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "plantuml",
+                            "type": "graphic"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "caption": "Preferences",
+        "id": "preferences",
+        "mnemonic": "n",
+        "children": [
+            {
+                "caption": "Package Settings",
+                "id": "package-settings",
+                "mnemonic": "P",
+                "children": [
+                    {
+                        "caption": "Formatter",
+                        "mnemonic": "F",
+                        "children": [
+                            {
+                                "caption": "Settings",
+                                "mnemonic": "S",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/Formatter/Formatter.sublime-settings",
+                                    "default": "// Do NOT edit anything in the left-hand pane.\n// Pick up items you need, just make sure to maintain the structure.\n{\n\t$0\n}\n"
+                                }
+                            },
+                            {
+                                "caption": "Open Config Folders",
+                                "mnemonic": "O",
+                                "command": "open_config_folders"
+                            },
+                            {
+                                "caption": "-"
+                            },
+                            {
+                                "caption": "Example Key Bindings",
+                                "mnemonic": "E",
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/Formatter/Example.sublime-keymap"
+                                }
+                            },
+                            {
+                                "caption": "Key Bindings – User",
+                                "mnemonic": "K",
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default (${platform}).sublime-keymap"
+                                }
+                            },
+                            {
+                                "caption": "-"
+                            },
+                            {
+                                "caption": "Backup Settings",
+                                "mnemonic": "B",
+                                "command": "config_manager",
+                                "args": {
+                                    "type": "backup"
+                                }
+                            },
+                            {
+                                "caption": "Restore Settings",
+                                "mnemonic": "R",
+                                "command": "config_manager",
+                                "args": {
+                                    "type": "restore"
+                                }
+                            },
+                            {
+                                "caption": "-"
+                            },
+                            {
+                                "caption": "Version Info",
+                                "mnemonic": "V",
+                                "command": "show_version"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

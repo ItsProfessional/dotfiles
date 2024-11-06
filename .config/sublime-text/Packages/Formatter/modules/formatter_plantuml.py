@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module, log
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['java']
 EXECUTABLES = ['plantuml.jar']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/plantuml/plantuml',
     'name': 'Plantuml',
@@ -21,11 +13,11 @@ MODULE_CONFIG = {
     'interpreter_path': '/path/to/bin/java.exe',
     'executable_path': '/path/to/bin/plantuml.jar',
     'args': None,
-    'comment': 'requires java on PATH if omit interpreter_path. no config, use args instead.'
+    'comment': 'No config, use "args" instead. Omit "interpreter_path" if java already on PATH.'
 }
 
 
-class PlantumlFormatter(common.Module):
+class PlantumlFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -38,15 +30,10 @@ class PlantumlFormatter(common.Module):
 
         cmd.extend(['-pipe', '-failfast2', '-tpng'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             outfile = self.get_output_image()
@@ -62,10 +49,10 @@ class PlantumlFormatter(common.Module):
                         exitcode, stdout, stderr = self.exec_cmd(cmd, outfile=out)
                         log.debug('Current extended arguments: %s Outfile: %s', cmd, out)
                     except Exception as e:
-                        log.error('An error occurred while executing extended cmd: %s Details: %s', cmd, e)
+                        log.error('Error while executing extended cmd: %s Details: %s', cmd, e)
 
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

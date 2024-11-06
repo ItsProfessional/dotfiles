@@ -1,16 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
 import re
-from ..core import common
 
-log = logging.getLogger(__name__)
+from ..core import Module
+
 EXECUTABLES = ['R']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/yihui/formatR',
     'name': 'FormatR',
@@ -26,7 +19,7 @@ MODULE_CONFIG = {
 }
 
 
-class FormatrFormatter(common.Module):
+class FormatrFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -57,15 +50,10 @@ class FormatrFormatter(common.Module):
         ops = ', ' + text if text else ''
         cmd.extend(['--slave', '--no-restore', '--no-save', '-e', 'formatR::tidy_source("stdin"' + ops + ')'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -74,7 +62,7 @@ class FormatrFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
+from ..core import Module, log
 from ..libs import yaml
-from ..core import common
 
-log = logging.getLogger(__name__)
 EXECUTABLES = ['d2']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/terrastruct/d2',
     'name': 'D2',
@@ -23,11 +15,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'd2_rc.yaml'
     },
-    'comment': 'uses headless browser to convert images, no dark-theme for png.'
+    'comment': 'Uses headless browser to convert images; no dark theme for PNG.'
 }
 
 
-class D2Formatter(common.Module):
+class D2Formatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -61,15 +53,10 @@ class D2Formatter(common.Module):
 
         cmd.extend(['-', self.get_output_image()])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -83,10 +70,10 @@ class D2Formatter(common.Module):
                         self.exec_cmd(cmd)
                         log.debug('Current extended arguments: %s', cmd)
                     except Exception as e:
-                        log.error('An error occurred while executing extended cmd: %s Details: %s', cmd, e)
+                        log.error('Error while executing extended cmd: %s Details: %s', cmd, e)
 
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

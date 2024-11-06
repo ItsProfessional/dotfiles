@@ -1,0 +1,21 @@
+{
+	"bootstrapped": true,
+	"installed_packages":
+	[
+		"Catppuccin color schemes",
+		"Formatter",
+		"language-mcfunction",
+		"Meson",
+		"NeoVintageous",
+		"OpenGL Shading Language (GLSL)",
+		"Package Control",
+	],
+	"in_process_packages":
+	[
+		"Formatter",
+	],
+	"repositories":
+	[
+		"https://github.com/Arcensoth/language-mcfunction"
+	],
+}

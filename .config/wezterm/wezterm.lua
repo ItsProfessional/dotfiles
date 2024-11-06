@@ -13,12 +13,14 @@ config.hide_mouse_cursor_when_typing = false
 config.default_cursor_style = 'SteadyBar'
 config.initial_rows = 34
 config.initial_cols = 140
+config.disable_default_mouse_bindings = true
+config.enable_wayland = false -- workaround for https://github.com/wez/wezterm/issues/5197
 
 -- color
 config.color_scheme = 'Catppuccin Mocha'
 
 -- font
-config.font = wezterm.font_with_fallback {'JetBrainsMono', {family="Font Awesome 6 Free", weight="Black", stretch="Normal", style="Normal"}, 'Noto Serif'}
+config.font = wezterm.font_with_fallback {'JetBrainsMono Nerd Font', {family="Font Awesome 6 Free", weight="Black", stretch="Normal", style="Normal"}, 'Noto Serif'}
 config.font_size = 11
 
 config.keys = {

@@ -1,21 +1,11 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import os
-import logging
-import tempfile
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['php']
 EXECUTABLES = ['php-cs-fixer-v3.phar', 'php-cs-fixer-v3', 'phpcsfixer.phar', 'phpcsfixer', 'php-cs-fixer.phar', 'php-cs-fixer', 'php-cs-fixer-v2.phar', 'php-cs-fixer-v2']
+DOTFILES = ['.php-cs-fixer.php', '.php-cs-fixer.dist.php']
 MODULE_CONFIG = {
     'source': 'https://github.com/FriendsOfPHP/PHP-CS-Fixer',
-    'name': 'PHP CS Fixer',
+    'name': 'PHPCSFixer',
     'uid': 'phpcsfixer',
     'type': 'beautifier',
     'syntaxes': ['php'],
@@ -25,11 +15,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'php_cs_fixer_rc.php'
     },
-    'comment': 'requires php on PATH if omit interpreter_path'
+    'comment': 'Omit "interpreter_path" if php already on PATH.'
 }
 
 
-class PhpcsfixerFormatter(common.Module):
+class PhpcsfixerFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -42,19 +32,13 @@ class PhpcsfixerFormatter(common.Module):
         if path:
             cmd.extend(['--config=' + path, '--allow-risky=yes'])
 
-        tmp_file = self.create_tmp_file()
+        tmp_file = self.create_tmp_file(autodel=True)
         cmd.extend(['fix', tmp_file])
-
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
 
         return cmd, tmp_file
 
     def format(self):
         cmd, tmp_file = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            self.remove_tmp_file(tmp_file)
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_com(cmd)
@@ -67,9 +51,7 @@ class PhpcsfixerFormatter(common.Module):
                 with open(tmp_file, 'r', encoding='utf-8') as file:
                     result = file.read()
                     file.close()
-        except OSError:
-            self.print_oserr(cmd)
-
-        self.remove_tmp_file(tmp_file)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return result

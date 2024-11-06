@@ -1,19 +1,11 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['java']
 EXECUTABLES = ['plantuml.jar']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/plantuml/plantuml',
-    'name': 'Plantuml ASCII',
+    'name': 'PlantumlASCII',
     'uid': 'plantumlascii',
     'type': 'beautifier',
     'syntaxes': ['plantuml'],
@@ -21,11 +13,11 @@ MODULE_CONFIG = {
     'interpreter_path': '/path/to/bin/java.exe',
     'executable_path': '/path/to/bin/plantuml.jar',
     'args': None,
-    'comment': 'requires java on PATH if omit interpreter_path. no config, use "args" instead. tips: enable "layout" in Formatter settings for dual-panes-view.'
+    'comment': 'No config, use "args" instead. Omit "interpreter_path" if java already on PATH. Tips: enable "layout" + "new_file_on_format" in Formatter settings for dual-panes-view.'
 }
 
 
-class PlantumlasciiFormatter(common.Module):
+class PlantumlasciiFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -38,15 +30,10 @@ class PlantumlasciiFormatter(common.Module):
 
         cmd.extend(['-pipe', '-failfast2', '-tutxt'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -55,7 +42,7 @@ class PlantumlasciiFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

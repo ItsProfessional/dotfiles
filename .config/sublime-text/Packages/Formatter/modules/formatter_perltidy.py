@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['perl']
 EXECUTABLES = ['perltidy', 'perltidy.pl']
+DOTFILES = ['.perltidyrc']
 MODULE_CONFIG = {
     'source': 'https://github.com/perltidy/perltidy',
     'name': 'Perltidy',
@@ -23,11 +15,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'perltidy_rc.cfg'
     },
-    'comment': 'requires perl on PATH if omit interpreter_path'
+    'comment': 'Omit "interpreter_path" if perl already on PATH.'
 }
 
 
-class PerltidyFormatter(common.Module):
+class PerltidyFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -42,15 +34,10 @@ class PerltidyFormatter(common.Module):
 
         cmd.extend(['--standard-output', '--standard-error-output', '--warning-output'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -59,7 +46,7 @@ class PerltidyFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

@@ -1,20 +1,13 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
 import sublime
-from ..core import common
 
-log = logging.getLogger(__name__)
+from ..core import Module
+
 INTERPRETERS = ['python3', 'python']
 EXECUTABLES = ['pyminify']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/dflook/python-minifier',
-    'name': 'Python Minifier',
+    'name': 'PythonMinifier',
     'uid': 'pythonminifier',
     'type': 'minifier',
     'syntaxes': ['python'],
@@ -24,11 +17,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'python_minifier_rc.json'
     },
-    'comment': 'requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path'
+    'comment': 'Requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. Omit "interpreter_path" if python already on PATH.'
 }
 
 
-class PythonminifierFormatter(common.Module):
+class PythonminifierFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -39,6 +32,8 @@ class PythonminifierFormatter(common.Module):
 
         path = self.get_config_path()
         if path:
+            # pythonminifier does not have an option to
+            # read external config file. We build one.
             params = [
                 '--no-combine-imports',
                 '--no-remove-pass',
@@ -70,7 +65,7 @@ class PythonminifierFormatter(common.Module):
                 no_param = '--no-' + k
                 param = '--' + k
                 if no_param in params and isinstance(v, bool) and not v:
-                        cmd.extend([no_param])
+                    cmd.extend([no_param])
                 if param in params:
                     if isinstance(v, bool) and v:
                         cmd.extend([param])
@@ -79,15 +74,10 @@ class PythonminifierFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -96,7 +86,7 @@ class PythonminifierFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

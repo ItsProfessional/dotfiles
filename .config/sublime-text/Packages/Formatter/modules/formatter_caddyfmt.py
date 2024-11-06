@@ -1,18 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['caddy']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/caddyserver/caddy',
-    'name': 'Caddy-fmt',
+    'name': 'CaddyFmt',
     'uid': 'caddyfmt',
     'type': 'beautifier',
     'syntaxes': ['Caddyfile'],
@@ -20,11 +12,11 @@ MODULE_CONFIG = {
     'executable_path': '/path/to/bin/caddy',
     'args': None,
     'config_path': None,
-    'comment': 'opinionated, no config'
+    'comment': 'Opinionated, no config.'
 }
 
 
-class CaddyfmtFormatter(common.Module):
+class CaddyfmtFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -39,15 +31,10 @@ class CaddyfmtFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -56,7 +43,7 @@ class CaddyfmtFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

@@ -1,15 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['clang-format']
+DOTFILES = ['.clang-format']
 MODULE_CONFIG = {
     'source': 'https://clang.llvm.org/docs/ClangFormat.html',
     'name': 'ClangFormat',
@@ -21,11 +13,12 @@ MODULE_CONFIG = {
     'args': None,
     'config_path': {
         'default': 'clang_format_llvm_rc.yaml'
-    }
+    },
+    'comment': 'Requires clang+llvm-14.0.0-rc1 or newer (clang-format >= 14.0.0).'
 }
 
 
-class ClangformatFormatter(common.Module):
+class ClangformatFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -44,43 +37,21 @@ class ClangformatFormatter(common.Module):
 
         extmap = {
             # (sublime, clang)
-            ('c', 'c'),
-            ('cs', 'cs'),
-            ('c++', 'cpp'),
-            ('objc', 'm'),
-            ('objc++', 'mm'),
-            ('js', 'js'),
-            ('tsx', 'ts'),
-            ('jsx', 'mjs'),
-            ('json', 'json'),
-            ('java', 'java'),
-            ('proto', 'proto'),
-            ('protodevel', 'protodevel'),
-            ('td', 'td'),
-            ('textpb', 'textpb'),
-            ('pb.txt', 'pb.txt'),
-            ('textproto', 'textproto'),
-            ('asciipb', 'asciipb'),
-            ('sv', 'sv'),
-            ('svh', 'svh'),
-            ('v', 'v'),
-            ('vh', 'vh'),
-            ('glsl', 'glsl')
+            'c++': 'cpp',
+            'objc': 'm',
+            'objc++': 'mm',
+            'tsx': 'ts',
+            'jsx': 'mjs'
         }
         syntax = self.get_assigned_syntax()
-        syntax = next(value for key, value in extmap if key == syntax)
+        syntax = extmap.get(syntax, syntax)
 
         cmd.extend(['--assume-filename=dummy.' + syntax, '--'])
-
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
 
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -89,7 +60,7 @@ class ClangformatFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

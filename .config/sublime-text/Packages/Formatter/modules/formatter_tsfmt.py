@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['node']
 EXECUTABLES = ['tsfmt']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/vvakame/typescript-formatter',
     'name': 'TSfmt',
@@ -18,16 +10,16 @@ MODULE_CONFIG = {
     'type': 'beautifier',
     'syntaxes': ['ts', 'tsx'],
     'exclude_syntaxes': None,
-    'executable_path': '/path/to/node_modules/.bin/tsfmt',
+    'executable_path': '/path/to/node_modules/.bin/tsfmt(.cmd on windows)',
     'args': None,
     'config_path': {
         'default': 'tsfmt.json'
     },
-    'comment': 'hardcoded config file name (tsfmt.json). requires node on PATH if omit interpreter_path'
+    'comment': 'Omit "interpreter_path" as files in /node_modules/.bin/ already point to node. Hardcoded config file name (tsfmt.json).'
 }
 
 
-class TsfmtFormatter(common.Module):
+class TsfmtFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -42,15 +34,10 @@ class TsfmtFormatter(common.Module):
 
         cmd.extend(['--stdin', '--'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -59,7 +46,7 @@ class TsfmtFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout.replace('\r', '')  # hack <0x0d>
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

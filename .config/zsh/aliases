@@ -23,6 +23,7 @@ alias treed='tree -CAFd'
 alias df='df -hT'
 alias du='du -sh'
 alias date='date "+%a %d/%m/%y %I:%M:%S:%3N %p"'
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 # other programs
 alias multitail='multitail --no-repeat -c'

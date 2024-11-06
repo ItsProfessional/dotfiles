@@ -126,13 +126,13 @@
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""],
-	      "interval": 1
+        "interval": 2
     },
 
     "clock": {
         "tooltip": false,
         //"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%I:%M:%S %p %d/%m/%y}",
+        "format": "{:%I:%M:%S %p %d/%m/%y %a}",
         "interval": 1
     },
 

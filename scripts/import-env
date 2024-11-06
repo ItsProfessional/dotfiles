@@ -1,25 +1,49 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-for name in $(awk 'END { for (name in ENVIRON) { print name; } }' < /dev/null)
-do
-  val="$(awk 'END { printf "%s", ENVIRON["'"$NAME"'"]; }' < /dev/null)"
+# https://gist.github.com/memchr/a40f9fdb95f9e263fc7a3f6a784b3feb
+# https://github.com/hyprwm/Hyprland/issues/3134
 
-  # SystemD
-  systemctl --user import-environment "$name"
+set -e
 
-  # Tmux
-  #tmux setenv -g "$name" "$val"
+[[ -n $HYPRLAND_DEBUG_CONF ]] && exit 0
+
+_envs=(
+	# display
+	WAYLAND_DISPLAY
+	DISPLAY
+	# xdg
+	USERNAME
+	XDG_BACKEND
+	XDG_CURRENT_DESKTOP
+	XDG_SESSION_TYPE
+	XDG_SESSION_ID
+	XDG_SESSION_CLASS
+	XDG_SESSION_DESKTOP
+	XDG_SEAT
+	XDG_VTNR
+	# hyprland
+	HYPRLAND_CMD
+	HYPRLAND_INSTANCE_SIGNATURE
+	# sway
+	SWAYSOCK
+	# misc
+	XCURSOR_SIZE
+	# toolkit
+	_JAVA_AWT_WM_NONREPARENTING
+	QT_QPA_PLATFORM
+	QT_WAYLAND_DISABLE_WINDOWDECORATION
+	GRIM_DEFAULT_DIR
+	# ssh
+	SSH_AUTH_SOCK
+)
+
+# Import to systemd and dbus user session
+dbus-update-activation-environment --systemd "${_envs[@]}"
+
+# Import to tmux server
+for v in "${_envs[@]}"; do
+	if [[ -n ${!v} ]]; then
+		tmux setenv -g "$v" "${!v}"
+	fi
 done
-
-# DBUS
-dbus-update-activation-environment --systemd --all
-
-# Zsh
-# Note: this requires a trap function (preferably in .zshenv): (without it, zsh will just exit)
-  # TRAPUSR1() {
-  #  if [[ -o INTERACTIVE ]]; then
-  #     exec zsh
-  #  fi
-  #}
-#killall -USR1 zsh
 

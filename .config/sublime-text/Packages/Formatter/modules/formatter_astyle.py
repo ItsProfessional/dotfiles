@@ -1,18 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['AStyle', 'astyle']
+DOTFILES = ['.astylerc', '_astylerc']
 MODULE_CONFIG = {
     'source': 'https://sourceforge.net/projects/astyle',
-    'name': 'Artistic Style',
+    'name': 'ArtisticStyle',
     'uid': 'astyle',
     'type': 'beautifier',
     'syntaxes': ['c', 'c++', 'cs', 'objc', 'objc++', 'java', 'js'],
@@ -26,7 +18,7 @@ MODULE_CONFIG = {
 }
 
 
-class AstyleFormatter(common.Module):
+class AstyleFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -49,15 +41,10 @@ class AstyleFormatter(common.Module):
 
         cmd.extend(['--mode=' + language])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -66,7 +53,7 @@ class AstyleFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

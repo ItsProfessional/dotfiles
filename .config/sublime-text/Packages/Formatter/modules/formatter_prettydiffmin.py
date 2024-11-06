@@ -1,35 +1,25 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import os
-import logging
-import tempfile
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['node']
 EXECUTABLES = ['prettydiff']
+DOTFILES = ['.prettydiffrc']
 MODULE_CONFIG = {
     'source': 'https://github.com/prettydiff/prettydiff',
-    'name': 'Pretty Diff',
+    'name': 'PrettyDiff',
     'uid': 'prettydiffmin',
     'type': 'minifier',
     'syntaxes': ['css', 'scss', 'less', 'js', 'jsx', 'json', 'html', 'asp', 'xml', 'tsx'],
     'exclude_syntaxes': None,
-    'executable_path': '/path/to/node_modules/.bin/prettydiff',
+    'executable_path': '/path/to/node_modules/.bin/prettydiff(.cmd on windows)',
     'args': None,
     'config_path': {
         'default': 'prettydiffmin_rc.json'
     },
-    'comment': 'requires node on PATH if omit interpreter_path'
+    'comment': 'Omit "interpreter_path" as files in /node_modules/.bin/ already point to node.'
 }
 
 
-class PrettydiffminFormatter(common.Module):
+class PrettydiffminFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -44,36 +34,22 @@ class PrettydiffminFormatter(common.Module):
         if path:
             cmd.extend(['config', path])
 
-        file = self.get_pathinfo()['path']
-        tmp_file = None
-        if file:
-            cmd.extend(['source', file])
-        else:
-            tmp_file = self.create_tmp_file()
-            cmd.extend(['source', tmp_file])
-
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
+        tmp_file = self.create_tmp_file(autodel=True)
+        cmd.extend(['source', tmp_file])
 
         return cmd, tmp_file
 
     def format(self):
         cmd, tmp_file = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            self.remove_tmp_file(tmp_file)
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_com(cmd)
-
-            self.remove_tmp_file(tmp_file)
 
             if exitcode > 0:
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.remove_tmp_file(tmp_file)
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

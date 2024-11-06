@@ -1,17 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
 # @install      https://scrossoracle.medium.com/building-graphviz-from-source-on-macos-b6a846d73949
 
-import logging
+from ..core import Module, log
 from ..libs import yaml
-from ..core import common
 
-log = logging.getLogger(__name__)
 EXECUTABLES = ['dot']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://gitlab.com/graphviz/graphviz',
     'name': 'Graphviz',
@@ -27,7 +20,7 @@ MODULE_CONFIG = {
 }
 
 
-class GraphvizFormatter(common.Module):
+class GraphvizFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -59,15 +52,10 @@ class GraphvizFormatter(common.Module):
 
         cmd.extend(['-Tpng', '-o', self.get_output_image()])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -81,10 +69,10 @@ class GraphvizFormatter(common.Module):
                         self.exec_cmd(cmd)
                         log.debug('Current extended arguments: %s', cmd)
                     except Exception as e:
-                        log.error('An error occurred while executing extended cmd: %s Details: %s', cmd, e)
+                        log.error('Error while executing extended cmd: %s Details: %s', cmd, e)
 
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

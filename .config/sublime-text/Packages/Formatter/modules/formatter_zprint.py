@@ -1,17 +1,11 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
 import re
-from ..core import common
+from os.path import basename
 
-log = logging.getLogger(__name__)
+from ..core import Module
+
 INTERPRETERS = ['bb', 'java']
 EXECUTABLES = ['zprint-filter', 'zprintma', 'zprintm', 'zprintl', 'zprint']
+DOTFILES = ['.zprintrc', '.zprint.edn']
 MODULE_CONFIG = {
     'source': 'https://github.com/kkinnear/zprint',
     'name': 'Zprint',
@@ -19,17 +13,17 @@ MODULE_CONFIG = {
     'type': 'beautifier',
     'syntaxes': ['clojure'],
     'exclude_syntaxes': None,
-    'interpreter_path': '/path/to/bin/java.exe if use zprint-filter OR /path/to/bin/bb if use babashka OR just omid',
+    'interpreter_path': '/path/to/bin/java.exe if use zprint-filter OR /path/to/bin/bb if use babashka OR just omit',
     'executable_path': '/path/to/bin/zprint[l|m|ma|] or /path/to/bin/zprint-filter if use java',
     'args': None,
     'config_path': {
         'default': 'zprint_rc.edn'
     },
-    'comment': 'requires java on PATH if use zprint-filter. macosx: a zprint already exists, avoid to use this same name'
+    'comment': 'Requires java on PATH to use zprint-filter. MacOS: another zprint already exists, avoid to use this same name.'
 }
 
 
-class ZprintFormatter(common.Module):
+class ZprintFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -47,9 +41,9 @@ class ZprintFormatter(common.Module):
         interpreter = self.get_interpreter()
         executable = self.get_executable(runtime_type=None)
         if executable and interpreter:
-            if 'zprint-filter' in common.basename(executable).lower():
+            if 'zprint-filter' in basename(executable).lower():
                 cmd = [interpreter, '-jar', executable]
-            elif 'bb' in common.basename(interpreter).lower():
+            elif 'bb' in basename(interpreter).lower():
                 cmd = [interpreter, executable]
             else:
                 cmd = [executable]
@@ -67,15 +61,10 @@ class ZprintFormatter(common.Module):
                 text = ''.join(text.splitlines())
                 cmd.extend([self.remove_extra_whitespaces(text)])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -84,7 +73,7 @@ class ZprintFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

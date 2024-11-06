@@ -1,43 +1,39 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import os
 import json
-import logging
 import threading
 from datetime import datetime, timedelta
+from os import makedirs
+from os.path import dirname, join
 
 import sublime
 import sublime_plugin
 
-from . import common
+from . import CONFIG, DataHandler, OptionHandler, bulk_operation_detector, log
 
-log = logging.getLogger(__name__)
-
-SESSION_FILE = common.join(sublime.packages_path(), '..', 'Local', 'Session.formatter_session')
+SESSION_FILE = join(sublime.packages_path(), '..', 'Local', 'Session.formatter_session')
 MAX_AGE_DAYS = 180
 MAX_DATABASE_RECORDS = 600
 
 
 class SessionManager:
     def __init__(self, max_database_records=MAX_DATABASE_RECORDS):
-        os.makedirs(common.dirname(SESSION_FILE), exist_ok=True)
+        makedirs(dirname(SESSION_FILE), exist_ok=True)
         self.lock = threading.Lock()
         self.max_database_records = max_database_records
         self.cleanup_session_file()
 
-    def read_session_file(self):
+    @staticmethod
+    def read_session_file():
         try:
-            with open(SESSION_FILE, 'r') as f:
+            with open(SESSION_FILE, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError):
+        except UnicodeDecodeError as e:
+            log.error('Unicode decoding error: %s', e)
+            return {}
+        except Exception:
             return {}
 
-    def write_session_file(self, data):
+    @staticmethod
+    def write_session_file(data):
         with open(SESSION_FILE, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4, sort_keys=True)
 
@@ -51,7 +47,8 @@ class SessionManager:
                 del data[key]
             self.write_session_file(data)
 
-    def is_entry_old(self, entry, current_time):
+    @staticmethod
+    def is_entry_old(entry, current_time):
         last_update = datetime.strptime(entry.get('last_update', ''), '%Y-%m-%d %H:%M:%S.%f')
         return current_time - last_update > timedelta(days=MAX_AGE_DAYS)
 
@@ -99,21 +96,6 @@ class SessionManager:
                 region = sublime.Region(region_data['start'], region_data['end'])
                 view.sel().add(region)
 
-    def add_syntax(self, file_path, syntax):
-        data = self.read_session_file()
-        entry = data.get(file_path, {})
-        entry['last_update'] = str(datetime.now())
-        entry['syntax'] = syntax
-        self.write_session_file(data)
-
-    def restore_syntax(self, view, file_path):
-        data = self.read_session_file()
-        entry = data.get(file_path, {})
-        syntax = entry.get('syntax', None)
-
-        if syntax:
-            view.assign_syntax(syntax)
-
     def add_bookmarks(self, file_path, bookmarks):
         data = self.read_session_file()
         entry = data.get(file_path, {})
@@ -136,7 +118,8 @@ class SessionManager:
 
             view.add_regions('bookmarks', bookmark_regions, 'bookmarks', 'bookmark', sublime.DRAW_OUTLINED)
 
-    def get_bookmarks(self, view):
+    @staticmethod
+    def get_bookmarks(view):
         bookmarks = []
         for region in view.get_regions('bookmarks'):
             row, _ = view.rowcol(region.begin())
@@ -149,15 +132,13 @@ class SessionManager:
             cursor_position = view.sel()[0].begin()
             cursor_x, cursor_y = view.rowcol(cursor_position)
 
-            # Get selections, syntax, and bookmarks and store them
+            # Store selections and bookmarks
             selections = [{'start': region.begin(), 'end': region.end()} for region in view.sel()]
-            # syntax = view.settings().get('syntax')
             bookmarks = self.get_bookmarks(view)
 
             with self.lock:
                 self.add_entry(file_path, cursor_x, cursor_y)
                 self.add_selections(file_path, selections)
-                # self.add_syntax(file_path, syntax)
                 self.add_bookmarks(file_path, bookmarks)
 
     def run_on_load(self, view):
@@ -174,22 +155,26 @@ class SessionManager:
                     cursor_position = view.text_point(cursor_x, cursor_y)
                     view.sel().clear()
                     view.sel().add(sublime.Region(cursor_position))
-                    view.show_at_center(cursor_position, animate=False)
+                    try:
+                        view.show_at_center(cursor_position, animate=False)  # ST4
+                    except Exception:
+                        view.show_at_center(cursor_position)  # ST3
 
-                    # Restore selections, syntax, and bookmarks
+                    # Restore selections and bookmarks
                     self.restore_selections(view, file_path)
-                    # self.restore_syntax(view, file_path)
                     self.restore_bookmarks(view, file_path)
 
 
-class SessionManagerListener(sublime_plugin.EventListener, common.Base):
-    def __init__(self, *args, **kwargs):
-        self.session_manager = SessionManager(max_database_records=600)
+session_manager = SessionManager(max_database_records=600)
 
+
+class SessionManagerListener(sublime_plugin.EventListener):
+    @bulk_operation_detector.bulk_operation_guard(register=True)
     def on_load(self, view):
-        if self.query(common.config, True, 'remember_session'):
-            self.session_manager.run_on_load(view)
+        if OptionHandler.query(CONFIG, True, 'remember_session') and (DataHandler.get('__dir_format_stop__')[1] or True):
+            session_manager.run_on_load(view)
 
+    @bulk_operation_detector.bulk_operation_guard(register=True)
     def on_pre_close(self, view):
-        if self.query(common.config, True, 'remember_session'):
-            self.session_manager.run_on_pre_close(view)
+        if OptionHandler.query(CONFIG, True, 'remember_session') and (DataHandler.get('__dir_format_stop__')[1] or True):
+            session_manager.run_on_pre_close(view)

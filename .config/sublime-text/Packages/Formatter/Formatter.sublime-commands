@@ -1,18 +1,56 @@
 [
     {
-        "caption": "Formatter: Show Version",
-        "command": "show_version"
+        "caption": "Preferences: Formatter Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/Formatter/Formatter.sublime-settings",
+            "default": "{\n\t$0\n}\n"
+        }
     },
     {
-        "caption": "Formatter: Open Config Folders",
-        "command": "open_config_folders"
+        "caption": "Preferences: Formatter About",
+        "command": "about"
     },
     {
-        "caption": "Formatter: Quick Options",
+        "caption": "Preferences: Formatter Changelog",
+        "command": "open_changelog"
+    },
+    {
+        "caption": "Preferences: Formatter Modules Info",
+        "command": "modules_info"
+    },
+    {
+        "caption": "Preferences: Formatter Browser Configs",
+        "command": "browser_configs"
+    },
+    {
+        "caption": "Preferences: Formatter Key Bindings",
+        "command": "key_bindings"
+    },
+    {
+        "caption": "Preferences: Formatter Backup Settings",
+        "command": "backup_manager",
+        "args": {
+            "type": "backup"
+        }
+    },
+    {
+        "caption": "Preferences: Formatter Restore Settings",
+        "command": "backup_manager",
+        "args": {
+            "type": "restore"
+        }
+    },
+    {
+        "caption": "Preferences: Formatter Quick Options",
         "command": "quick_options"
     },
     {
-        "caption": "Formatter: Beautify with Apple Swift Format",
+        "caption": "Formatter: Auto Format File",
+        "command": "auto_format_file"
+    },
+    {
+        "caption": "Formatter: Beautify with AppleSwiftFormat",
         "command": "run_format",
         "args": {
             "uid": "appleswiftformat",
@@ -28,7 +66,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Artistic Style",
+        "caption": "Formatter: Beautify with ArtisticStyle",
         "command": "run_format",
         "args": {
             "uid": "astyle",
@@ -52,10 +90,18 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with BibTeX-tidy",
+        "caption": "Formatter: Beautify with BibTeXTidy",
         "command": "run_format",
         "args": {
             "uid": "bibtextidy",
+            "type": "beautifier"
+        }
+    },
+    {
+        "caption": "Formatter: Beautify with Biome",
+        "command": "run_format",
+        "args": {
+            "uid": "biome",
             "type": "beautifier"
         }
     },
@@ -68,7 +114,15 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Cabal-fmt",
+        "caption": "Formatter: Beautify with BladeFormatter",
+        "command": "run_format",
+        "args": {
+            "uid": "bladeformatter",
+            "type": "beautifier"
+        }
+    },
+    {
+        "caption": "Formatter: Beautify with CabalFmt",
         "command": "run_format",
         "args": {
             "uid": "cabalfmt",
@@ -76,7 +130,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Caddy-fmt",
+        "caption": "Formatter: Beautify with CaddyFmt",
         "command": "run_format",
         "args": {
             "uid": "caddyfmt",
@@ -100,7 +154,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with CMake-format",
+        "caption": "Formatter: Beautify with CMakeFormat",
         "command": "run_format",
         "args": {
             "uid": "cmakeformat",
@@ -124,7 +178,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with D2-fmt",
+        "caption": "Formatter: Beautify with D2Fmt",
         "command": "run_format",
         "args": {
             "uid": "d2fmt",
@@ -132,7 +186,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Dart Format",
+        "caption": "Formatter: Beautify with DartFormat",
         "command": "run_format",
         "args": {
             "uid": "dartformat",
@@ -148,7 +202,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Dhall format",
+        "caption": "Formatter: Beautify with DhallFormat",
         "command": "run_format",
         "args": {
             "uid": "dhallformat",
@@ -180,7 +234,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Erlang efmt",
+        "caption": "Formatter: Beautify with ErlangEfmt",
         "command": "run_format",
         "args": {
             "uid": "efmt",
@@ -188,7 +242,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Elixir mix",
+        "caption": "Formatter: Beautify with ElixirMix",
         "command": "run_format",
         "args": {
             "uid": "elixirmix",
@@ -196,7 +250,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Elm-format",
+        "caption": "Formatter: Beautify with ElmFormat",
         "command": "run_format",
         "args": {
             "uid": "elmformat",
@@ -204,7 +258,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Erlang erlfmt",
+        "caption": "Formatter: Beautify with Erlfmt",
         "command": "run_format",
         "args": {
             "uid": "erlfmt",
@@ -252,7 +306,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Fortran fprettify",
+        "caption": "Formatter: Beautify with Fprettify",
         "command": "run_format",
         "args": {
             "uid": "fprettify",
@@ -292,7 +346,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Google Java Format",
+        "caption": "Formatter: Beautify with GoogleJavaFormat",
         "command": "run_format",
         "args": {
             "uid": "googlejavaformat",
@@ -316,7 +370,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with HTML Tidy",
+        "caption": "Formatter: Beautify with HTMLTidy",
         "command": "run_format",
         "args": {
             "uid": "htmltidy",
@@ -332,7 +386,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with JS Beautifier",
+        "caption": "Formatter: Beautify with JSBeautifier",
         "command": "run_format",
         "args": {
             "uid": "jsbeautifier",
@@ -344,6 +398,14 @@
         "command": "run_format",
         "args": {
             "uid": "jsonmax",
+            "type": "beautifier"
+        }
+    },
+    {
+        "caption": "Formatter: Beautify with JuliaFormatter",
+        "command": "run_format",
+        "args": {
+            "uid": "juliaformatter",
             "type": "beautifier"
         }
     },
@@ -396,7 +458,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with OCP-indent",
+        "caption": "Formatter: Beautify with OCPIndent",
         "command": "run_format",
         "args": {
             "uid": "ocpindent",
@@ -428,7 +490,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with PHP CodeSniffer",
+        "caption": "Formatter: Beautify with PHPCodeSniffer",
         "command": "run_format",
         "args": {
             "uid": "phpcbf",
@@ -436,7 +498,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with PHP CS Fixer",
+        "caption": "Formatter: Beautify with PHPCSFixer",
         "command": "run_format",
         "args": {
             "uid": "phpcsfixer",
@@ -444,7 +506,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Plantuml ASCII",
+        "caption": "Formatter: Beautify with PlantumlASCII",
         "command": "run_format",
         "args": {
             "uid": "plantumlascii",
@@ -468,7 +530,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Pretty Diff",
+        "caption": "Formatter: Beautify with PrettyDiff",
         "command": "run_format",
         "args": {
             "uid": "prettydiffmax",
@@ -556,7 +618,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Semistandard JS",
+        "caption": "Formatter: Beautify with SemistandardJS",
         "command": "run_format",
         "args": {
             "uid": "semistandardjs",
@@ -580,7 +642,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with SQL Formatter",
+        "caption": "Formatter: Beautify with SQLFormatter",
         "command": "run_format",
         "args": {
             "uid": "sqlformatter",
@@ -596,7 +658,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Standard JS",
+        "caption": "Formatter: Beautify with StandardJS",
         "command": "run_format",
         "args": {
             "uid": "standardjs",
@@ -604,7 +666,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Standard RB",
+        "caption": "Formatter: Beautify with StandardRB",
         "command": "run_format",
         "args": {
             "uid": "standardrb",
@@ -612,7 +674,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Standardx JS",
+        "caption": "Formatter: Beautify with StandardxJS",
         "command": "run_format",
         "args": {
             "uid": "standardxjs",
@@ -644,7 +706,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Stylish Haskell",
+        "caption": "Formatter: Beautify with StylishHaskell",
         "command": "run_format",
         "args": {
             "uid": "stylishhaskell",
@@ -684,7 +746,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with Terraform fmt",
+        "caption": "Formatter: Beautify with TerraformFmt",
         "command": "run_format",
         "args": {
             "uid": "terraformfmt",
@@ -708,7 +770,7 @@
         }
     },
     {
-        "caption": "Formatter: Beautify with TS Standard",
+        "caption": "Formatter: Beautify with TSStandard",
         "command": "run_format",
         "args": {
             "uid": "tsstandard",
@@ -720,6 +782,22 @@
         "command": "run_format",
         "args": {
             "uid": "uncrustify",
+            "type": "beautifier"
+        }
+    },
+    {
+        "caption": "Formatter: Beautify with YAMLfmt",
+        "command": "run_format",
+        "args": {
+            "uid": "yamlfmt",
+            "type": "beautifier"
+        }
+    },
+    {
+        "caption": "Formatter: Beautify with YAML",
+        "command": "run_format",
+        "args": {
+            "uid": "yamlmax",
             "type": "beautifier"
         }
     },
@@ -748,7 +826,7 @@
         }
     },
     {
-        "caption": "Formatter: Minify with Clean CSS",
+        "caption": "Formatter: Minify with CleanCSS",
         "command": "run_format",
         "args": {
             "uid": "cleancss",
@@ -772,7 +850,7 @@
         }
     },
     {
-        "caption": "Formatter: Minify with Pretty Diff",
+        "caption": "Formatter: Minify with PrettyDiff",
         "command": "run_format",
         "args": {
             "uid": "prettydiffmin",
@@ -780,7 +858,7 @@
         }
     },
     {
-        "caption": "Formatter: Minify with Python Minifier",
+        "caption": "Formatter: Minify with PythonMinifier",
         "command": "run_format",
         "args": {
             "uid": "pythonminifier",
@@ -820,10 +898,650 @@
         }
     },
     {
+        "caption": "Formatter: Convert with Sf BASE16 (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbase16dec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BASE16 (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbase16enc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BASE32 (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbase32dec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BASE32 (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbase32enc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BASE64 (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbase64dec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BASE64 (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbase64enc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BASE (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbasedec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BASE (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbaseenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BINARY (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbinarydec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BINARY (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbinaryenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BRAILLE (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbrailledec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf BRAILLE (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfbrailleenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf CHARCODE (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfcharcodedec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf CHARCODE (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfcharcodeenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf DECIMAL (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfdecimaldec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf DECIMAL (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfdecimalenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf DATES (extract)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfextractdates",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf EMAIL (extract)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfextractemailaddr",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf FILEPATHS (extract)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfextractfilepaths",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf IP (extract)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfextractipaddr",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf MAC (extract)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfextractmacaddr",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf URLS (extract)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfextracturls",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf GZIP (compress)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfgzipcompress",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf GZIP (decompress)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfgzipdecompress",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf HEX (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfhexdec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf HEXDUMP (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfhexdumpdec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf HEXDUMP (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfhexdumpenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf HEX (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfhexenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf HTML (deentitize)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfhtmldeentitize",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf HTML (entitize)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfhtmlentitize",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf HTML (strip tags)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfhtmlstriptags",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf LoremIpsum",
+        "command": "run_format",
+        "args": {
+            "uid": "sfloremipsum",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf LZMA (compress)",
+        "command": "run_format",
+        "args": {
+            "uid": "sflzmacompress",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf LZMA (decompress)",
+        "command": "run_format",
+        "args": {
+            "uid": "sflzmadecompress",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf OCTAL (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfoctaldec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf OCTAL (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfoctalenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf PUNYCODE (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfpunycodedec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf PUNYCODE (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfpunycodeenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf QP (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfquotedprintabledec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf QP (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfquotedprintableenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf REGEX (escape)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfregexescape",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf REGEX (unescape)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfregexunescape",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf ROMAN NUM (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfromannumeraldec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf ROMAN NUM (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfromannumeralenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf STRING (escape)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfstringescape",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf STRING (unescape)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfstringunescape",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf UNICODE (escape)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfunicodeescape",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf UNICODE (unescape)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfunicodeunescape",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf TIMESTAMP (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfunixtimestampdec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf TIMESTAMP (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfunixtimestampenc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf URI (decode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfuridec",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf URI (encode)",
+        "command": "run_format",
+        "args": {
+            "uid": "sfurienc",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->CRC32",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2crc32",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->Diacritics",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2diacritics",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->MD5",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2md5",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->RANDPASS",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2randpass",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->SHA1",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2sha1",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->SHA256",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2sha256",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->SHA3_256",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2sha3256",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->SHA3_512",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2sha3512",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->SHA512",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2sha512",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->SHAKE256",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2shake256",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->SHAKE512",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2shake512",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Sf X->UUID",
+        "command": "run_format",
+        "args": {
+            "uid": "sfx2uuid",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yj X->HCL",
+        "command": "run_format",
+        "args": {
+            "uid": "yjx2hcl",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yj X->JSON",
+        "command": "run_format",
+        "args": {
+            "uid": "yjx2json",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yj X->TOML",
+        "command": "run_format",
+        "args": {
+            "uid": "yjx2toml",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yj X->YAML",
+        "command": "run_format",
+        "args": {
+            "uid": "yjx2yaml",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->BASE64",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2base64",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->CSV",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2csv",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->JSON",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2json",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->LUA",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2lua",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->PROPS",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2props",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->SHELL",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2shell",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->TOML",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2toml",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->TSV",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2tsv",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->URI",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2uri",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->XML",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2xml",
+            "type": "converter"
+        }
+    },
+    {
+        "caption": "Formatter: Convert with Yq X->YAML",
+        "command": "run_format",
+        "args": {
+            "uid": "yqx2yaml",
+            "type": "converter"
+        }
+    },
+    {
         "caption": "Formatter: Visualize with D2",
         "command": "run_format",
         "args": {
             "uid": "d2",
+            "type": "graphic"
+        }
+    },
+    {
+        "caption": "Formatter: Visualize with Drawio",
+        "command": "run_format",
+        "args": {
+            "uid": "drawio",
             "type": "graphic"
         }
     },

@@ -1,15 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module, log
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['shellcheck']
+DOTFILES = ['.shellcheckrc', 'shellcheckrc']
 MODULE_CONFIG = {
     'source': 'https://github.com/koalaman/shellcheck',
     'name': 'ShellCheck',
@@ -22,11 +14,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'shellcheck_rc.cfg'
     },
-    'comment': 'limited autofix, no formatting capability'
+    'comment': 'Limited autofix, no formatting capability.'
 }
 
 
-class ShellcheckFormatter(common.Module):
+class ShellcheckFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -44,9 +36,6 @@ class ShellcheckFormatter(common.Module):
             cmd.extend(self.build_config(path))
 
         cmd.extend(['--color=never', '--format', 'diff', '-'])
-
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
 
         return cmd
 
@@ -102,7 +91,7 @@ class ShellcheckFormatter(common.Module):
         '''
         import difflib
 
-        _no_eol = '\ No newline at end of file'
+        _no_eol = r'\ No newline at end of file'
 
         diffs = difflib.unified_diff(a.splitlines(True), b.splitlines(True), n=0)
         try:
@@ -124,7 +113,7 @@ class ShellcheckFormatter(common.Module):
         '''
         import re
 
-        _hdr_pat = re.compile('^@@ -(\d+),?(\d+)? \+(\d+),?(\d+)? @@$')
+        _hdr_pat = re.compile(r'^@@ -(\d+),?(\d+)? \+(\d+),?(\d+)? @@$')
 
         s = s.splitlines(True)
         p = patch.splitlines(True)
@@ -137,11 +126,11 @@ class ShellcheckFormatter(common.Module):
             m = _hdr_pat.match(p[i])
             if not m:
                 raise Exception('Bad patch -- regex mismatch [line ' + str(i) + ']')
-            l = int(m.group(midx)) - 1 + (m.group(midx + 1) == '0')
-            if sl > l or l > len(s):
+            length = int(m.group(midx)) - 1 + (m.group(midx + 1) == '0')
+            if sl > length or length > len(s):
                 raise Exception('Bad patch -- bad line num [line ' + str(i) + ']')
-            t += ''.join(s[sl:l])
-            sl = l
+            t += ''.join(s[sl:length])
+            sl = length
             i += 1
             while i < len(p) and p[i][0] != '@':
                 if i + 1 < len(p) and p[i + 1][0] == '\\':
@@ -159,8 +148,6 @@ class ShellcheckFormatter(common.Module):
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -178,7 +165,7 @@ class ShellcheckFormatter(common.Module):
                     log.debug(stdout)
             else:
                 return out
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

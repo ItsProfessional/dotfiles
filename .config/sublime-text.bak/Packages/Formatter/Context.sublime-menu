@@ -1,0 +1,861 @@
+[
+    {
+        "caption": "Formatter",
+        "id": "formatter",
+        "children": [
+            {
+                "caption": "☰ Quick Options",
+                "command": "quick_options"
+            },
+            {
+                "caption": "-"
+            },
+            {
+                "caption": "Apple Swift Format",
+                "command": "run_format",
+                "args": {
+                    "uid": "appleswiftformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "ASMfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "asmfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Artistic Style",
+                "command": "run_format",
+                "args": {
+                    "uid": "astyle",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Autopep8",
+                "command": "run_format",
+                "args": {
+                    "uid": "autopep8",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Beautysh",
+                "command": "run_format",
+                "args": {
+                    "uid": "beautysh",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "BibTeX-tidy",
+                "command": "run_format",
+                "args": {
+                    "uid": "bibtextidy",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Black",
+                "command": "run_format",
+                "args": {
+                    "uid": "black",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Cabal-fmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "cabalfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Caddy-fmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "caddyfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "ClangFormat",
+                "command": "run_format",
+                "args": {
+                    "uid": "clangformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "CLJfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "cljfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "CMake-format",
+                "command": "run_format",
+                "args": {
+                    "uid": "cmakeformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Crystal",
+                "command": "run_format",
+                "args": {
+                    "uid": "crystal",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "CSScomb",
+                "command": "run_format",
+                "args": {
+                    "uid": "csscomb",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "D2-fmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "d2fmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Dart Format",
+                "command": "run_format",
+                "args": {
+                    "uid": "dartformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Deno",
+                "command": "run_format",
+                "args": {
+                    "uid": "deno",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Dhall format",
+                "command": "run_format",
+                "args": {
+                    "uid": "dhallformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Docformatter",
+                "command": "run_format",
+                "args": {
+                    "uid": "docformatter",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Dockfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "dockfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Dprint",
+                "command": "run_format",
+                "args": {
+                    "uid": "dprint",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Erlang efmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "efmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Elixir mix",
+                "command": "run_format",
+                "args": {
+                    "uid": "elixirmix",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Elm-format",
+                "command": "run_format",
+                "args": {
+                    "uid": "elmformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Erlang erlfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "erlfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "ESLint",
+                "command": "run_format",
+                "args": {
+                    "uid": "eslint",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "ESLintd",
+                "command": "run_format",
+                "args": {
+                    "uid": "eslintd",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Floskell",
+                "command": "run_format",
+                "args": {
+                    "uid": "floskell",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "FormatR",
+                "command": "run_format",
+                "args": {
+                    "uid": "formatr",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Fourmolu",
+                "command": "run_format",
+                "args": {
+                    "uid": "fourmolu",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Fortran fprettify",
+                "command": "run_format",
+                "args": {
+                    "uid": "fprettify",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Gleam",
+                "command": "run_format",
+                "args": {
+                    "uid": "gleam",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Gofmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "gofmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Gofumpt",
+                "command": "run_format",
+                "args": {
+                    "uid": "gofumpt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Goimports",
+                "command": "run_format",
+                "args": {
+                    "uid": "goimports",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Google Java Format",
+                "command": "run_format",
+                "args": {
+                    "uid": "googlejavaformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "HCLfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "hclfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Hindent",
+                "command": "run_format",
+                "args": {
+                    "uid": "hindent",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "HTML Tidy",
+                "command": "run_format",
+                "args": {
+                    "uid": "htmltidy",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Isort",
+                "command": "run_format",
+                "args": {
+                    "uid": "isort",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "JS Beautifier",
+                "command": "run_format",
+                "args": {
+                    "uid": "jsbeautifier",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "JSON",
+                "command": "run_format",
+                "args": {
+                    "uid": "jsonmax",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Ktlint",
+                "command": "run_format",
+                "args": {
+                    "uid": "ktlint",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "LaTeXindent",
+                "command": "run_format",
+                "args": {
+                    "uid": "latexindent",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "LuaFormatter",
+                "command": "run_format",
+                "args": {
+                    "uid": "luaformatter",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "NASMfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "nasmfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "NGINXfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "nginxfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "OCamlformat",
+                "command": "run_format",
+                "args": {
+                    "uid": "ocamlformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "OCP-indent",
+                "command": "run_format",
+                "args": {
+                    "uid": "ocpindent",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Ormolu",
+                "command": "run_format",
+                "args": {
+                    "uid": "ormolu",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Perltidy",
+                "command": "run_format",
+                "args": {
+                    "uid": "perltidy",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "PgFormatter",
+                "command": "run_format",
+                "args": {
+                    "uid": "pgformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "PHP CodeSniffer",
+                "command": "run_format",
+                "args": {
+                    "uid": "phpcbf",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "PHP CS Fixer",
+                "command": "run_format",
+                "args": {
+                    "uid": "phpcsfixer",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Plantuml ASCII",
+                "command": "run_format",
+                "args": {
+                    "uid": "plantumlascii",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Prettier",
+                "command": "run_format",
+                "args": {
+                    "uid": "prettier",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Prettierd",
+                "command": "run_format",
+                "args": {
+                    "uid": "prettierd",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Pretty Diff",
+                "command": "run_format",
+                "args": {
+                    "uid": "prettydiffmax",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "PrettyTable",
+                "command": "run_format",
+                "args": {
+                    "uid": "prettytable",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Pyment",
+                "command": "run_format",
+                "args": {
+                    "uid": "pyment",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Racofmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "racofmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "RuboCop",
+                "command": "run_format",
+                "args": {
+                    "uid": "rubocop",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Rubyfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "rubyfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Ruff",
+                "command": "run_format",
+                "args": {
+                    "uid": "ruff",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Rufo",
+                "command": "run_format",
+                "args": {
+                    "uid": "rufo",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Rustfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "rustfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Scalafmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "scalafmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Scalariform",
+                "command": "run_format",
+                "args": {
+                    "uid": "scalariform",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Semistandard JS",
+                "command": "run_format",
+                "args": {
+                    "uid": "semistandardjs",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "ShellCheck",
+                "command": "run_format",
+                "args": {
+                    "uid": "shellcheck",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Shfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "shfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "SQL Formatter",
+                "command": "run_format",
+                "args": {
+                    "uid": "sqlformatter",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "SQLparse",
+                "command": "run_format",
+                "args": {
+                    "uid": "sqlparse",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Standard JS",
+                "command": "run_format",
+                "args": {
+                    "uid": "standardjs",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Standard RB",
+                "command": "run_format",
+                "args": {
+                    "uid": "standardrb",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Standardx JS",
+                "command": "run_format",
+                "args": {
+                    "uid": "standardxjs",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Stylefmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "stylefmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Stylelint",
+                "command": "run_format",
+                "args": {
+                    "uid": "stylelint",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Styler",
+                "command": "run_format",
+                "args": {
+                    "uid": "styler",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Stylish Haskell",
+                "command": "run_format",
+                "args": {
+                    "uid": "stylishhaskell",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "StyLua",
+                "command": "run_format",
+                "args": {
+                    "uid": "stylua",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "SVGO",
+                "command": "run_format",
+                "args": {
+                    "uid": "svgomax",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "SwiftFormat",
+                "command": "run_format",
+                "args": {
+                    "uid": "swiftformat",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Taplo",
+                "command": "run_format",
+                "args": {
+                    "uid": "taplo",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Terraform fmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "terraformfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Topiary",
+                "command": "run_format",
+                "args": {
+                    "uid": "topiary",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "TSfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "tsfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "TS Standard",
+                "command": "run_format",
+                "args": {
+                    "uid": "tsstandard",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Uncrustify",
+                "command": "run_format",
+                "args": {
+                    "uid": "uncrustify",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "YAPF",
+                "command": "run_format",
+                "args": {
+                    "uid": "yapf",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Zigfmt",
+                "command": "run_format",
+                "args": {
+                    "uid": "zigfmt",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "Zprint",
+                "command": "run_format",
+                "args": {
+                    "uid": "zprint",
+                    "type": "beautifier"
+                }
+            },
+            {
+                "caption": "-"
+            },
+            {
+                "caption": "Clean CSS (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "cleancss",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "HTMLMinifier (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "htmlminifier",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "JSON (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "jsonmin",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "Pretty Diff (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "prettydiffmin",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "Python Minifier (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "pythonminifier",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "Shfmt (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "shfmtmin",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "SQLMin (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "sqlmin",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "SVGO (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "svgomin",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "Terser (min)",
+                "command": "run_format",
+                "args": {
+                    "uid": "terser",
+                    "type": "minifier"
+                }
+            },
+            {
+                "caption": "-"
+            },
+            {
+                "caption": "D2",
+                "command": "run_format",
+                "args": {
+                    "uid": "d2",
+                    "type": "graphic"
+                }
+            },
+            {
+                "caption": "Graphviz",
+                "command": "run_format",
+                "args": {
+                    "uid": "graphviz",
+                    "type": "graphic"
+                }
+            },
+            {
+                "caption": "Mermaid",
+                "command": "run_format",
+                "args": {
+                    "uid": "mermaid",
+                    "type": "graphic"
+                }
+            },
+            {
+                "caption": "Plantuml",
+                "command": "run_format",
+                "args": {
+                    "uid": "plantuml",
+                    "type": "graphic"
+                }
+            }
+        ]
+    }
+]

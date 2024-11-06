@@ -1,18 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['ocp-indent']
+DOTFILES = ['.ocp-indent', 'ocp-indent.conf']
 MODULE_CONFIG = {
     'source': 'https://github.com/OCamlPro/ocp-indent',
-    'name': 'OCP-indent',
+    'name': 'OCPIndent',
     'uid': 'ocpindent',
     'type': 'beautifier',
     'syntaxes': ['ocaml', 'ocamlyacc', 'ocamllex'],
@@ -25,7 +17,7 @@ MODULE_CONFIG = {
 }
 
 
-class OcpindentFormatter(common.Module):
+class OcpindentFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -62,15 +54,10 @@ class OcpindentFormatter(common.Module):
 
         cmd.extend(['--'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -79,7 +66,7 @@ class OcpindentFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

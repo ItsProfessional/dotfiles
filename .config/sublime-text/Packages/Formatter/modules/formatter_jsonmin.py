@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
 import json
-import sublime
-from ..core import common
 
-log = logging.getLogger(__name__)
+from ..core import Module, log
+
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'build-in',
     'name': 'JSON',
@@ -21,11 +13,11 @@ MODULE_CONFIG = {
     'executable_path': None,
     'args': None,
     'config_path': None,
-    'comment': 'build-in, no executable, no config'
+    'comment': 'Build-in, no "executable_path", no config. Standard JSON, not superset JSON5 with comments.'
 }
 
 
-class JsonminFormatter(common.Module):
+class JsonminFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -35,7 +27,7 @@ class JsonminFormatter(common.Module):
             obj = json.loads(text)
             result = json.dumps(obj, ensure_ascii=False, separators=(',', ':'), indent=None)
             return result
-        except ValueError as err:
-            log.status('File not formatted due to ValueError: "%s"', err)
+        except Exception as e:
+            log.status('Formatting failed due to error: %s', e)
 
         return None

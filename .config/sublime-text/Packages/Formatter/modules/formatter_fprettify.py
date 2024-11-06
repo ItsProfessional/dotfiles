@@ -1,19 +1,11 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['python3', 'python']
 EXECUTABLES = ['fprettify']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/pseewald/fprettify',
-    'name': 'Fortran fprettify',
+    'name': 'Fprettify',
     'uid': 'fprettify',
     'type': 'beautifier',
     'syntaxes': ['fortran'],
@@ -23,11 +15,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'fprettify_rc.cfg'
     },
-    'comment': 'requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path'
+    'comment': 'Requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. Omit "interpreter_path" if python already on PATH.'
 }
 
 
-class FprettifyFormatter(common.Module):
+class FprettifyFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -42,15 +34,10 @@ class FprettifyFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -59,7 +46,7 @@ class FprettifyFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

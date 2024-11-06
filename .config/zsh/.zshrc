@@ -1,4 +1,4 @@
-# Tmux
+# Launch tmux (only in terminal emulators, not in a tty; also excludes vscode's integrated terminal as it's sometimes buggy with tmux)
 if [[ "$(tty)" != "/dev/tty"* ]] && [ -z "$TMUX" ] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
   exec tmux
 fi
@@ -13,9 +13,9 @@ fi
 # History in cache directory
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+HISTFILE=$XDG_CACHE_HOME/zsh/history
 
-# options
+# Options
 unsetopt menu_complete
 unsetopt flowcontrol
 setopt prompt_subst
@@ -34,25 +34,37 @@ setopt interactivecomments
 setopt auto_cd
 setopt globdots
 
-# plugins
-source $XDG_CONFIG_HOME/zsh/catppuccin-zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
+# Use menu selection for auto complete
+zstyle ':completion:*' menu select
+
+# Enable case-insensitive path completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# Plugins
+source $XDG_CONFIG_HOME/zsh/catppuccin/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
 
-# tab completion
+# Tab completion
 autoload -Uz compinit && compinit
 
-# plugin options
+# Plugin options
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-# initialize stuff
+# Source aliases and functions
+[ -f "${XDG_CONFIG_HOME}/zsh/functions" ] && source "${XDG_CONFIG_HOME}/zsh/functions"
+[ -f "${XDG_CONFIG_HOME}/zsh/aliases" ] && source "${XDG_CONFIG_HOME}/zsh/aliases"
+
+# Remove duplicates from path
+typeset -U path
+
+# Initialize stuff
 eval $(thefuck --alias)
 eval "$(zoxide init zsh)"
 
-# fix ctrl+l in tmux
+# Fix Ctrl+L not fully clearing history in tmux
 if [ ! -z "$TMUX" ]; then
   clear-scrollback-and-screen () {
     zle clear-screen
@@ -64,22 +76,9 @@ if [ ! -z "$TMUX" ]; then
 fi
 
 
-# aliases and functions
-[ -f "${XDG_CONFIG_HOME}/zsh/functions" ] && source "${XDG_CONFIG_HOME}/zsh/functions"
-[ -f "${XDG_CONFIG_HOME}/zsh/aliases" ] && source "${XDG_CONFIG_HOME}/zsh/aliases"
+# Bindings
 
-# use menu selection for auto complete
-zstyle ':completion:*' menu select
-
-# enable case-insensitive path completion
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
-# Remove duplicates from path
-typeset -U path
-
-# binds
-
-# terminal file manager (lf)
+# Terminal file manager (lf)
 bindkey -s '^o' 'lf\n'
 
 # zoxide interactive

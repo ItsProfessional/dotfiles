@@ -1,0 +1,603 @@
+{
+	"file_history":
+	[
+		"/home/iprf/Documents/jee.txt",
+		"/home/iprf/Documents/10th_books.txt",
+		"/home/iprf/Documents/docs/math.yml",
+		"/home/iprf/Documents/dev/repos/filters/filters.txt",
+		"/home/iprf/Documents/dev/repos/bemenu/lib/vim.c",
+		"/home/iprf/Documents/dev/repos/bemenu/lib/menu.c",
+		"/home/iprf/Documents/dev/repos/bemenu/lib/bemenu.h",
+		"/home/iprf/Documents/dev/repos/bemenu/lib/list.c",
+		"/home/iprf/Documents/dev/repos/bemenu/lib/vim.h",
+		"/home/iprf/Documents/dev/repos/bemenu/client/bemenu.c",
+		"/home/iprf/Documents/dev/repos/bemenu/client/common/common.c",
+		"/home/iprf/Documents/dev/repos/bemenu/lib/internal.h",
+		"/home/iprf/Documents/dev/repos/bemenu/lib/renderers/cairo_renderer.h",
+		"/home/iprf/Documents/dev/cpp/opengl-test/src/texture.cpp",
+		"/home/iprf/Documents/dev/cpp/opengl-test/src/main.cpp",
+		"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/texture.vs",
+		"/home/iprf/dotfiles/.config/sublime-text/Packages/Default/Preferences.sublime-settings",
+		"/home/iprf/dotfiles/.config/sublime-text/Packages/User/Preferences.sublime-settings",
+		"/home/iprf/Documents/menu.txt",
+		"/tmp/portable-par/src/main.cpp",
+		"/tmp/portable-par/src/texture.cpp",
+		"/tmp/portable-par/src/shader.cpp",
+		"/home/iprf/Documents/dev/cpp/opengl-test/src/shader_program.cpp",
+		"/tmp/portable-par/src/model.cpp",
+		"/home/iprf/Documents/dev/cpp/opengl-test/src/shader.cpp",
+		"/home/iprf/Documents/dev/cpp/opengl-test/meson.build",
+		"/home/iprf/Documents/dev/cpp/opengl-test/include/shader_program.h",
+		"/home/iprf/Documents/dev/cpp/opengl-test/src/shader_s.h",
+		"/home/iprf/Documents/dev/cpp/opengl-test/include/texture.h",
+		"/home/iprf/Documents/dev/cpp/opengl-test/include/shader.h",
+		"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/texture.fs",
+		"/tmp/portable-par/src/shader_program.cpp",
+		"/tmp/portable-par/assets/shaders/passthrough.vs",
+		"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.vs",
+		"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.fs",
+		"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.vert",
+		"/home/iprf/dotfiles/.config/sublime-text/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/iprf/dotfiles/.config/sublime-text/Packages/User/Default (Linux).sublime-keymap",
+		"/home/iprf/.config/sublime-text/Packages/Default/Preferences.sublime-settings",
+		"/home/iprf/.config/sublime-text/Packages/User/Preferences.sublime-settings"
+	],
+	"folder_history":
+	[
+		"/home/iprf/Documents/dev/repos/filters",
+		"/home/iprf/Documents/dev/repos/bemenu",
+		"/tmp/portable-par",
+		"/home/iprf/Documents/dev/cpp/opengl-test"
+	],
+	"last_version": 4180,
+	"last_window_id": 12,
+	"log_indexing": false,
+	"next_update_check": 1730627124,
+	"settings":
+	{
+		"new_window_full_screen": false,
+		"new_window_height": 1080.0,
+		"new_window_maximized": true,
+		"new_window_position":
+		[
+			0.0,
+			27.0
+		],
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+				]
+			},
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"yml",
+						"Set Syntax: YAML"
+					],
+					[
+						"markdown",
+						"Set Syntax: Markdown"
+					],
+					[
+						"yaml",
+						"Set Syntax: YAML"
+					],
+					[
+						"install pack",
+						"Package Control: Install Package"
+					],
+					[
+						"glsl",
+						"Set Syntax: GLSL"
+					],
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"keybindin",
+						"Preferences: Key Bindings"
+					],
+					[
+						"install pac",
+						"Package Control: Install Package"
+					],
+					[
+						"isntall pack",
+						"Package Control: Install Package"
+					],
+					[
+						"package control list pack",
+						"Package Control: List Packages"
+					],
+					[
+						"package control upd",
+						"Package Control: Upgrade All Packages"
+					]
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 0.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/home/iprf/Documents/jee.txt",
+				"/home/iprf/Documents/10th_books.txt",
+				"/home/iprf/Documents/docs/math.yml",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/vim.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/menu.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/bemenu.h",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/list.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/vim.h",
+				"/home/iprf/Documents/dev/repos/bemenu/client/bemenu.c",
+				"/home/iprf/Documents/dev/repos/bemenu/client/common/common.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/internal.h",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/renderers/cairo_renderer.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/texture.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/main.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/texture.vs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/shader_program.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/shader.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/meson.build",
+				"/home/iprf/Documents/dev/cpp/opengl-test/include/shader_program.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/shader_s.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/include/texture.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/include/shader.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/texture.fs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.vs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.fs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.vert"
+			],
+			"find":
+			{
+				"height": 32.0
+			},
+			"find_in_files":
+			{
+				"height": 116.0,
+				"where_history":
+				[
+					""
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"wl-paste",
+					"BM_KEY_RETURN",
+					"return",
+					"BM_KEY_RETURN",
+					"vim_esc_",
+					"title_x",
+					"spacing_x",
+					"bm_menu_set_spacing",
+					"menu->spacing",
+					"spacing_x",
+					"title",
+					"bm_menu_set_title",
+					"title",
+					"prompt"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"scrollbar_highlights": true,
+				"show_context": true,
+				"use_buffer2": true,
+				"use_gitignore": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 32.0
+			},
+			"input":
+			{
+				"height": 44.0
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 60.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 285.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 1920.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+				]
+			},
+			"buffers":
+			[
+				{
+					"contents": "",
+					"settings":
+					{
+						"buffer_size": 0,
+						"line_ending": "Unix"
+					},
+					"undo_stack":
+					[
+						[
+							1,
+							1,
+							"insert",
+							{
+								"characters": "adsadsfadfadfadf"
+							},
+							"EAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAFAAAAAAAAAAAAAAAFAAAAAAAAAAYAAAAAAAAAAAAAAAYAAAAAAAAABwAAAAAAAAAAAAAABwAAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAkAAAAAAAAAAAAAAAkAAAAAAAAACgAAAAAAAAAAAAAACgAAAAAAAAALAAAAAAAAAAAAAAALAAAAAAAAAAwAAAAAAAAAAAAAAAwAAAAAAAAADQAAAAAAAAAAAAAADQAAAAAAAAAOAAAAAAAAAAAAAAAOAAAAAAAAAA8AAAAAAAAAAAAAAA8AAAAAAAAAEAAAAAAAAAAAAAAA",
+							"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+						],
+						[
+							4,
+							2,
+							"left_delete",
+							null,
+							"AQAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAYWRzYWRzZmFkZmFkZmFkZg",
+							"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8"
+						]
+					]
+				}
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"yml",
+						"Set Syntax: YAML"
+					],
+					[
+						"markdown",
+						"Set Syntax: Markdown"
+					],
+					[
+						"yaml",
+						"Set Syntax: YAML"
+					],
+					[
+						"install pack",
+						"Package Control: Install Package"
+					],
+					[
+						"glsl",
+						"Set Syntax: GLSL"
+					],
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"keybindin",
+						"Preferences: Key Bindings"
+					],
+					[
+						"install pac",
+						"Package Control: Install Package"
+					],
+					[
+						"isntall pack",
+						"Package Control: Install Package"
+					],
+					[
+						"package control list pack",
+						"Package Control: List Packages"
+					],
+					[
+						"package control upd",
+						"Package Control: Upgrade All Packages"
+					]
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 0.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/home/iprf/Documents/jee.txt",
+				"/home/iprf/Documents/10th_books.txt",
+				"/home/iprf/Documents/docs/math.yml",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/vim.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/menu.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/bemenu.h",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/list.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/vim.h",
+				"/home/iprf/Documents/dev/repos/bemenu/client/bemenu.c",
+				"/home/iprf/Documents/dev/repos/bemenu/client/common/common.c",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/internal.h",
+				"/home/iprf/Documents/dev/repos/bemenu/lib/renderers/cairo_renderer.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/texture.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/main.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/texture.vs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/shader_program.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/shader.cpp",
+				"/home/iprf/Documents/dev/cpp/opengl-test/meson.build",
+				"/home/iprf/Documents/dev/cpp/opengl-test/include/shader_program.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/src/shader_s.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/include/texture.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/include/shader.h",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/texture.fs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.vs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.fs",
+				"/home/iprf/Documents/dev/cpp/opengl-test/assets/shaders/test.vert"
+			],
+			"find":
+			{
+				"height": 32.0
+			},
+			"find_in_files":
+			{
+				"height": 116.0,
+				"where_history":
+				[
+					""
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"wl-paste",
+					"BM_KEY_RETURN",
+					"return",
+					"BM_KEY_RETURN",
+					"vim_esc_",
+					"title_x",
+					"spacing_x",
+					"bm_menu_set_spacing",
+					"menu->spacing",
+					"spacing_x",
+					"title",
+					"bm_menu_set_title",
+					"title",
+					"prompt"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"scrollbar_highlights": true,
+				"show_context": true,
+				"use_buffer2": true,
+				"use_gitignore": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"groups":
+			[
+				{
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"selected": true,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 0,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										0,
+										0
+									]
+								],
+								"settings":
+								{
+									"auto_name": "",
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"stack_multiselect": false,
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 32.0
+			},
+			"input":
+			{
+				"height": 44.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"position": "0,1,0,0,0,0,0,1906,1041,1920,1080,0",
+			"project": "",
+			"replace":
+			{
+				"height": 60.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 0,
+			"settings":
+			{
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 285.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			},
+			"window_id": 11,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}

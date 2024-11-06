@@ -1,0 +1,18 @@
+[submodule ".config/alacritty/catppuccin"]
+	path = .config/alacritty/catppuccin
+	url = https://github.com/catppuccin/alacritty
+[submodule ".config/bat/themes/catppuccin"]
+	path = .config/bat/themes/catppuccin
+	url = https://github.com/catppuccin/bat
+[submodule ".config/btop/catppuccin"]
+	path = .config/btop/catppuccin
+	url = https://github.com/catppuccin/btop
+[submodule ".config/hypr/catppuccin"]
+	path = .config/hypr/catppuccin
+	url = https://github.com/catppuccin/hyprland
+[submodule ".config/waybar/catppuccin"]
+	path = .config/waybar/catppuccin
+	url = https://github.com/catppuccin/waybar
+[submodule ".config/zsh/catppuccin"]
+	path = .config/zsh/catppuccin
+	url = https://github.com/catppuccin/zsh-syntax-highlighting

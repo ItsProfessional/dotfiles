@@ -1,0 +1,107 @@
+%YAML 1.2
+---
+name: Console
+scope: source.console
+contexts:
+  main:
+    - match: '^(▍)'
+      scope: constant.character.escape.console
+      push:
+        - match: '\[([^\]]+)\]\(([^#]+)#L(\d+)\):'
+          captures:
+            1: entity.name.component.console
+            2: entity.name.file.console
+            3: constant.numeric.line.console
+        - match: '\[INFO\]'
+          scope: support.type.info.console
+        - match: '\[DEBUG\]'
+          scope: support.type.debug.console
+        - match: '\[ERROR\]'
+          scope: constant.character.escape.console
+        - match: '\[WARNING\]'
+          scope: constant.character.escape.console
+        - match: '\[STATUS\]'
+          scope: constant.character.escape.console
+        - match: '(Command|Fixed command|Args):\s*[\[{]'
+          push: command_arguments
+        - match: 'Extended commands:\s*\['
+          push: extended_arguments
+        - match: '(Syntax|syntax|UID|uid|method):\s*([^\s\(\)]+)'
+          captures:
+            2: string.console
+        - match: '(Mode|Scope|Target):\s*(.+)'
+          captures:
+            2: string.console
+        # Matches paths on Windows, MacOS, and Linux
+        - match: '([a-zA-Z]:\\[^*|"<>?\n\r]*|\/[^*|"<>?\n\r]*)'
+          scope: string.path.console
+        # Match content inside quote ""
+        - match: '"([^"]+)"'
+          captures:
+            1: string.console
+        - match: '\n'
+          pop: true
+
+    # Match traceback logs with the 'Traceback' header
+    - match: '^Traceback \(most recent call last\):'
+      scope: keyword.control.exception.console
+      push: traceback
+
+    # Match traceback logs without the 'Traceback' header
+    - match: '^\s*File "([^"]+)", line (\d+), in ([^\n]+)'
+      captures:
+        1: string.path.console            # File path
+        2: constant.numeric.line.console  # Line number
+        3: entity.name.function.console   # Function name
+      push: traceback
+
+    - match: '^(={87})$'
+      scope: constant.character.escape.console
+      push:
+        # Match numbers, excluding those preceded or followed by '%'
+        - match: '(?<!%)\b\d+\b(?!%)'
+          scope: constant.character.escape.console
+        # Matches a sequence of ^^^ and ~~~ and ××× signs
+        - match: '[\^~×⚠⚡]+'
+          scope: constant.character.escape.console
+        # Matches a sequence of !!! and >>> signs
+        - match: '[\!>]+'
+          scope: keyword.console
+        - match: '^(={87})$'
+          scope: constant.character.escape.console
+          pop: true
+    - match: '[^\n]+'
+      scope: text.console
+
+  command_arguments:
+    - match: '\]'
+      pop: true
+    - match: "'([^']*)'"
+      captures:
+        1: keyword.console
+    - match: ','
+      scope: punctuation.separator.console
+
+  extended_arguments:
+    - match: '\]'
+      pop: true
+    - match: '\['
+      push: command_arguments
+
+  traceback:
+    - match: '^\s*File "([^"]+)", line (\d+), in ([^\n]+)'
+      captures:
+        1: string.path.console            # File path
+        2: constant.numeric.line.console  # Line number
+        3: entity.name.function.console   # Function name
+    # Match the 'raise ErrorType' pattern
+    - match: '\s+raise\s+([A-Za-z_]\w*)'
+      captures:
+        1: support.class.exception.console
+    # Match the 'ErrorType:' at the end of the traceback
+    - match: '^([A-Za-z_]\w*):'
+      captures:
+        1: support.class.exception.console
+    # Exit traceback context when there is no more indentation
+    - match: '^\S'
+      pop: true

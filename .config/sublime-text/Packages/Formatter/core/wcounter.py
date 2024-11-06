@@ -1,92 +1,101 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
-
 import sublime
 import sublime_plugin
 
-from . import common
+from . import (CONFIG, STATUS_KEY, DataHandler, OptionHandler,
+               bulk_operation_detector, debounce, skip_word_counter)
 
-log = logging.getLogger(__name__)
+CHUNK_SIZE = 1024 * 1024  # ≈ 1048576 chars (1MB)
 
 
-class WordsCounter:
-    def __init__(self, view, ignore_whitespace_char=True):
-        self.view = view
-        self.selections = view.sel()
+class WordCounter:
+    def __init__(self):
+        self.view = None
+        self.ignore_whitespace_char = True
+        self.use_short_label = False
+
+    def reset(self):
+        self.size = self.view.size()
+        self.selections = self.view.sel()
         self.total_lines = 0
         self.total_words = 0
         self.total_chars = 0
         self.total_chars_with_spaces = 0
-        self.ignore_whitespace_char = ignore_whitespace_char
 
-    def thousands_separator(self, number):
+    @staticmethod
+    def thousands_separator(number):
         return '{:,}'.format(number).replace(',', '.')
 
     def count_characters(self, text):
         if self.ignore_whitespace_char:
-            return len(common.re.sub(r'\s', '', text))
+            return sum(1 for char in text if not char.isspace())
+        return len(text)
+
+    def count_text(self, text):
+        self.total_chars += self.count_characters(text)
+        self.total_chars_with_spaces += len(text)
+        self.total_words += len(text.split())
+        self.total_lines += text.count('\n') + 1
+
+    def calculate_for_selection(self):
+        for selection in self.selections:
+            selected_text = self.view.substr(selection)
+            self.count_text(selected_text)
+
+    def calculate_for_view(self):
+        for start in range(0, self.size, CHUNK_SIZE):
+            end = min(start + CHUNK_SIZE, self.size)
+            chunk_text = self.view.substr(sublime.Region(start, end))
+            self.count_text(chunk_text)
+
+    def update_status(self):
+        if self.selections and self.view.substr(self.selections[0]):
+            self.calculate_for_selection()
+            label = 'Sel: {} | L: {} | W: {} | C: {}' if self.use_short_label else 'Selections: {} | Lines: {} | Words: {} | Chars: {}'
+            status_text = label.format(
+                self.thousands_separator(len(self.selections)),
+                self.thousands_separator(self.total_lines),
+                self.thousands_separator(self.total_words),
+                self.thousands_separator(self.total_chars)
+            )
+            if self.ignore_whitespace_char:
+                label = ' | C (w/sp): {}' if self.use_short_label else ' | Chars (with spaces): {}'
+                status_text += label.format(self.thousands_separator(self.total_chars_with_spaces))
         else:
-            return len(text)
+            self.calculate_for_view()
+            current_line, current_column = self.view.rowcol(self.selections[0].begin())
+            label = 'Lines: {} | W: {} | C: {} | L: {}, Col: {}' if self.use_short_label else 'Total Lines: {} | Words: {} | Chars: {} | Line: {}, Col: {}'
+            status_text = label.format(
+                self.thousands_separator(self.total_lines),
+                self.thousands_separator(self.total_words),
+                self.thousands_separator(self.total_chars),
+                self.thousands_separator(current_line + 1),
+                self.thousands_separator(current_column + 1)
+            )
 
-    def run_on_selection_modified(self):
+        self.view.set_status(STATUS_KEY + '_c', status_text)
+
+    def run_on_selection_modified(self, view, ignore_whitespace_char, use_short_label):
         try:
-            if self.selections and self.view.substr(self.selections[0]):
-                # Selections: words count
-                for selection in self.selections:
-                    selected_text = self.view.substr(selection)
-                    char_count_with_spaces = len(selected_text)
-                    char_count = self.count_characters(selected_text)
-
-                    self.total_chars += char_count
-                    self.total_chars_with_spaces += char_count_with_spaces
-
-                    word_count = len(selected_text.split())
-                    self.total_words += word_count
-
-                    selected_lines = selected_text.split('\n')
-                    self.total_lines += len(selected_lines)
-
-                status_text = 'Selections: {} | Lines: {} | Words: {} | Chars: {}'.format(
-                    self.thousands_separator(len(self.selections)),
-                    self.thousands_separator(self.total_lines),
-                    self.thousands_separator(self.total_words),
-                    self.thousands_separator(self.total_chars)
-                )
-
-                if self.ignore_whitespace_char:
-                    status_text += ' | Chars (with spaces): {}'.format(self.thousands_separator(self.total_chars_with_spaces))
-            else:
-                # Entire view: words count
-                self.total_lines = self.view.rowcol(self.view.size())[0] + 1
-                total_text = self.view.substr(sublime.Region(0, self.view.size()))
-
-                self.total_chars = self.count_characters(total_text)
-                current_line = self.view.rowcol(self.selections[0].begin())[0] + 1
-                current_column = self.view.rowcol(self.selections[0].begin())[1] + 1
-                self.total_words = len(total_text.split())
-
-                status_text = 'Total Lines: {} | Words: {} | Chars: {} | Line: {}, Col: {}'.format(
-                    self.thousands_separator(self.total_lines),
-                    self.thousands_separator(self.total_words),
-                    self.thousands_separator(self.total_chars),
-                    self.thousands_separator(current_line),
-                    self.thousands_separator(current_column)
-                )
-
-            self.view.set_status(common.STATUS_KEY + '_words_count', status_text)
-        except:
+            self.view = view
+            self.ignore_whitespace_char = ignore_whitespace_char
+            self.use_short_label = use_short_label
+            self.reset()
+            self.update_status()
+        except Exception:
             pass
 
 
-class WordsCounterListener(sublime_plugin.EventListener, common.Base):
+word_counter = WordCounter()
+
+
+class WordCounterListener(sublime_plugin.EventListener):
+    @bulk_operation_detector.bulk_operation_guard(register=False)
+    @skip_word_counter(max_size=6000000)
+    @debounce(delay_in_ms=300)
     def on_selection_modified_async(self, view):
-        if self.query(common.config, False, 'show_words_count', 'enable'):
-            ignore_whitespace_char = self.query(common.config, True, 'show_words_count', 'ignore_whitespace_char')
+        x = OptionHandler.query(CONFIG, {}, 'show_words_count')
+        if x.get('enable', True) and (DataHandler.get('__dir_format_stop__')[1] or True):
+            ignore_whitespace_char = x.get('ignore_whitespace_char', True)
+            use_short_label = x.get('use_short_label', False)
             view.settings().set('show_line_column', 'disabled')
-            WordsCounter(view, ignore_whitespace_char).run_on_selection_modified()
+            word_counter.run_on_selection_modified(view, ignore_whitespace_char, use_short_label)

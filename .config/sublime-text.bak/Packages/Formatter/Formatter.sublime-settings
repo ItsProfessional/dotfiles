@@ -1,0 +1,2291 @@
+{
+    // Enable debug mode to view errors in the console.
+    // Accepted values: true (verbose), false, OR "status" (minimal info)
+    "debug": false,
+
+    // Auto open the console panel whenever formatting failed.
+    // This is useful when combined with "debug": "status" or true
+    "open_console_on_failure": false,
+
+    // Timeout to abort subprocess in seconds.
+    // Default to 10 seconds. Set to false to disable the timeout.
+    "timeout": 10,
+
+    // Integrate your custom modules into the Formatter ecosystem.
+    // This option ensures that your own modules won't be automatically removed
+    // from Packages Control during any release updates. It also spares you the trouble
+    // of having to submit pull requests to get your own modules integrated.
+    // For security reasons, Formatter never communicates over the Internet:
+    // All paths to files and folders must be local.
+    "custom_modules": {
+        "config": [],
+        "modules": [],
+        "libs": []
+    },
+
+    // Display results in the status bar.
+    // The displayed abbreviation for the current settings mode:
+    // PUS: Persistent User Settings
+    // PQO: Persistent Quick Options
+    // TQO: Temporary Quick Options
+    "show_statusbar": true,
+
+    // Display a real-time word and character count in the status bar.
+    // By default, whitespace is not included in the character count.
+    "show_words_count": {
+        "enable": true,
+        "ignore_whitespace_char": true
+    },
+
+    // Remember and restore cursor position, selections and bookmarks
+    // each time a file is closed and re-opened.
+    // This is helpful to resume your work from where you left off.
+    // It does not remember the whole session as name might suggest.
+    "remember_session": true,
+
+    // Configure the layout when opening new files.
+    // This setting takes effect when the "new_file_on_format" option is enabled.
+    // Available choices include 2-columns, 2-rows or single layout.
+    // To revert to the Sublime default layout:
+    // View > Layout > Single
+    // Accepted values: "2cols", "2rows", "single" OR false
+    "layout": {
+        "enable": "2cols",
+        "sync_scroll": true
+    },
+
+    // A set of directories where executable programs are located.
+    // It can be absolute paths to module directories, python zipfiles.
+    // Any environment variables like PATH, PYTHONPATH, GEM_PATH, GOPATH,
+    // GOROOT, GOBIN, TMPDIR, WHATEVER, etc. can be added here.
+    // This option is similar to running 'export PYTHONPATH="/path/to/my/site-packages"'
+    // from terminal. But it is only temporary in the memory and will only apply
+    // for the current formatting session. Your system environment remains untouched.
+    // Non-existent environment directories and files will be silently ignored.
+    // This option can be ommitted, but for python, ruby and erlang you probably need
+    // to add it. In debug mode, Formatter will display your current system environments
+    // to assist you in configuration. On Windows, you can use either escaped
+    // backslashes (e.g., "C:\\a\\b\\c") or forward slashes (e.g., "C:/a/b/c")
+    // as path separators for all other options in this file as well.
+    "environ": {
+        "PATH": [],
+        "GEM_PATH": [],
+        "PYTHONPATH": [],
+        "OLALA": []
+    },
+
+    // This option addresses the syntaxes conflict described in "format_on_save".
+    // It serves as a takeover and only applies to the following options:
+    // 1. "format_on_save"
+    // 2. "format_on_paste"
+    // Syntaxes in this option always take precedence over the syntaxes specified there.
+    // All syntaxes must be unique without any duplicates.
+    "format_on_unique": {
+        "enable": false,
+        "csscomb": ["css"],
+        "jsbeautifier": ["js"]
+    },
+
+    // THIRD-PARTY PLUGINS LEVEL
+    "formatters": {
+        "examplegeneric": {
+            // Formatter provides 2 methods to add custom plugins:
+            // - Generic: this one, you design the bridge yourself. Suitable for simple tasks.
+            // - Modules: hacking deeper where generic cannot, needs writing python modules.
+            // Note: Generic method requires an Sublime Text restart after adding or changing
+            // the keys: "name" and "type". Also avoid using the same existing uid key in JSON.
+
+            // Capitalized Plugin name. REQUIRED! REQUIRED! REQUIRED!
+            // This will appear on the sublime menu and on other important commands.
+            "name": "Example Generic",
+
+            // Plugin type. REQUIRED! REQUIRED! REQUIRED!
+            // This will be assigned to a category. Accepted values:
+            // "beautifier" OR "minifier" OR "converter" OR "graphic" OR any string of your choice.
+            "type": "beautifier",
+
+            // This will activate the option "args_extended" for type graphic
+            // to generate extended files like SVG to download.
+            "render_extended": false,
+
+            // The exit code of the third-party plugin.
+            // This option can be omitted. Type integer, default to 0.
+            "success_code": 0,
+
+            // Same as examplemodule options.
+            "disable": true,
+            // Same as examplemodule options.
+            "format_on_save": false,
+            // Same as examplemodule options.
+            "format_on_paste": false,
+            // Same as examplemodule options. (disabled for type graphic)
+            "new_file_on_format": false,
+            // Same as examplemodule options. (disabled for type graphic)
+            "recursive_folder_format": {},
+            // Same as examplemodule options.
+            "syntaxes": ["css", "html", "js", "php"],
+            // Same as examplemodule options.
+            "exclude_syntaxes": {},
+            // Same as examplemodule options.
+            "interpreter_path": ["${HOME}/example/path/to\\$my/php.exe"],
+            // Same as examplemodule options.
+            "executable_path": ["${HOME}/example/path/to\\$my/php-cs-fixer.phar"],
+            // Same as examplemodule options.
+            "config_path": {
+                "css": "${packages}/User/formatter.assets/config/only_css_rc.json",
+                "php": "${packages}/User/formatter.assets/config/only_php_rc.json",
+                "default": "${packages}/User/formatter.assets/config/css_plus_js_plus_php_rc.json"
+            },
+
+            // These are the main commands to trigger the formatting process.
+            // You can either pass the paths directly or use variable substitution for the following options:
+            // - "interpreter_path"   : "{{i}}"
+            // - "executable_path"    : "{{e}}", "{{e=node}}" (to auto resolve the local executable with runtime type node)
+            // - "config_path"        : "{{c}}"
+            // - SPECIAL CASE GRAPHIC : "{{o}}" (output PNG image, e.g: "args": [... "--output", "{{o}}"])
+            // Variable substitution offers more advanced mechanisms such as auto-search path, auto-config, etc.
+            // Requirements to use the SPECIAL CASE GRAPHIC:
+            // 1. Third-party plugins MUST support exporting PNG format.
+            // 2. The hardcoded "{{o}}" MUST ALWAYS be set inside "args".
+            //    You might regret using your own path instead of "{{o}}" or daring to omit "{{o}}" in this case.
+            // In all other cases, output may not be as a file; use "-" or "--" instead.
+            "args": ["{{i}}", "{{e=node}}", "--config", "{{c}}", "--basedir", "./example/my/foo", "--"],
+
+            // This is for the SPECIAL CASE GRAPHIC to offer downloading extended graphic files.
+            // To use this, the option "render_extended" above must be activated.
+            // Sublime Text only supports PNG, JPG, and GIF images. Formatter uses PNG to display
+            // image in view and generates the same image in various formats for you.
+            // WARNING: Formatter will loop subprocess to render extended files. This means, process
+            // will takes more time. This option might be useful for the final step to production.
+            // key:[value,..], where key is the output file extension, value is the command arguments.
+            "args_extended": {
+                "svg": ["{{e}}", "--config", "{{c}}", "--blabla-format", "svgv5", "--output", "{{o}}"],
+                "pdf": ["{{e}}", "--config", "{{c}}", "--blabla-format", "pdf2001", "--output", "{{o}}"]
+            }
+        },
+        "examplemodule": {
+            // Plugin activation.
+            // By default, all plugins are disabled and disappear from the menu.
+            "disable": true,
+
+            // Auto formatting whenever the current file/view is being saved.
+            // This option should be used for plugins with unique syntaxes.
+            // For multi plugins with the same syntaxes, the first plugin takes precedence.
+            // Remove the identical syntaxes from one of the plugins to avoid conflicts.
+            // For example:
+            // Plugin A (enabled): syntaxes ["css", "js"]
+            // Plugin B (enabled): syntaxes ["html", "css"]
+            // In the case you want to use Plugin B with "css", then you should remove
+            // the "css" from plugin A or just disable it, as there is no guarantee of the
+            // execution order between the two, and determining your favorist is not possible.
+            // Solution: Use the "format_on_unique" option to workaround this.
+            "format_on_save": false,
+
+            // Auto formatting whenever code is pasted into the current file/view.
+            // This option is affected by the same syntax conflict, so its solutions
+            // are identical to those mentioned above for the "format_on_save" option.
+            "format_on_paste": false,
+
+            // Create a new file containing formatted codes.
+            // The value of this option is the suffix of the new file being renamed.
+            // Suffix must be of type string. =true, =false and all other types imply =false
+            // Note: It will overwrite any existing file that has the same new name in
+            // the same location.
+            // For example:
+            // "new_file_on_format": "min", will create a new file:
+            // myfile.raw.js -> myfile.raw.min.js
+            "new_file_on_format": false,
+
+            // Recursively format the entire folder with unlimited depth.
+            // This option requires an existing and currently opened file
+            // to serve as the starting point. Files will be opened and closed.
+            // For the sake of convenience, two new folders will be created at
+            // the same level as the file, which will contain all failed and
+            // successfully formatted files. The "new_file_on_format" option
+            // can be used to rename files if needed.
+            // The "format_on_save" option above, which applies only to
+            // single files, does not take effect here.
+            // All none-text files (binary) will be automatically ignored.
+            // Note: Placing files directly on the Desktop or elsewhere without
+            // enclosing them within a folder can lead to accidental formatting.
+            // Any literal "$" must be escaped to "\\$" to distinguish it from
+            // the variable expansion "${...}". This important rule applies
+            // to the entire content of this settings file!
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": ["Spotlight-V100", "temp", "cache", "logs", "^_.*foo\\$"],
+                "exclude_files_regex": ["^._.*$", ".*bar.exe"],
+                "exclude_extensions": ["DS_Store", "localized", "TemporaryItems", "Trashes", "db", "ini", "git", "svn", "tmp", "bak"],
+                "exclude_syntaxes": []
+            },
+
+            // Syntax support based on the scope name, not file extension.
+            // Syntax name is part of the scope name and can be retrieved from:
+            // Tools > Developer > Show Scope Name
+            // End-users are advised to consult plugin documentation to add more syntaxes.
+            "syntaxes": ["css", "html", "js", "php"],
+
+            // Exclude a list of syntaxes for an individual syntax key.
+            // A list of excluded syntaxes can be applied to all syntax definitions.
+            // In this case, the key must be named: "all".
+            // This option is useful to exclude part of the scope selector.
+            // For example: text.html.markdown, want html but wish to filter out html.markdown.
+            "exclude_syntaxes": {
+                "html": ["markdown"],
+                "all": ["markdown"]
+            },
+
+            // Path to the interpreter to run the third-party plugin.
+            // Just for the sake of completeness, but it is unlikely that you will ever need
+            // to use this option. Most of the programs you have installed are usually set
+            // to run in the global environment, such as Python, Node.js, Ruby, PHP, etc.
+            // Formatter is able to detect and automatically set them for you.
+            // However, if you do need to use a specific interpreter, you can provide the path.
+            // Alternatively, you can set the basename as the interpreter name to search on
+            // PATH, similar to how it is done with the "executable_path" option.
+            "interpreter_path": ["${HOME}/example/path/to\\$my/php.exe"],
+
+            // Path to the third-party plugin executable to process formatting.
+            // This option can be either a string or a list of executable paths.
+            // - If this option is omitted or set to null, then the global executable
+            //   on PATH will be used, if automatically found.
+            // - If this option is exactly the basename, then it will be used as the
+            //   executable name and searched for on the PATH.
+            //   Basename can be with or without dot.extension as both variants are the same.
+            //   For example: "fiLe.exe" (Windows only), "fiLe" (Windows + Unix + Linux)
+            // System variable expansions like ${HOME}, ${USER} etc. and the Sublime Text
+            // specific ${packages} can be used to assign paths.
+            // Note: Again, any literal "$" must be escaped to "\\$" to distinguish
+            // it from the variable expansion "${...}".
+            "executable_path": ["${HOME}/example/path/to\\$my/php-cs-fixer.phar"],
+
+            // Path to the config file for each individual syntaxes.
+            // Syntax keys must match those in the "syntaxes" option above.
+            // A single config file can be used to assign to all syntaxes.
+            // In this case, the key must be named: "default"
+            // Formatter provides a set of default config files under
+            // "formatter.assets/config" folder for your personal use.
+            // Do not use the reference files with suffix '.master.' directly.
+            // These files could be overwritten by any release updates.
+            // Note: Options from this config file always have precedence over
+            // the options from any local project (per-project config file).
+            // To disable this option in favor of the local project config:
+            // 1. Set the config path of this option to null, OR
+            // 2. Use the Quick Options: Prioritize Per-project Config, OR
+            // 3. Place an empty '.cfgignore' file inside the project root folder.
+            // Formatter will start to search up the file tree until a
+            // '.cfgignore' file is (or isn’t) found.
+            "config_path": {
+                "css": "${packages}/User/formatter.assets/config/only_css_rc.json",
+                "php": "${packages}/User/formatter.assets/config/only_php_rc.json",
+                "default": "${packages}/User/formatter.assets/config/css_plus_js_plus_php_rc.json"
+            },
+
+            // Array of additional arguments for the command line.
+            "args": ["--basedir", "./example/my/foo", "--show-bar", "yes"],
+
+            // This option is specifically designed for type graphic.
+            // It enables SVG image generation for download.
+            // Enable it if you need SVG image at the cost of processing time.
+            // Unlike the generic method, this method only supports SVG generation.
+            "render_extended": false,
+
+            // Manipulate hardcoded command-line arguments.
+            // This option allow you to modify hardcoded parameters, values and
+            // their positions without digging into the source code.
+            // This feature is primarily intended to temporarily fix bugs until
+            // an official solution is implemented.
+            // Note: Hardcoded args can be changed (rarely) by any release updates.
+            // Enable debug mode will help to find all current hardcoded args.
+            // Use "args" option above to add, this option to remove or manipulate.
+            // Using regex: Again, any literal "$" must be escaped to "\\$" to
+            // distinguish it from the variable expansion "${...}". Accepted args:
+            // [search, [replace, [index, count, new position]]], where:
+            // - search:   @type:str (regex)
+            // - replace:  @type:str
+            // - index:    @type:int (the number is known as a list index); required!
+            // - count:    @type:int (the matching occurrences per index, 0 = all); required!
+            // - position: @type:int (move old index pos. to new/old one, -1 = delete index); required!
+            "fix_commands": [
+                ["--autocorrect", "--autocorrect-all", 4, 0, 4], // no index pos change
+                ["^.*?auto.*\\$", "--with", 4, 1, 5], // using escaped "\\$" regex, move index 4 to pos 5
+                ["${packages}/to/old", "${packages}/to/new", 3, 0, 3], // variable expansion, no escaped "$"
+                ["css", 5, 0, 7], // replace the value in index 5 with "css", move it to pos 7
+                [3, 0, 4], // just move index 3 to the new pos 4. (count 0 irrelevant)
+                [2, 0, -1], // just delete the index 2. (count 0 irrelevant)
+                ["--show-bar", "xxx", 2, 0, -1] // enough bar, pop it out. ("xxx", 2, 0 irrelevant)
+            ]
+        },
+        // -- END of explanation --
+
+        "appleswiftformat": {
+            "info": "https://github.com/apple/swift-format",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["swift"],
+            "executable_path": ["/path/to/bin/swift-format"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/apple_swift_format_rc.json"
+            }
+        },
+        "asmfmt": {
+            "info": "https://github.com/klauspost/asmfmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["asm"],
+            "executable_path": ["/path/to/bin/asmfmt"]
+            /* opinionated, no config */
+        },
+        "astyle": {
+            "info": "https://sourceforge.net/projects/astyle",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["c", "c++", "cs", "objc", "objc++", "java", "js"],
+            "executable_path": ["/path/to/bin/astyle"],
+            "config_path": {
+                "java": "${packages}/User/formatter.assets/config/artistic_style_java_rc.ini",
+                "default": "${packages}/User/formatter.assets/config/artistic_style_astyle_rc.ini"
+            }
+        },
+        "autopep8": {
+            "info": "https://github.com/hhatto/autopep8",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/autopep8"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/autopep8_rc.cfg"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "beautysh": {
+            "info": "https://github.com/lovesegfault/beautysh",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["bash"],
+            "executable_path": ["/path/to/bin/beautysh"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/beautysh_rc.json"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "bibtextidy": {
+            "info": "https://github.com/FlamingTempura/bibtex-tidy",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["bibtex"],
+            "executable_path": ["/path/to/node_modules/.bin/bibtex-tidy"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/bibtex_tidy_rc.yaml"
+            }
+            /* requires node on PATH if omit interpreter_path. */
+        },
+        "black": {
+            "info": "https://github.com/ambv/black",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/black"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/black_rc.toml"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "cabalfmt": {
+            "info": "https://github.com/phadej/cabal-fmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["cabal"],
+            "executable_path": ["/path/to/.cabal/bin/cabal-fmt"],
+            "args": ["--tabular", "--indent", "4"]
+            /* requires haskell. use args instead of config_path */
+        },
+        "caddyfmt": {
+            "info": "https://github.com/caddyserver/caddy",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["Caddyfile"],
+            "executable_path": ["/path/to/bin/caddy"]
+            /* opinionated, no config */
+        },
+        "clangformat": {
+            "info": "https://clang.llvm.org/docs/ClangFormat.html",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["c", "cs", "c++", "objc", "objc++", "js", "tsx", "jsx", "json", "java", "proto", "protodevel", "td", "sv", "svh", "v", "vh", "glsl"],
+            "executable_path": ["/path/to/bin/clang-format"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/clang_format_llvm_rc.yaml"
+            }
+        },
+        "cljfmt": {
+            "info": "https://github.com/weavejester/cljfmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["clojure"],
+            "interpreter_path": ["/path/to/bin/java.exe or /path/to/bin/lein"],
+            "executable_path": ["/path/to/bin/cljfmt"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/cljfmt_rc.edn"
+            }
+            /* omit interpreter_path if use cljfmt standalone version */
+        },
+        "cmakeformat": {
+            "info": "https://github.com/cheshirekow/cmake_format",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["cmake"],
+            "executable_path": ["/path/to/bin/cmake-format"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/cmakeformat_rc.py"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "crystal": {
+            "info": "https://github.com/crystal-lang/crystal",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["crystal"],
+            "executable_path": ["/path/to/bin/crystal"]
+            /* opinionated, no config */
+        },
+        "csscomb": {
+            "info": "https://github.com/csscomb/csscomb.js",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "sass", "less"],
+            "executable_path": ["/path/to/node_modules/.bin/csscomb"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/csscomb_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "d2fmt": {
+            "info": "https://github.com/terrastruct/d2",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["d2"],
+            "executable_path": ["/path/to/bin/d2"]
+            /* opinionated, no config */
+        },
+        "dartformat": {
+            "info": "https://dart.dev/tools/dart-format",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["dart"],
+            "executable_path": ["/path/to/bin/dart"]
+            /* opinionated, no config */
+        },
+        "deno": {
+            "info": "https://github.com/denoland/deno",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js", "jsx", "ts", "tsx", "json", "markdown", "ipynb"],
+            "executable_path": ["/path/to/bin/deno"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/deno_rc.json"
+            }
+        },
+        "dhallformat": {
+            "info": "https://github.com/dhall-lang/dhall-haskell",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["dhall"],
+            "executable_path": ["/path/to/bin/dhall"]
+            /* opinionated, no config */
+        },
+        "docformatter": {
+            "info": "https://github.com/PyCQA/docformatter",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/docformatter"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/docformatter_rc.toml"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "dockfmt": {
+            "info": "https://github.com/jessfraz/dockfmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["dockerfile"],
+            "executable_path": ["/path/to/bin/dockfmt"]
+            /* opinionated, no config */
+        },
+        "dprint": {
+            "info": "https://github.com/dprint/dprint",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js", "jsx", "ts", "tsx", "json", "markdown", "toml"],
+            "executable_path": ["/path/to/bin/dprint"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/dprint_rc.json"
+            }
+        },
+        "efmt": {
+            "info": "https://github.com/sile/efmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["erlang"],
+            "executable_path": ["/path/to/bin/efmt (standalone bin) or /path/to/rebar3"]
+            /* opinionated, no config */
+        },
+        "elixirmix": {
+            "info": "https://github.com/elixir-lang/elixir",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["elixir"],
+            "executable_path": ["/path/to/elixir/bin/mix"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/elixirmix_rc.exs"
+            }
+            /* no interpreter_path, instead use "environ": {"PATH": ["/path/to/erlang@22/bin:$PATH", "$PATH:/path/to/elixir/bin"]} */
+        },
+        "elmformat": {
+            "info": "https://github.com/avh4/elm-format",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["elm"],
+            "executable_path": ["/path/to/bin/elm-format"]
+            /* opinionated, no config */
+        },
+        "erlfmt": {
+            "info": "https://github.com/WhatsApp/erlfmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["erlang"],
+            "executable_path": ["/path/to/erlfmt (standalone bin) or /path/to/rebar3"]
+            /* opinionated, no config */
+        },
+        "eslint": {
+            "info": "https://github.com/eslint/eslint",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js"],
+            "executable_path": ["/path/to/node_modules/.bin/eslint or /path/to/node_modules/.bin/eslint.js"],
+            "args": ["--resolve-plugins-relative-to", "/path/to/javascript/node_modules"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/eslint_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "eslintd": {
+            "info": "https://github.com/mantoni/eslint_d.js",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js"],
+            "executable_path": ["/path/to/node_modules/.bin/eslint_d or /path/to/node_modules/.bin/eslint_d.js"],
+            "args": ["--resolve-plugins-relative-to", "/path/to/javascript/node_modules"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/eslintd_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "floskell": {
+            "info": "https://github.com/ennocramer/floskell",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["haskell"],
+            "executable_path": ["/path/to/.cabal/bin/floskell"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/floskell_rc.json"
+            }
+        },
+        "formatr": {
+            "info": "https://github.com/yihui/formatR",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["r"],
+            "executable_path": ["/path/to/bin/R"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/formatr_rc.cfg"
+            }
+        },
+        "fourmolu": {
+            "info": "https://github.com/fourmolu/fourmolu",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["haskell"],
+            "executable_path": ["/path/to/bin/fourmolu"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/fourmolu_rc.yaml"
+            }
+        },
+        "fprettify": {
+            "info": "https://github.com/pseewald/fprettify",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["fortran"],
+            "executable_path": ["/path/to/bin/fprettify"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/fprettify_rc.cfg"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "gleam": {
+            "info": "https://github.com/gleam-lang/gleam",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["gleam"],
+            "executable_path": ["/path/to/bin/gleam"]
+            /* opinionated, no config */
+        },
+        "gofmt": {
+            "info": "https://pkg.go.dev/cmd/gofmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["go"],
+            "executable_path": ["/path/to/bin/gofmt"]
+            /* opinionated, no config */
+        },
+        "gofumpt": {
+            "info": "https://github.com/mvdan/gofumpt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["go"],
+            "executable_path": ["/path/to/bin/gofumpt"]
+            /* opinionated, no config */
+        },
+        "goimports": {
+            "info": "https://pkg.go.dev/golang.org/x/tools/cmd/goimports",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["go"],
+            "executable_path": ["/path/to/bin/goimports"]
+            /* opinionated, no config */
+        },
+        "googlejavaformat": {
+            "info": "https://github.com/google/google-java-format",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["java"],
+            "interpreter_path": ["/path/to/bin/java.exe"],
+            "executable_path": ["/path/to/bin/google-java-format-all-deps.jar"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/google_java_format_rc.yaml"
+            }
+            /* requires java on PATH if omit interpreter_path */
+        },
+        "hclfmt": {
+            "info": "https://github.com/hashicorp/hcl",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["hcl"],
+            "executable_path": ["/path/to/go/bin/hclfmt"]
+            /* opinionated, no config */
+        },
+        "hindent": {
+            "info": "https://github.com/mihaimaruseac/hindent",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["haskell"],
+            "executable_path": ["/path/to/bin/hindent"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/hindent_rc.yaml"
+            }
+        },
+        "htmltidy": {
+            "info": "https://github.com/htacg/tidy-html5",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["html", "xml"],
+            "executable_path": ["/path/to/bin/tidy"],
+            "config_path": {
+                "html": "${packages}/User/formatter.assets/config/htmltidy_html_rc.cfg",
+                "xml": "${packages}/User/formatter.assets/config/htmltidy_xml_rc.cfg"
+            }
+        },
+        "isort": {
+            "info": "https://github.com/PyCQA/isort",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/isort"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/isort_rc.toml"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "jsbeautifier": {
+            "info": "https://github.com/beautify-web/js-beautify",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js", "css", "html", "json", "tsx", "vue"],
+            "exclude_syntaxes": {
+                "html": ["markdown"]
+            },
+            "executable_path": ["/path/to/node_modules/.bin/js-beautify"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/jsbeautify_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "jsonmax": {
+            "info": "build-in",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["json"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/jsonmax_rc.json"
+            }
+            /* build-in, no executable */
+        },
+        "ktlint": {
+            "info": "https://github.com/pinterest/ktlint",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["kotlin"],
+            "interpreter_path": ["/path/to/bin/java.exe"],
+            "executable_path": ["/path/to/bin/ktlint or path/to/ktlint.bat"]
+            /* requires java on PATH if omit interpreter_path. opinionated, no config */
+        },
+        "latexindent": {
+            "info": "https://github.com/cmhughes/latexindent.pl",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["tex", "latex"],
+            "executable_path": ["/path/to/latexindent or /path/to/latexindent.pl"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/latexindent_rc.yaml"
+            }
+            /* requires perl on PATH if omit interpreter_path */
+        },
+        "luaformatter": {
+            "info": "https://github.com/Koihik/LuaFormatter",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["lua"],
+            "executable_path": ["/path/to/bin/lua-format"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/luaformatter_rc.yaml"
+            }
+        },
+        "nasmfmt": {
+            "info": "https://github.com/yamnikov-oleg/nasmfmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["asm"],
+            "executable_path": ["/path/to/bin/nasmfmt"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/nasmfmt_rc.yaml"
+            }
+        },
+        "nginxfmt": {
+            "info": "https://github.com/slomkowski/nginx-config-formatter",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["nginx"],
+            "executable_path": ["/path/to/bin/nginxfmt"],
+            "args": ["--indent", "4"]
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. no config, use args instead. requires python on PATH if omit interpreter_path */
+        },
+        "ocamlformat": {
+            "info": "https://github.com/ocaml-ppx/ocamlformat",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ocaml", "ocamlyacc", "ocamllex"],
+            "executable_path": ["/path/to/bin/ocamlformat"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/ocamlformat_rc.cfg"
+            }
+        },
+        "ocpindent": {
+            "info": "https://github.com/OCamlPro/ocp-indent",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ocaml", "ocamlyacc", "ocamllex"],
+            "executable_path": ["/path/to/bin/ocp-indent"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/ocpindent_rc.cfg"
+            }
+        },
+        "ormolu": {
+            "info": "https://github.com/tweag/ormolu",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["haskell"],
+            "executable_path": ["/path/to/bin/ormolu"]
+            /* opinionated, no config */
+        },
+        "perltidy": {
+            "info": "https://github.com/perltidy/perltidy",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["perl"],
+            "executable_path": ["/path/to/bin/perltidy or /path/to/perltidy.pl"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/perltidy_rc.cfg"
+            }
+            /* requires perl on PATH if omit interpreter_path */
+        },
+        "pgformat": {
+            "info": "https://github.com/darold/pgFormatter",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["sql"],
+            "interpreter_path": ["/path/to/perl.exe or just omit"],
+            "executable_path": ["/path/to/bin/pg_format"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/pg_format_rc.cfg"
+            }
+            /* requires perl on PATH if omit interpreter_path */
+        },
+        "phpcbf": {
+            "info": "https://github.com/squizlabs/PHP_CodeSniffer",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["php"],
+            "executable_path": ["/path/to/bin/phpcbf.phar"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/phpcbf_rc.xml"
+            }
+            /* use phpcbf.phar, not phpcs.phar. requires php on PATH if omit interpreter_path */
+        },
+        "phpcsfixer": {
+            "info": "https://github.com/FriendsOfPHP/PHP-CS-Fixer",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["php"],
+            "executable_path": ["/path/to/bin/php-cs-fixer.phar"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/php_cs_fixer_rc.php"
+            }
+            /* requires php on PATH if omit interpreter_path */
+        },
+        "plantumlascii": {
+            "info": "https://github.com/plantuml/plantuml",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["plantuml"],
+            "interpreter_path": ["/path/to/bin/java.exe"],
+            "executable_path": ["/path/to/bin/plantuml.jar"]
+            /* requires java on PATH if omit interpreter_path. no config, use "args" instead. tips: enable "layout" in Formatter settings for dual-panes-view. */
+        },
+        "prettier": {
+            "info": "https://github.com/prettier/prettier",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "less", "js", "jsx", "json", "html", "graphql", "markdown", "tsx", "vue", "yaml"],
+            "executable_path": ["/path/to/node_modules/.bin/prettier or /path/to/node_modules/.bin/bin-prettier.js"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/prettier_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "prettierd": {
+            "info": "https://github.com/fsouza/prettierd",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "less", "js", "jsx", "json", "html", "graphql", "markdown", "tsx", "vue", "yaml"],
+            "executable_path": ["/path/to/node_modules/.bin/prettierd"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/prettierd_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path. use config_path instead of PRETTIERD_DEFAULT_CONFIG */
+        },
+        "prettydiffmax": {
+            "info": "https://github.com/prettydiff/prettydiff",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "less", "js", "jsx", "json", "html", "asp", "xml", "tsx"],
+            "executable_path": ["/path/to/node_modules/.bin/prettydiff"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/prettydiffmax_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "prettytable": {
+            "info": "https://github.com/jazzband/prettytable",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["csv", "text"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/prettytable_rc.json"
+            }
+            /* build-in, no executable */
+        },
+        "pyment": {
+            "info": "https://github.com/dadadel/pyment",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/pyment"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/pyment_rc.cfg"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "racofmt": {
+            "info": "https://github.com/sorawee/fmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["racket"],
+            "executable_path": ["/path/to/bin/raco"],
+            "args": ["--width", "102", "--limit", "120", "--max-blank-lines", "1", "--indent", "0"]
+            /* undocumented --config <config_path>, use args instead. config_path can be still used in place of --config */
+        },
+        "rubocop": {
+            "info": "https://github.com/rubocop-hq/rubocop",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ruby"],
+            "executable_path": ["/path/to/bin/rubocop"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/rubocop_rc.yml"
+            }
+            /* requires "environ": {"GEM_PATH": ["/path/to/dir/ruby"]}. requires ruby on PATH if omit interpreter_path */
+        },
+        "rubyfmt": {
+            "info": "https://github.com/fables-tales/rubyfmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ruby"],
+            "executable_path": ["/path/to/bin/rubyfmt"]
+            /* opinionated, no config */
+        },
+        "ruff": {
+            "info": "https://github.com/astral-sh/ruff",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/ruff"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/ruff_rc.toml"
+            }
+        },
+        "rufo": {
+            "info": "https://github.com/ruby-formatter/rufo",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ruby"],
+            "executable_path": ["/path/to/bin/rufo"]
+            /* requires "environ": {"GEM_PATH": ["/path/to/dir/ruby"]}. opinionated, no config. requires ruby on PATH if omit interpreter_path */
+        },
+        "rustfmt": {
+            "info": "https://github.com/rust-lang/rustfmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["rust"],
+            "executable_path": ["/path/to/bin/rustfmt"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/rustfmt_rc.toml"
+            }
+        },
+        "scalafmt": {
+            "info": "https://github.com/scalameta/scalafmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["scala"],
+            "executable_path": ["/path/to/bin/scalafmt"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/scalafmt_rc.conf"
+            }
+        },
+        "scalariform": {
+            "info": "https://github.com/scala-ide/scalariform",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["scala"],
+            "interpreter_path": ["/path/to/bin/java.exe or just omit"],
+            "executable_path": ["/path/to/bin/scalariform or /path/to/bin/scalariform.jar"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/scalariform_rc.cfg"
+            }
+        },
+        "semistandardjs": {
+            "info": "https://github.com/standard/semistandard",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js"],
+            "executable_path": ["/path/to/node_modules/.bin/semistandard"]
+            /* requires node on PATH if omit interpreter_path. opinionated, no config */
+        },
+        "shellcheck": {
+            "info": "https://github.com/koalaman/shellcheck",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["bash"],
+            "executable_path": ["/path/to/bin/shellcheck"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/shellcheck_rc.cfg"
+            }
+            /* limited autofix, no formatting capability */
+        },
+        "shfmt": {
+            "info": "https://github.com/mvdan/sh",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["bash"],
+            "executable_path": ["/path/to/bin/shfmt"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/shfmt_rc.json"
+            }
+        },
+        "sqlformatter": {
+            "info": "https://github.com/sql-formatter-org/sql-formatter",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["sql"],
+            "executable_path": ["/path/to/node_modules/.bin/sql-formatter"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/sql_formatter_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "sqlparse": {
+            "info": "https://github.com/andialbrecht/sqlparse",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["sql"],
+            "executable_path": ["/path/to/bin/sqlformat"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/sqlparse_rc.yaml"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "standardjs": {
+            "info": "https://github.com/standard/standard",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js"],
+            "executable_path": ["/path/to/node_modules/.bin/standard"]
+            /* requires node on PATH if omit interpreter_path. opinionated, no config */
+        },
+        "standardrb": {
+            "info": "https://github.com/standardrb/standard",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ruby"],
+            "executable_path": ["/path/to/bin/standardrb"]
+            /* requires "environ": {"GEM_PATH": ["/path/to/dir/ruby"]}. opinionated, no config. requires ruby on PATH if omit interpreter_path. */
+        },
+        "standardxjs": {
+            "info": "https://github.com/standard/standardx",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js"],
+            "executable_path": ["/path/to/node_modules/.bin/standardx"]
+            /* requires node on PATH if omit interpreter_path. opinionated, no config */
+        },
+        "stylefmt": {
+            "info": "https://github.com/masaakim/stylefmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "sass", "less"],
+            "executable_path": ["/path/to/node_modules/.bin/stylefmt"],
+            "args": ["--config-basedir", "/path/to/javascript/node_modules"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/stylefmt_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "stylelint": {
+            "info": "https://github.com/stylelint/stylelint",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "sass", "less", "sss", "sugarss"],
+            "executable_path": ["/path/to/node_modules/.bin/stylelint"],
+            "args": ["--config-basedir", "/path/to/javascript/node_modules"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/stylelint_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "styler": {
+            "info": "https://github.com/r-lib/styler",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["r"],
+            "executable_path": ["/path/to/bin/R"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/styler_rc.cfg"
+            }
+        },
+        "stylishhaskell": {
+            "info": "https://github.com/haskell/stylish-haskell",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["haskell"],
+            "executable_path": ["/path/to/bin/stylish-haskell"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/stylish_haskell_rc.yaml"
+            }
+        },
+        "stylua": {
+            "info": "https://github.com/JohnnyMorganz/StyLua",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["lua"],
+            "executable_path": ["/path/to/bin/stylua"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/stylua_rc.toml"
+            }
+        },
+        "svgomax": {
+            "info": "https://github.com/svg/svgo",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["svg"],
+            "executable_path": ["/path/to/node_modules/.bin/svgo"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/svgomax_rc.js"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "swiftformat": {
+            "info": "https://github.com/nicklockwood/SwiftFormat",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["swift"],
+            "executable_path": ["/path/to/bin/swiftformat"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/swiftformat_rc.cfg"
+            }
+        },
+        "taplo": {
+            "info": "https://github.com/tamasfe/taplo",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["toml"],
+            "executable_path": ["/path/to/bin/taplo"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/taplo_rc.toml"
+            }
+        },
+        "terraformfmt": {
+            "info": "https://developer.hashicorp.com/terraform/cli/commands/fmt",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["terraform"],
+            "executable_path": ["/path/to/bin/terraform"]
+            /* opinionated, no config */
+        },
+        "topiary": {
+            "info": "https://github.com/tweag/topiary",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["json", "nickel", "ocaml", "ocamllex", "toml"],
+            "executable_path": ["/path/to/bin/topiary"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/topiary_rc.toml"
+            }
+        },
+        "tsfmt": {
+            "info": "https://github.com/vvakame/typescript-formatter",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ts", "tsx"],
+            "executable_path": ["/path/to/node_modules/.bin/tsfmt"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/tsfmt.json"
+            }
+            /* hardcoded config file name (tsfmt.json). requires node on PATH if omit interpreter_path */
+        },
+        "tsstandard": {
+            "info": "https://github.com/standard/ts-standard",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["ts"],
+            "executable_path": ["/path/to/node_modules/.bin/ts-standard"]
+            /* requires node on PATH if omit interpreter_path. opinionated, no config */
+        },
+        "uncrustify": {
+            "info": "https://github.com/uncrustify/uncrustify",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["c", "c++", "cs", "d", "es", "objc", "objc++", "java", "pawn", "vala"],
+            "executable_path": ["/path/to/bin/uncrustify"],
+            "config_path": {
+                "java": "${packages}/User/formatter.assets/config/uncrustify_sun_java_rc.cfg",
+                "objc": "${packages}/User/formatter.assets/config/uncrustify_objc_rc.cfg",
+                "objc++": "${packages}/User/formatter.assets/config/uncrustify_objc_rc.cfg",
+                "default": "${packages}/User/formatter.assets/config/uncrustify_rc.cfg"
+            }
+        },
+        "yapf": {
+            "info": "https://github.com/google/yapf",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/yapf"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/yapf_rc.yapf"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}, requires python on PATH if omit interpreter_path */
+        },
+        "zigfmt": {
+            "info": "https://github.com/ziglang/zig",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["zig"],
+            "executable_path": ["/path/to/bin/zig"]
+            /* opinionated, no config */
+        },
+        "zprint": {
+            "info": "https://github.com/kkinnear/zprint",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["clojure"],
+            "interpreter_path": ["/path/to/bin/java.exe if use zprint-filter OR /path/to/bin/bb if use babashka OR just omid"],
+            "executable_path": ["/path/to/bin/zprint[l|m|ma|] or /path/to/bin/zprint-filter if use java"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/zprint_rc.edn"
+            }
+            /* requires java on PATH if use zprint-filter. macosx: a zprint already exists, avoid to use this same name */
+        },
+        "cleancss": {
+            "info": "https://github.com/jakubpawlowicz/clean-css-cli",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "sass", "less"],
+            "executable_path": ["/path/to/node_modules/.bin/cleancss"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/cleancss_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "htmlminifier": {
+            "info": "https://github.com/kangax/html-minifier",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["html", "xml"],
+            "executable_path": ["/path/to/node_modules/.bin/html-minifier"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/htmlminifier_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "jsonmin": {
+            "info": "build-in",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["json"]
+            /* build-in, no executable, no config */
+        },
+        "prettydiffmin": {
+            "info": "https://github.com/prettydiff/prettydiff",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["css", "scss", "less", "js", "jsx", "json", "html", "asp", "xml", "tsx"],
+            "executable_path": ["/path/to/node_modules/.bin/prettydiff"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/prettydiffmin_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "pythonminifier": {
+            "info": "https://github.com/dflook/python-minifier",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["python"],
+            "executable_path": ["/path/to/bin/pyminify"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/python_minifier_rc.json"
+            }
+            /* requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path */
+        },
+        "shfmtmin": {
+            "info": "https://github.com/mvdan/sh",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["bash"],
+            "executable_path": ["/path/to/bin/shfmt"]
+            /* opinionated, no config */
+        },
+        "sqlmin": {
+            "info": "https://github.com/bitst0rm",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["sql"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/sqlmin_rc.json"
+            }
+            /* build-in, no executable */
+        },
+        "svgomin": {
+            "info": "https://github.com/svg/svgo",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["svg"],
+            "executable_path": ["/path/to/node_modules/.bin/svgo"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/svgomin_rc.js"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "terser": {
+            "info": "https://github.com/terser-js/terser",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "new_file_on_format": false,
+            "recursive_folder_format": {
+                "enable": false,
+                "exclude_folders_regex": [],
+                "exclude_files_regex": [],
+                "exclude_extensions": [],
+                "exclude_syntaxes": []
+            },
+            "syntaxes": ["js"],
+            "executable_path": ["/path/to/node_modules/.bin/terser"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/terser_rc.json"
+            }
+            /* requires node on PATH if omit interpreter_path */
+        },
+        "d2": {
+            "info": "https://github.com/terrastruct/d2",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "syntaxes": ["d2"],
+            "type": "graphic",
+            "render_extended": false,
+            "executable_path": ["/path/to/bin/d2"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/d2_rc.yaml"
+            }
+            /* uses headless browser to convert images, no dark-theme for png. */
+        },
+        "graphviz": {
+            "info": "https://gitlab.com/graphviz/graphviz",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "syntaxes": ["graphviz"],
+            "type": "graphic",
+            "render_extended": false,
+            "executable_path": ["/path/to/bin/dot"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/graphviz_rc.yaml"
+            }
+        },
+        "mermaid": {
+            "info": "https://github.com/mermaid-js/mermaid-cli",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "syntaxes": ["mermaid"],
+            "type": "graphic",
+            "render_extended": false,
+            "executable_path": ["/path/to/node_modules/.bin/mmdc"],
+            "args": ["--width", "800", "--height", "600", "--backgroundColor", "white"],
+            "config_path": {
+                "default": "${packages}/User/formatter.assets/config/mermaid_rc.json"
+            }
+        },
+        "plantuml": {
+            "info": "https://github.com/plantuml/plantuml",
+            "disable": true,
+            "format_on_save": false,
+            "format_on_paste": false,
+            "syntaxes": ["plantuml"],
+            "type": "graphic",
+            "render_extended": false,
+            "interpreter_path": ["/path/to/bin/java.exe"],
+            "executable_path": ["/path/to/bin/plantuml.jar"]
+            /* requires java on PATH if omit interpreter_path. no config, use args instead. */
+        }
+    }
+}

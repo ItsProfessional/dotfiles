@@ -1,18 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['swift-format']
+DOTFILES = ['.swift-format']
 MODULE_CONFIG = {
     'source': 'https://github.com/apple/swift-format',
-    'name': 'Apple Swift Format',
+    'name': 'AppleSwiftFormat',
     'uid': 'appleswiftformat',
     'type': 'beautifier',
     'syntaxes': ['swift'],
@@ -25,7 +17,7 @@ MODULE_CONFIG = {
 }
 
 
-class AppleswiftformatFormatter(common.Module):
+class AppleswiftformatFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -34,9 +26,7 @@ class AppleswiftformatFormatter(common.Module):
         if not executable:
             return None
 
-        cmd = [executable]
-
-        cmd.extend(['format'])
+        cmd = [executable, 'format']
 
         cmd.extend(self.get_args())
 
@@ -45,18 +35,13 @@ class AppleswiftformatFormatter(common.Module):
             cmd.extend(['--configuration', path])
 
         file = self.get_pathinfo()['path']
-        dummy = file if file else 'dummy.' + self.get_assigned_syntax()
+        dummy = file or 'dummy.' + self.get_assigned_syntax()
         cmd.extend(['--assume-filename', dummy])
-
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
 
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -65,7 +50,7 @@ class AppleswiftformatFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

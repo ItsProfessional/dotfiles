@@ -15,10 +15,15 @@
                         "command": "quick_options"
                     },
                     {
+                        "caption": "Auto Format File",
+                        "mnemonic": "A",
+                        "command": "auto_format_file"
+                    },
+                    {
                         "caption": "-"
                     },
                     {
-                        "caption": "Apple Swift Format",
+                        "caption": "AppleSwiftFormat",
                         "mnemonic": "A",
                         "command": "run_format",
                         "args": {
@@ -36,7 +41,7 @@
                         }
                     },
                     {
-                        "caption": "Artistic Style",
+                        "caption": "ArtisticStyle",
                         "mnemonic": "A",
                         "command": "run_format",
                         "args": {
@@ -63,11 +68,20 @@
                         }
                     },
                     {
-                        "caption": "BibTeX-tidy",
+                        "caption": "BibTeXTidy",
                         "mnemonic": "B",
                         "command": "run_format",
                         "args": {
                             "uid": "bibtextidy",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "Biome",
+                        "mnemonic": "B",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "biome",
                             "type": "beautifier"
                         }
                     },
@@ -81,7 +95,16 @@
                         }
                     },
                     {
-                        "caption": "Cabal-fmt",
+                        "caption": "BladeFormatter",
+                        "mnemonic": "B",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "bladeformatter",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "CabalFmt",
                         "mnemonic": "C",
                         "command": "run_format",
                         "args": {
@@ -90,7 +113,7 @@
                         }
                     },
                     {
-                        "caption": "Caddy-fmt",
+                        "caption": "CaddyFmt",
                         "mnemonic": "C",
                         "command": "run_format",
                         "args": {
@@ -117,7 +140,7 @@
                         }
                     },
                     {
-                        "caption": "CMake-format",
+                        "caption": "CMakeFormat",
                         "mnemonic": "C",
                         "command": "run_format",
                         "args": {
@@ -144,7 +167,7 @@
                         }
                     },
                     {
-                        "caption": "D2-fmt",
+                        "caption": "D2Fmt",
                         "mnemonic": "D",
                         "command": "run_format",
                         "args": {
@@ -153,7 +176,7 @@
                         }
                     },
                     {
-                        "caption": "Dart Format",
+                        "caption": "DartFormat",
                         "mnemonic": "D",
                         "command": "run_format",
                         "args": {
@@ -171,7 +194,7 @@
                         }
                     },
                     {
-                        "caption": "Dhall format",
+                        "caption": "DhallFormat",
                         "mnemonic": "D",
                         "command": "run_format",
                         "args": {
@@ -207,7 +230,7 @@
                         }
                     },
                     {
-                        "caption": "Erlang efmt",
+                        "caption": "ErlangEfmt",
                         "mnemonic": "E",
                         "command": "run_format",
                         "args": {
@@ -216,7 +239,7 @@
                         }
                     },
                     {
-                        "caption": "Elixir mix",
+                        "caption": "ElixirMix",
                         "mnemonic": "E",
                         "command": "run_format",
                         "args": {
@@ -225,7 +248,7 @@
                         }
                     },
                     {
-                        "caption": "Elm-format",
+                        "caption": "ElmFormat",
                         "mnemonic": "E",
                         "command": "run_format",
                         "args": {
@@ -234,7 +257,7 @@
                         }
                     },
                     {
-                        "caption": "Erlang erlfmt",
+                        "caption": "Erlfmt",
                         "mnemonic": "E",
                         "command": "run_format",
                         "args": {
@@ -288,7 +311,7 @@
                         }
                     },
                     {
-                        "caption": "Fortran fprettify",
+                        "caption": "Fprettify",
                         "mnemonic": "F",
                         "command": "run_format",
                         "args": {
@@ -333,7 +356,7 @@
                         }
                     },
                     {
-                        "caption": "Google Java Format",
+                        "caption": "GoogleJavaFormat",
                         "mnemonic": "G",
                         "command": "run_format",
                         "args": {
@@ -360,7 +383,7 @@
                         }
                     },
                     {
-                        "caption": "HTML Tidy",
+                        "caption": "HTMLTidy",
                         "mnemonic": "H",
                         "command": "run_format",
                         "args": {
@@ -378,7 +401,7 @@
                         }
                     },
                     {
-                        "caption": "JS Beautifier",
+                        "caption": "JSBeautifier",
                         "mnemonic": "J",
                         "command": "run_format",
                         "args": {
@@ -392,6 +415,15 @@
                         "command": "run_format",
                         "args": {
                             "uid": "jsonmax",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "JuliaFormatter",
+                        "mnemonic": "J",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "juliaformatter",
                             "type": "beautifier"
                         }
                     },
@@ -450,7 +482,7 @@
                         }
                     },
                     {
-                        "caption": "OCP-indent",
+                        "caption": "OCPIndent",
                         "mnemonic": "O",
                         "command": "run_format",
                         "args": {
@@ -486,7 +518,7 @@
                         }
                     },
                     {
-                        "caption": "PHP CodeSniffer",
+                        "caption": "PHPCodeSniffer",
                         "mnemonic": "P",
                         "command": "run_format",
                         "args": {
@@ -495,7 +527,7 @@
                         }
                     },
                     {
-                        "caption": "PHP CS Fixer",
+                        "caption": "PHPCSFixer",
                         "mnemonic": "P",
                         "command": "run_format",
                         "args": {
@@ -504,7 +536,7 @@
                         }
                     },
                     {
-                        "caption": "Plantuml ASCII",
+                        "caption": "PlantumlASCII",
                         "mnemonic": "P",
                         "command": "run_format",
                         "args": {
@@ -531,7 +563,7 @@
                         }
                     },
                     {
-                        "caption": "Pretty Diff",
+                        "caption": "PrettyDiff",
                         "mnemonic": "P",
                         "command": "run_format",
                         "args": {
@@ -630,7 +662,7 @@
                         }
                     },
                     {
-                        "caption": "Semistandard JS",
+                        "caption": "SemistandardJS",
                         "mnemonic": "S",
                         "command": "run_format",
                         "args": {
@@ -657,7 +689,7 @@
                         }
                     },
                     {
-                        "caption": "SQL Formatter",
+                        "caption": "SQLFormatter",
                         "mnemonic": "S",
                         "command": "run_format",
                         "args": {
@@ -675,7 +707,7 @@
                         }
                     },
                     {
-                        "caption": "Standard JS",
+                        "caption": "StandardJS",
                         "mnemonic": "S",
                         "command": "run_format",
                         "args": {
@@ -684,7 +716,7 @@
                         }
                     },
                     {
-                        "caption": "Standard RB",
+                        "caption": "StandardRB",
                         "mnemonic": "S",
                         "command": "run_format",
                         "args": {
@@ -693,7 +725,7 @@
                         }
                     },
                     {
-                        "caption": "Standardx JS",
+                        "caption": "StandardxJS",
                         "mnemonic": "S",
                         "command": "run_format",
                         "args": {
@@ -729,7 +761,7 @@
                         }
                     },
                     {
-                        "caption": "Stylish Haskell",
+                        "caption": "StylishHaskell",
                         "mnemonic": "S",
                         "command": "run_format",
                         "args": {
@@ -774,7 +806,7 @@
                         }
                     },
                     {
-                        "caption": "Terraform fmt",
+                        "caption": "TerraformFmt",
                         "mnemonic": "T",
                         "command": "run_format",
                         "args": {
@@ -801,7 +833,7 @@
                         }
                     },
                     {
-                        "caption": "TS Standard",
+                        "caption": "TSStandard",
                         "mnemonic": "T",
                         "command": "run_format",
                         "args": {
@@ -815,6 +847,24 @@
                         "command": "run_format",
                         "args": {
                             "uid": "uncrustify",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "YAMLfmt",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yamlfmt",
+                            "type": "beautifier"
+                        }
+                    },
+                    {
+                        "caption": "YAML",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yamlmax",
                             "type": "beautifier"
                         }
                     },
@@ -849,7 +899,7 @@
                         "caption": "-"
                     },
                     {
-                        "caption": "Clean CSS (min)",
+                        "caption": "CleanCSS (min)",
                         "mnemonic": "C",
                         "command": "run_format",
                         "args": {
@@ -876,7 +926,7 @@
                         }
                     },
                     {
-                        "caption": "Pretty Diff (min)",
+                        "caption": "PrettyDiff (min)",
                         "mnemonic": "P",
                         "command": "run_format",
                         "args": {
@@ -885,7 +935,7 @@
                         }
                     },
                     {
-                        "caption": "Python Minifier (min)",
+                        "caption": "PythonMinifier (min)",
                         "mnemonic": "P",
                         "command": "run_format",
                         "args": {
@@ -933,11 +983,734 @@
                         "caption": "-"
                     },
                     {
+                        "caption": "Sf BASE16 (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbase16dec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BASE16 (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbase16enc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BASE32 (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbase32dec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BASE32 (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbase32enc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BASE64 (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbase64dec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BASE64 (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbase64enc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BASE (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbasedec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BASE (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbaseenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BINARY (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbinarydec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BINARY (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbinaryenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BRAILLE (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbrailledec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf BRAILLE (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfbrailleenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf CHARCODE (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfcharcodedec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf CHARCODE (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfcharcodeenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf DECIMAL (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfdecimaldec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf DECIMAL (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfdecimalenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf DATES (extract)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfextractdates",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf EMAIL (extract)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfextractemailaddr",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf FILEPATHS (extract)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfextractfilepaths",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf IP (extract)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfextractipaddr",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf MAC (extract)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfextractmacaddr",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf URLS (extract)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfextracturls",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf GZIP (compress)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfgzipcompress",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf GZIP (decompress)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfgzipdecompress",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf HEX (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfhexdec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf HEXDUMP (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfhexdumpdec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf HEXDUMP (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfhexdumpenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf HEX (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfhexenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf HTML (deentitize)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfhtmldeentitize",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf HTML (entitize)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfhtmlentitize",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf HTML (strip tags)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfhtmlstriptags",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf LoremIpsum",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfloremipsum",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf LZMA (compress)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sflzmacompress",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf LZMA (decompress)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sflzmadecompress",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf OCTAL (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfoctaldec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf OCTAL (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfoctalenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf PUNYCODE (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfpunycodedec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf PUNYCODE (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfpunycodeenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf QP (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfquotedprintabledec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf QP (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfquotedprintableenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf REGEX (escape)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfregexescape",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf REGEX (unescape)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfregexunescape",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf ROMAN NUM (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfromannumeraldec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf ROMAN NUM (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfromannumeralenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf STRING (escape)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfstringescape",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf STRING (unescape)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfstringunescape",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf UNICODE (escape)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfunicodeescape",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf UNICODE (unescape)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfunicodeunescape",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf TIMESTAMP (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfunixtimestampdec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf TIMESTAMP (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfunixtimestampenc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf URI (decode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfuridec",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf URI (encode)",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfurienc",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->CRC32",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2crc32",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->Diacritics",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2diacritics",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->MD5",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2md5",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->RANDPASS",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2randpass",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->SHA1",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2sha1",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->SHA256",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2sha256",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->SHA3_256",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2sha3256",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->SHA3_512",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2sha3512",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->SHA512",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2sha512",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->SHAKE256",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2shake256",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->SHAKE512",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2shake512",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Sf X->UUID",
+                        "mnemonic": "S",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "sfx2uuid",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yj X->HCL",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yjx2hcl",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yj X->JSON",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yjx2json",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yj X->TOML",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yjx2toml",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yj X->YAML",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yjx2yaml",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->BASE64",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2base64",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->CSV",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2csv",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->JSON",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2json",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->LUA",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2lua",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->PROPS",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2props",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->SHELL",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2shell",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->TOML",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2toml",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->TSV",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2tsv",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->URI",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2uri",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->XML",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2xml",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "Yq X->YAML",
+                        "mnemonic": "Y",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "yqx2yaml",
+                            "type": "converter"
+                        }
+                    },
+                    {
+                        "caption": "-"
+                    },
+                    {
                         "caption": "D2",
                         "mnemonic": "D",
                         "command": "run_format",
                         "args": {
                             "uid": "d2",
+                            "type": "graphic"
+                        }
+                    },
+                    {
+                        "caption": "Drawio",
+                        "mnemonic": "D",
+                        "command": "run_format",
+                        "args": {
+                            "uid": "drawio",
                             "type": "graphic"
                         }
                     },
@@ -992,32 +1765,26 @@
                                 "command": "edit_settings",
                                 "args": {
                                     "base_file": "${packages}/Formatter/Formatter.sublime-settings",
-                                    "default": "// Do NOT edit anything in the left-hand pane.\n// Pick up items you need, just make sure to maintain the structure.\n{\n\t$0\n}\n"
+                                    "default": "{\n\t$0\n}\n"
                                 }
                             },
                             {
-                                "caption": "Open Config Folders",
-                                "mnemonic": "O",
-                                "command": "open_config_folders"
+                                "caption": "Modules Info",
+                                "mnemonic": "M",
+                                "command": "modules_info"
+                            },
+                            {
+                                "caption": "Browser Configs",
+                                "mnemonic": "B",
+                                "command": "browser_configs"
                             },
                             {
                                 "caption": "-"
                             },
                             {
-                                "caption": "Example Key Bindings",
-                                "mnemonic": "E",
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/Formatter/Example.sublime-keymap"
-                                }
-                            },
-                            {
-                                "caption": "Key Bindings – User",
+                                "caption": "Key Bindings",
                                 "mnemonic": "K",
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/Default (${platform}).sublime-keymap"
-                                }
+                                "command": "key_bindings"
                             },
                             {
                                 "caption": "-"
@@ -1025,7 +1792,7 @@
                             {
                                 "caption": "Backup Settings",
                                 "mnemonic": "B",
-                                "command": "config_manager",
+                                "command": "backup_manager",
                                 "args": {
                                     "type": "backup"
                                 }
@@ -1033,7 +1800,7 @@
                             {
                                 "caption": "Restore Settings",
                                 "mnemonic": "R",
-                                "command": "config_manager",
+                                "command": "backup_manager",
                                 "args": {
                                     "type": "restore"
                                 }
@@ -1042,9 +1809,14 @@
                                 "caption": "-"
                             },
                             {
-                                "caption": "Version Info",
-                                "mnemonic": "V",
-                                "command": "show_version"
+                                "caption": "Changelog",
+                                "mnemonic": "C",
+                                "command": "open_changelog"
+                            },
+                            {
+                                "caption": "About",
+                                "mnemonic": "A",
+                                "command": "about"
                             }
                         ]
                     }

@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
+from ..core import Module
 from ..libs import yaml
-from ..core import common
 
-log = logging.getLogger(__name__)
 EXECUTABLES = ['fourmolu']
+DOTFILES = ['fourmolu.yaml']
 MODULE_CONFIG = {
     'source': 'https://github.com/fourmolu/fourmolu',
     'name': 'Fourmolu',
@@ -26,7 +18,7 @@ MODULE_CONFIG = {
 }
 
 
-class FourmoluFormatter(common.Module):
+class FourmoluFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -51,15 +43,10 @@ class FourmoluFormatter(common.Module):
 
         cmd.extend(['--color', 'never', '--stdin-input-file', '-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -68,7 +55,7 @@ class FourmoluFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

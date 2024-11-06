@@ -1,17 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
 import sublime
-from ..core import common
 
-log = logging.getLogger(__name__)
+from ..core import Module
+
 INTERPRETERS = ['python3', 'python']
 EXECUTABLES = ['beautysh']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/lovesegfault/beautysh',
     'name': 'Beautysh',
@@ -24,11 +17,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'beautysh_rc.json'
     },
-    'comment': 'requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. requires python on PATH if omit interpreter_path'
+    'comment': 'Requires "environ": {"PYTHONPATH": ["/lib/python3.7/site-packages"]}. Omit "interpreter_path" if python already on PATH.'
 }
 
 
-class BeautyshFormatter(common.Module):
+class BeautyshFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -43,9 +36,6 @@ class BeautyshFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def get_config(self, path):
@@ -57,19 +47,17 @@ class BeautyshFormatter(common.Module):
 
         result = []
         for key, value in json.items():
-            if type(value) == int:
+            if type(value) is int:
                 result.extend(['--' + key, '%d' % value])
-            elif type(value) == bool and value:
+            elif type(value) is bool and value:
                 result.extend(['--' + key])
-            elif type(value) == str:
+            elif type(value) is str:
                 result.extend(['--' + key, '%s' % value])
 
         return result
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -78,7 +66,7 @@ class BeautyshFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

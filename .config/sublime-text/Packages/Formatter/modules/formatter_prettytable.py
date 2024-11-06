@@ -1,16 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
-
-import logging
 import sublime
-from ..core import common
+
+from ..core import Module, log
 from ..libs.prettytable import prettytable
 
-log = logging.getLogger(__name__)
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/jazzband/prettytable',
     'name': 'PrettyTable',
@@ -23,11 +16,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'prettytable_rc.json'
     },
-    'comment': 'build-in, no executable'
+    'comment': 'Build-in, no "executable_path".'
 }
 
 
-class PrettytableFormatter(common.Module):
+class PrettytableFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -54,7 +47,7 @@ class PrettytableFormatter(common.Module):
             with open(path, 'r', encoding='utf-8') as file:
                 data = file.read()
             json = sublime.decode_value(data)
-            log.debug('Current arguments: %s', json)
+            log.debug('Command: %s', json)
 
         style = json.get('style', None)
         separator = json.get('separator', None)

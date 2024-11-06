@@ -1,7 +1,7 @@
 @import "catppuccin/themes/mocha.css";
 
 * {
-  font-family: JetbrainsMono, Noto Sans;
+  font-family: JetbrainsMono Nerd Font, Noto Sans;
   font-size: 12px;
 }
 

@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['perl']
 EXECUTABLES = ['pg_format']
+DOTFILES = ['.pg_format']
 MODULE_CONFIG = {
     'source': 'https://github.com/darold/pgFormatter',
     'name': 'PgFormatter',
@@ -24,11 +16,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'pg_format_rc.cfg'
     },
-    'comment': 'requires perl on PATH if omit interpreter_path'
+    'comment': 'Omit "interpreter_path" if perl already on PATH.'
 }
 
 
-class PgformatFormatter(common.Module):
+class PgformatFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -43,15 +35,10 @@ class PgformatFormatter(common.Module):
 
         cmd.extend(['--'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -60,7 +47,7 @@ class PgformatFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

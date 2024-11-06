@@ -10,7 +10,7 @@
 	"caret_style": "blink",
 	"caret_extra_top": 0,
 	"caret_extra_bottom": 0,
-	"caret_extra_width": 1,
+	"caret_extra_width": 0.5,
 	"font_face": "JetbrainsMono",
 	"font_size": 12,
 	"neovintageous_build_version": 13200,
@@ -30,4 +30,5 @@
 	"preview_on_click": false,
 	"hide_pointer_while_typing": false,
 	"mini_diff": false,
+	"hot_exit": "always",
 }

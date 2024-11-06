@@ -1,18 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['cabal-fmt']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/phadej/cabal-fmt',
-    'name': 'Cabal-fmt',
+    'name': 'CabalFmt',
     'uid': 'cabalfmt',
     'type': 'beautifier',
     'syntaxes': ['cabal'],
@@ -20,11 +12,11 @@ MODULE_CONFIG = {
     'executable_path': '/path/to/.cabal/bin/cabal-fmt',
     'args': ['--tabular', '--indent', '4'],
     'config_path': None,
-    'comment': 'requires haskell. use args instead of config_path'
+    'comment': 'Requires haskell. Use "args" instead of "config_path".'
 }
 
 
-class CabalfmtFormatter(common.Module):
+class CabalfmtFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -39,15 +31,10 @@ class CabalfmtFormatter(common.Module):
 
         cmd.extend(['--stdout', '--'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -56,7 +43,7 @@ class CabalfmtFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

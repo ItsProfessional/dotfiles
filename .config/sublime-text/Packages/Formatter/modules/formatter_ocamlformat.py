@@ -1,15 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['ocamlformat']
+DOTFILES = ['.ocamlformat']
 MODULE_CONFIG = {
     'source': 'https://github.com/ocaml-ppx/ocamlformat',
     'name': 'OCamlformat',
@@ -25,7 +17,7 @@ MODULE_CONFIG = {
 }
 
 
-class OcamlformatFormatter(common.Module):
+class OcamlformatFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -60,15 +52,10 @@ class OcamlformatFormatter(common.Module):
         p = self.get_pathinfo()['path']
         cmd.extend(['--name', p if p else 'dummy.ml', '-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -77,7 +64,7 @@ class OcamlformatFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

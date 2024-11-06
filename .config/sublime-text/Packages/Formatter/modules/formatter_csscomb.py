@@ -1,16 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['node']
 EXECUTABLES = ['csscomb']
+DOTFILES = ['.csscomb.json']
 MODULE_CONFIG = {
     'source': 'https://github.com/csscomb/csscomb.js',
     'name': 'CSScomb',
@@ -18,16 +10,16 @@ MODULE_CONFIG = {
     'type': 'beautifier',
     'syntaxes': ['css', 'scss', 'sass', 'less'],
     'exclude_syntaxes': None,
-    'executable_path': '/path/to/node_modules/.bin/csscomb',
+    'executable_path': '/path/to/node_modules/.bin/csscomb(.cmd on windows)',
     'args': None,
     'config_path': {
         'default': 'csscomb_rc.json'
     },
-    'comment': 'requires node on PATH if omit interpreter_path'
+    'comment': 'Omit "interpreter_path" as files in /node_modules/.bin/ already point to node.'
 }
 
 
-class CsscombFormatter(common.Module):
+class CsscombFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -42,15 +34,10 @@ class CsscombFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -59,7 +46,7 @@ class CsscombFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

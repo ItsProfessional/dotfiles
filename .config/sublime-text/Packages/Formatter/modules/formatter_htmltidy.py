@@ -1,18 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module, log
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 EXECUTABLES = ['tidy']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/htacg/tidy-html5',
-    'name': 'HTML Tidy',
+    'name': 'HTMLTidy',
     'uid': 'htmltidy',
     'type': 'beautifier',
     'syntaxes': ['html', 'xml'],
@@ -26,7 +18,7 @@ MODULE_CONFIG = {
 }
 
 
-class HtmltidyFormatter(common.Module):
+class HtmltidyFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -45,15 +37,10 @@ class HtmltidyFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -64,7 +51,7 @@ class HtmltidyFormatter(common.Module):
                 if exitcode == 1:
                     log.warning('File formatted but with warnings (exitcode=%d): "%s"', exitcode, stderr)
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

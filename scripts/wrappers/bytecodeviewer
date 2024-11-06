@@ -1,0 +1,4 @@
+#!/bin/sh
+
+bash /usr/bin/bytecodeviewer
+

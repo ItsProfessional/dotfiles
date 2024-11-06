@@ -1,35 +1,27 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from ..core import Module
 
-import logging
-from ..core import common
-
-log = logging.getLogger(__name__)
 INTERPRETERS = ['node']
 EXECUTABLES = ['js-beautify']
+DOTFILES = ['.jsbeautifyrc']
 MODULE_CONFIG = {
     'source': 'https://github.com/beautify-web/js-beautify',
-    'name': 'JS Beautifier',
+    'name': 'JSBeautifier',
     'uid': 'jsbeautifier',
     'type': 'beautifier',
     'syntaxes': ['js', 'css', 'html', 'json', 'tsx', 'vue'],
     'exclude_syntaxes': {
         'html': ['markdown']
     },
-    'executable_path': '/path/to/node_modules/.bin/js-beautify',
+    'executable_path': '/path/to/node_modules/.bin/js-beautify(.cmd on windows)',
     'args': None,
     'config_path': {
         'default': 'jsbeautify_rc.json'
     },
-    'comment': 'requires node on PATH if omit interpreter_path'
+    'comment': 'Omit "interpreter_path" as files in /node_modules/.bin/ already point to node.'
 }
 
 
-class JsbeautifierFormatter(common.Module):
+class JsbeautifierFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -45,15 +37,10 @@ class JsbeautifierFormatter(common.Module):
         syntax = self.get_assigned_syntax()
         cmd.extend(['--type', syntax if syntax in ('js', 'css', 'html') else 'js'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -62,7 +49,7 @@ class JsbeautifierFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

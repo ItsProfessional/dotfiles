@@ -6,9 +6,17 @@
   #fi
 #}
 
-## Functions
-# Path
 
+## Environment
+# XDG Base Directory
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_DATA_DIRS=/usr/local/share:/usr/share
+export XDG_CONFIG_DIRS=/etc/xdg
+
+# Path
   pathremove() {
     # Delete path by parts so we can never accidentally remove sub paths
     if [ "$PATH" = "$1" ]; then PATH=""; fi
@@ -32,32 +40,13 @@
     fi
   }
 
-## Environment
-# XDG Base Directory
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_STATE_HOME=$HOME/.local/state
-export XDG_DATA_DIRS=/usr/local/share:/usr/share
-export XDG_CONFIG_DIRS=/etc/xdg
-
-# Path
-  # Reorder path
-  #pathprepend /usr/local/sbin
-  #pathprepend /usr/local/bin
-  #pathprepend /usr/lib/jvm/default/bin
-  #pathprepend /usr/lib/rustup/bin
-  #pathprepend "$HOME"/.local/bin
-
   # Add scripts directories to path
-  #pathprepend ~/scripts
-  #for _dir in `find ~/scripts/ -mindepth 1 -maxdepth 1 -type d`;
-  #do
-    #pathprepend $_dir;
-  #done
-
-  # Force PATH to be environment
-  #export PATH
+  pathprepend ~/scripts
+  for _dir in `find ~/scripts/ -mindepth 1 -maxdepth 1 -type d`;
+  do
+    pathprepend $_dir;
+  done
+  export PATH
 
 # Editor
     export VISUAL=nvim
@@ -86,11 +75,17 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
     export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
     export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+    export DOT_SAGE="$XDG_CONFIG_HOME"/sage
+    export BN_USER_DIRECTORY="$XDG_CONFIG_HOME"/binaryninja
+
     
 # Program options
 
     # Enable wrap-around instead of truncating text when using journalctl
     export SYSTEMD_LESS=FRXMK
+
+    # Enable wrap-around instead of truncating text when using journalctl
+    export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
     # Pfetch config
     export PF_SOURCE="$XDG_CONFIG_HOME"/pfetchrc

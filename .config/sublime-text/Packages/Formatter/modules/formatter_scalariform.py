@@ -1,16 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from os.path import basename
 
-import logging
-from ..core import common
+from ..core import Module
 
-log = logging.getLogger(__name__)
 INTERPRETERS = ['java']
 EXECUTABLES = ['scalariform']
+DOTFILES = []
 MODULE_CONFIG = {
     'source': 'https://github.com/scala-ide/scalariform',
     'name': 'Scalariform',
@@ -27,7 +21,7 @@ MODULE_CONFIG = {
 }
 
 
-class ScalariformFormatter(common.Module):
+class ScalariformFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -38,7 +32,7 @@ class ScalariformFormatter(common.Module):
 
         interpreter = self.get_interpreter()
         if interpreter:
-            interpreter_base = common.basename(interpreter).lower()
+            interpreter_base = basename(interpreter).lower()
             if 'java' in interpreter_base and executable.endswith('jar'):
                 cmd = [interpreter, '-jar', executable]
             else:
@@ -54,15 +48,10 @@ class ScalariformFormatter(common.Module):
 
         cmd.extend(['--stdin'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -71,7 +60,7 @@ class ScalariformFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None

@@ -1,16 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-# @copyright    Copyright (c) 2019-present, Duc Ng. (bitst0rm)
-# @link         https://github.com/bitst0rm
-# @license      The MIT License (MIT)
+from os.path import basename
 
-import logging
-from ..core import common
+from ..core import Module
 
-log = logging.getLogger(__name__)
 INTERPRETERS = ['java']
 EXECUTABLES = ['cljfmt']
+DOTFILES = ['.cljfmt.edn', '.cljfmt.clj', 'cljfmt.edn', 'cljfmt.clj']
 MODULE_CONFIG = {
     'source': 'https://github.com/weavejester/cljfmt',
     'name': 'CLJfmt',
@@ -24,11 +18,11 @@ MODULE_CONFIG = {
     'config_path': {
         'default': 'cljfmt_rc.edn'
     },
-    'comment': 'omit interpreter_path if use cljfmt standalone version'
+    'comment': 'Omit "interpreter_path" if "executable_path" is set to the standalone version of cljfmt.'
 }
 
 
-class CljfmtFormatter(common.Module):
+class CljfmtFormatter(Module):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -39,7 +33,7 @@ class CljfmtFormatter(common.Module):
 
         interpreter = self.get_interpreter()
         if interpreter:
-            interpreter_base = common.basename(interpreter).lower()
+            interpreter_base = basename(interpreter).lower()
             if 'java' in interpreter_base and executable.endswith('jar'):
                 cmd = [interpreter, '-jar', executable]
             elif 'lein' in interpreter_base:
@@ -59,15 +53,10 @@ class CljfmtFormatter(common.Module):
 
         cmd.extend(['-'])
 
-        log.debug('Current arguments: %s', cmd)
-        cmd = self.fix_cmd(cmd)
-
         return cmd
 
     def format(self):
         cmd = self.get_cmd()
-        if not self.is_valid_cmd(cmd):
-            return None
 
         try:
             exitcode, stdout, stderr = self.exec_cmd(cmd)
@@ -76,7 +65,7 @@ class CljfmtFormatter(common.Module):
                 self.print_exiterr(exitcode, stderr)
             else:
                 return stdout
-        except OSError:
-            self.print_oserr(cmd)
+        except Exception as e:
+            self.print_oserr(cmd, e)
 
         return None
