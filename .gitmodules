@@ -16,3 +16,6 @@
 [submodule ".config/zsh/catppuccin"]
 	path = .config/zsh/catppuccin
 	url = https://github.com/catppuccin/zsh-syntax-highlighting
+[submodule ".config/obs-studio/catppuccin"]
+	path = .config/obs-studio/catppuccin
+	url = https://github.com/catppuccin/obs

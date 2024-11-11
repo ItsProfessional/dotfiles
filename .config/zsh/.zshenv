@@ -1,12 +1,3 @@
-# Reload zsh on USR1 signal: killall -USR1 zsh
-# I use this in my ~/scripts/import-env script
-#TRAPUSR1() {
-  #if [[ -o INTERACTIVE ]]; then
-     #exec zsh
-  #fi
-#}
-
-
 ## Environment
 # XDG Base Directory
 export XDG_CONFIG_HOME=$HOME/.config
@@ -41,6 +32,7 @@ export XDG_CONFIG_DIRS=/etc/xdg
   }
 
   # Add scripts directories to path
+  pathprepend "$HOME"/.local/bin
   pathprepend ~/scripts
   for _dir in `find ~/scripts/ -mindepth 1 -maxdepth 1 -type d`;
   do
@@ -55,7 +47,7 @@ export XDG_CONFIG_DIRS=/etc/xdg
 
 # Change dotfile locations
     # History files
-    export HISTFILE="${XDG_STATE_HOME}"/bash/history
+    export HISTFILE="$XDG_STATE_HOME"/bash/history
     export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
     export PYTHONSTARTUP="/etc/python/pythonrc"
     export LESSHISTFILE="$XDG_STATE_HOME"/less/history

@@ -5,6 +5,7 @@ evsieve \
 	--map key:capslock key:esc \
 	--map key:rightalt key:rightmeta \
 	--output \
+	\
 	--input /dev/input/by-path/pci-0000:00:14.0-usb-0:1:1.0-event-mouse grab \
 	--hook btn:middle exec-shell="wl-copy -pc && xsel -nc" \
 	--output

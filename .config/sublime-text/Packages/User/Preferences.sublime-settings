@@ -4,7 +4,7 @@
 		"NeoVintageous",
 		"Vintage",
 	],
-	"color_scheme": "Catppuccin Mocha.sublime-color-scheme",
+	"color_scheme": "Catppuccin Latte.sublime-color-scheme",
 	"theme": "Adaptive.sublime-theme",
 	"remember_open_files": false,
 	"caret_style": "blink",
@@ -31,4 +31,6 @@
 	"hide_pointer_while_typing": false,
 	"mini_diff": false,
 	"hot_exit": "always",
+	"dark_theme": "Default.sublime-theme",
+	"light_theme": "Default.sublime-theme",
 }
