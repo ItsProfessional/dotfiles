@@ -18,12 +18,15 @@ entry=$(find $dir1 $dir2 $dir3 -type f | fzf)
 mimetypes=$(awk -F '=' '{if (! ($0 ~ /^;/) && $0 ~ /^MimeType=/) {print $2; exit}}' "$entry")
 [ -z "$mimetypes" ] && { echo "No mimetypes found for the desktop entry" ; exit 1; }
 
-export IFS=";"
-mimetype=$(for mimetype in $mimetypes; do
-    echo "$mimetype"
-done | fzf --bind=return:accept-or-print-query --preview 'xdg-mime query default {}')
-[ -z "$mimetype" ] && { echo "No mimetype selected" ; exit 1; }
+IFS=";"
 
-xdg-mime default "$(basename $entry)" "$mimetype"
-echo "$mimetype" set to "$entry"
+while true; do
+    mimetype=$(for mimetype in $mimetypes; do
+        echo "$mimetype"
+    done | fzf --bind=return:accept-or-print-query --preview 'xdg-mime query default {}')
+    [ -z "$mimetype" ] && { echo "No mimetype selected" ; exit 1; }
+
+    xdg-mime default "$(basename $entry)" "$mimetype"
+    echo "$mimetype" set to "$entry"
+done
 

@@ -19,3 +19,6 @@
 [submodule ".config/obs-studio/catppuccin"]
 	path = .config/obs-studio/catppuccin
 	url = https://github.com/catppuccin/obs
+[submodule ".config/fuzzel/catppuccin"]
+	path = .config/fuzzel/catppuccin
+	url = https://github.com/catppuccin/fuzzel

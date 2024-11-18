@@ -33,13 +33,27 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
     export GTK_USE_PORTAL=1
     export GDK_DEBUG=portals
 
-    # Load GTK/QT env vars from config files -- sometimes these are not set by the DE/WM so I do it manually just in case.
+    # Load GTK/QT env vars from config files -- sometimes these are not set by the DE/WM so I do it manually just in case
+    # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland#setting-values-in-gsettings
     config="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini" # this file is written to by nwg-look
     if [ -f "$config" ]; then
-      export GTK_THEME="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-      #export XCURSOR_THEME="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
-      #export XCURSOR_SIZE="$(grep 'gtk-cursor-theme-size' "$config" | sed 's/.*\s*=\s*//')"
+      gnome_schema="org.gnome.desktop.interface"
+      gtk_theme="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+      icon_theme="$(grep 'gtk-icon-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+      cursor_theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
+      cursor_size="$(grep 'gtk-cursor-theme-size' "$config" | sed 's/.*\s*=\s*//')"
+      font_name="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
+
+      gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
+      gsettings set "$gnome_schema" icon-theme "$icon_theme"
+      gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
+      gsettings set "$gnome_schema" font-name "$font_name"
+
+      export GTK_THEME="$gtk_theme"
+      export XCURSOR_THEME="$cursor_theme"
+      export XCURSOR_SIZE="$cursor_size"
     fi
+
     # Force libreoffice to use gtk
     export SAL_USE_VCLPLUGIN=gtk4
 
@@ -63,6 +77,3 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
 
 fi
 
-
-# Created by `pipx` on 2024-11-10 15:30:33
-export PATH="$PATH:/home/iprf/.local/bin"

@@ -1,10 +1,11 @@
 {
 	"ignored_packages":
 	[
+		"Formatter",
 		"NeoVintageous",
 		"Vintage",
 	],
-	"color_scheme": "Catppuccin Latte.sublime-color-scheme",
+	"color_scheme": "Catppuccin Mocha.sublime-color-scheme",
 	"theme": "Adaptive.sublime-theme",
 	"remember_open_files": false,
 	"caret_style": "blink",

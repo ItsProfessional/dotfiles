@@ -7,10 +7,10 @@
 
 window#waybar {
   background-color: @base;
-  border-bottom: 1px solid @surface0;
+  /* border-bottom: 1px solid @surface0; */
   color: @text;
-  transition-property: background-color;
-  transition-duration: .5s;
+  /* transition-property: background-color;
+  transition-duration: .5s; */
 }
 
 window#waybar.hidden {
@@ -43,8 +43,7 @@ button:hover {
 
 #workspaces button.active {
   background-color: @surface0;
-  box-shadow: inset 0 -1px #89b4fa;
-  /*border-radius: 0 0 2px 2px;*/
+  box-shadow: inset 0 -1px @blue;
 }
 
 #workspaces button.urgent {

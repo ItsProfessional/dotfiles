@@ -1,0 +1,1 @@
+This directory contains links to programs, for purposes like aliases (even when called without a shell), overwriting a program in path with another, etc. but NOT for adding programs to the path that weren't already in path.

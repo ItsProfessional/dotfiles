@@ -14,7 +14,7 @@ config.default_cursor_style = 'SteadyBar'
 config.initial_rows = 34
 config.initial_cols = 140
 config.disable_default_mouse_bindings = true
-config.enable_wayland = false -- workaround for https://github.com/wez/wezterm/issues/5197
+-- config.enable_wayland = false -- workaround for https://github.com/wez/wezterm/issues/5197
 
 -- color
 config.color_scheme = 'Catppuccin Mocha'

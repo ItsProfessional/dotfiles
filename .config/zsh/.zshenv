@@ -8,36 +8,14 @@ export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 
 # Path
-  pathremove() {
-    # Delete path by parts so we can never accidentally remove sub paths
-    if [ "$PATH" = "$1" ]; then PATH=""; fi
-
-    PATH=${PATH//":$1:"/":"} # delete any instances in the middle
-    PATH=${PATH/#"$1:"/} # delete any instance at the beginning
-    PATH=${PATH/%":$1"/} # delete any instance in the at the end
-  }
-
-  pathappend() {
-    pathremove "$1"
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-      PATH="${PATH:+"$PATH:"}$1"
-    fi
-  }
-
-  pathprepend() {
-    pathremove "$1"
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-      PATH="$1${PATH:+":$PATH"}"
-    fi
-  }
-
   # Add scripts directories to path
-  pathprepend "$HOME"/.local/bin
-  pathprepend ~/scripts
-  for _dir in `find ~/scripts/ -mindepth 1 -maxdepth 1 -type d`;
-  do
-    pathprepend $_dir;
+  path=("$HOME/scripts" "$HOME/.local/bin" $path)
+  for _dir in `find ~/scripts/ -mindepth 1 -maxdepth 1 -type d`; do
+    path=("$_dir" $path)
   done
+
+  typeset -U path
+
   export PATH
 
 # Editor
@@ -86,15 +64,15 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export FZF_DEFAULT_OPTS=" \
     --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
     --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
-    --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8" #\
+    # --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
     # fzf
     export BEMENU_OPTS="--ignorecase --no-cursor --prompt \">\" --border 1 --hp 8 \
       --ch 20 --cw 1 \
-      --binding vim --vim-esc-exits \
       --fn \"JetbrainsMono 10\" \
-      --fb #1e1e2e --ff #94e2d5 --nb #1e1e2e --nf #f5e0dc --tb #1e1e2e --hb #1e1e2e --tf #cba6f7 --hf #89b4fa --nf #f5e0dc --af #f5e0dc --ab #1e1e2e --bdr #45475a"
+      --fb #1e1e2e --ff #94e2d5 --nb #1e1e2e --nf #f5e0dc --tb #1e1e2e --hb #1e1e2e --tf #cba6f7 --hf #89b4fa --nf #f5e0dc --af #f5e0dc --ab #1e1e2e --bdr #45475a \
+      --binding vim --vim-esc-exits"
 
     # man
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
