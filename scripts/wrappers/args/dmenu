@@ -1,0 +1,4 @@
+#!/bin/sh
+. ~/scripts/unwrap
+exec dmenu -p ">" "$@"
+

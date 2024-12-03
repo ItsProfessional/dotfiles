@@ -8,11 +8,11 @@
 dir1=/usr/share/applications
 dir2=/usr/local/share/applications
 dir3=$XDG_DATA_HOME/applications
-[ ! -d $dir1 ] && dir1=
-[ ! -d $dir2 ] && dir2=
-[ ! -d $dir3 ] && dir3=
+[ ! -d "$dir1" ] && dir1=
+[ ! -d "$dir2" ] && dir2=
+[ ! -d "$dir3" ] && dir3=
 
-entry=$(find $dir1 $dir2 $dir3 -type f | fzf)
+entry=$(find "$dir1" "$dir2" "$dir3" -type f | fzf)
 [ -z "$entry" ] && { echo "No desktop entires selected" ; exit 1; }
 
 mimetypes=$(awk -F '=' '{if (! ($0 ~ /^;/) && $0 ~ /^MimeType=/) {print $2; exit}}' "$entry")
@@ -26,7 +26,7 @@ while true; do
     done | fzf --bind=return:accept-or-print-query --preview 'xdg-mime query default {}')
     [ -z "$mimetype" ] && { echo "No mimetype selected" ; exit 1; }
 
-    xdg-mime default "$(basename $entry)" "$mimetype"
+    xdg-mime default "$(basename "$entry")" "$mimetype"
     echo "$mimetype" set to "$entry"
 done
 

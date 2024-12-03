@@ -6,9 +6,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # For MacOS homebrew
 if [[ -f "/opt/homebrew/bin/brew" ]] then
@@ -25,7 +25,7 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+#zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -73,7 +73,6 @@ bindkey '^H' backward-kill-word # C-Backspace
 bindkey '^[[3;5~' kill-word # C-Delete
 
 bindkey -s '^o' 'lf\n'
-
 
 # Fix Ctrl+L not fully clearing history in tmux
 if [ ! -z "$TMUX" ]; then
@@ -146,6 +145,7 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 [ -f "${XDG_CONFIG_HOME}/zsh/functions" ] && source "${XDG_CONFIG_HOME}/zsh/functions"
 
 # Shell integrations
+eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval $(thefuck --alias)

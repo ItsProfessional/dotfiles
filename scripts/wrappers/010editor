@@ -1,3 +1,0 @@
-#!/bin/sh
-exec env QT_QPA_PLATFORM=xcb /usr/bin/010editor
-

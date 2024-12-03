@@ -16,6 +16,9 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       export XDG_SESSION_DESKTOP=$environment
     fi
 
+    # Toolkit stuff
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
     # Force native wayland
     export MOZ_ENABLE_WAYLAND=1
     export GDK_BACKEND=wayland,x11,*
@@ -62,13 +65,16 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       export QT_QPA_PLATFORMTHEME=kde
       exec startplasma-wayland
     else
-      #export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
-      export QT_QPA_PLATFORMTHEME=kde # use plasma's systemsettings for qt stuff -- I prefer this over something like qt5ct because it's so much more customizable
-      export KDE_SESSION_VERSION=6 # This is important, as even though it's specifically a kde env var; without it, qt5 applications won't respect what you configure in systemsettings (only qt6 applications will)
+      export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
+      #export XDG_CURRENT_SESSION=KDE
+      #export QT_QPA_PLATFORMTHEME=kde # use plasma's systemsettings for qt stuff -- I prefer this over something like qt5ct because it's so much more customizable
+      #export KDE_SESSION_VERSION=6 # This is important, as even though it's specifically a kde env var; without it, qt5 applications won't respect what you configure in systemsettings (only qt6 applications will)
 
       gsettings set org.gnome.desktop.wm.preferences button-layout ':' # Remove titlebar buttons -- it's important to make this gsettings command run every time I log in, because if I just set it once, it will get reset when I log into a DE such as plasma.
 
       if [ "$environment" = "hyprland" ]; then
+          export HYPRCURSOR_THEME="theme_NotwaitaGray"
+          export HYPRCURSOR_SIZE="$XCURSOR_SIZE"
           exec Hyprland
       elif [ "$environment" = "qtile" ]; then
           exec qtile start -b wayland

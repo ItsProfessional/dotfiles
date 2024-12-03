@@ -1,0 +1,4 @@
+#!/bin/sh
+COMMAND="set -m; "$@" & tmux rename "'$!'"; fg"
+eval exec tmux new -d "'$COMMAND'"
+

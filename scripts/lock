@@ -6,8 +6,6 @@ if [ "$playerctl_status" = "Playing" ]; then
   playing=yes
 fi
 
-echo $paused
-
 [ $playing = "yes" ] && playerctl pause
 
 swaylock

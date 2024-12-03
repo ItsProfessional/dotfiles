@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # command flags
 # verbose and interactive
 alias cp='cp -v' #-iv
@@ -43,6 +45,7 @@ alias yay='paru'
 alias neofetch='fastfetch'
 alias grimshot='grimblast'
 alias lf='lfcd'
+alias htop='btop'
 alias sxiv='nsxiv'
 
 # shell commands
@@ -86,7 +89,7 @@ alias copy='wl-copy'
 alias vi="$EDITOR"
 alias vim="$EDITOR"
 alias v="$EDITOR"
-alias vv="sudoedit"
+alias vv="sudoedit" # sudo $EDITOR
 alias nv='nvim'
 alias sv="sudoedit"
 alias vf='vim $(fzf)'
@@ -97,17 +100,14 @@ alias pc='pacman'
 alias p='paru'
 
 # sudo aliases
-#alias sudo='doas'
-#alias sudoedit='doasedit'
+alias sudo='doas'
+alias sudoedit='doasedit'
 
 # trash
 alias tp='trash-put -v'
 alias trl='trash-list'
 alias tre='trash-empty'
 alias trr='trash-restore'
-
-# interpretors and compilers
-alias python='python3'
 
 # youtube dl
 alias youtube-dl='yt-dlp'
@@ -120,6 +120,8 @@ alias za='zathura'
 # other programs
 alias tm='tmux'
 alias nf='neofetch'
+alias ff='fastfetch'
+alias pf='pfetch'
 alias pp='fpp'
 
 # typos
@@ -250,6 +252,7 @@ alias tmn='tmux new-session -s'
 # pacman
 alias install='paru -S --needed'
 alias ins='paru -S --needed'
+alias update='paru'
 
 # update grub config
 alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
@@ -309,3 +312,4 @@ alias fernflower='java -jar /usr/share/idea/plugins/java-decompiler/lib/java-dec
 
 # usage: <your command which has a colored output> | remove-colors 
 alias remove-colors='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g"'
+

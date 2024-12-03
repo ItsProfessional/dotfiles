@@ -1,0 +1,32 @@
+configuration {
+ // modi: "window,drun,ssh,combi";
+ // combi-modi: "window,drun,ssh";
+ sort: true;
+ matching: "fuzzy";
+
+ // run-command: "/home/iprf/scripts/tmuxrun {cmd}";
+ run-shell-command: "/home/iprf/scripts/term {cmd}";
+
+ run {
+  display-name: ">";
+ }
+ drun {
+  display-name: ">";
+ }
+ window {
+  display-name: ">";
+ }
+ drun-display-format: "{name}"; // By default the format includes the categories
+
+ kb-row-up:           "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+ kb-row-down:         "Down,Control+j";
+ kb-accept-entry:     "Control+m,Return,KP_Enter";
+ kb-remove-to-eol:    "Control+Shift+e";
+ kb-mode-next:        "Shift+Right,Control+Tab,Control+l";
+ kb-mode-previous:    "Shift+Left,Control+Shift+Tab,Control+h";
+ kb-remove-char-back: "BackSpace";
+ kb-mode-complete:    "Alt+Tab";
+}
+
+@theme "~/.config/rofi/themes/mocha.rasi"
+

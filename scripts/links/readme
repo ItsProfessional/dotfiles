@@ -1,1 +1,4 @@
-This directory contains links to programs, for purposes like aliases (even when called without a shell), overwriting a program in path with another, etc. but NOT for adding programs to the path that weren't already in path.
+path/ contains links for the purpose of putting programs that aren't in path (e.g. portable programs, etc.) to path
+aliases/ contains aliases (that work without a shell)
+overrides/ contains links similar to those in aliases/ but these override other programs. E.g. dmenu -> rofi
+

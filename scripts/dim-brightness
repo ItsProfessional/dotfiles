@@ -10,6 +10,6 @@ dim)
 	;;
 undim)
   # set brightness from saved value
-  brillo -q -u 150000 -S $(/usr/bin/cat /tmp/prev_backlight)
+  brillo -q -u 150000 -S "$(/usr/bin/cat /tmp/prev_backlight)"
 	;;
 esac

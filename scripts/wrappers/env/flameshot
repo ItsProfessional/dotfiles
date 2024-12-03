@@ -1,0 +1,4 @@
+#!/bin/sh
+. ~/scripts/unwrap
+exec env XDG_CURRENT_DESKTOP=sway /usr/bin/flameshot
+

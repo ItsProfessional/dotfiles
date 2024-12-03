@@ -8,7 +8,7 @@ send_notification() {
   fi
 
   #notify-send -a "changevolume" -u low -r 9993 -h int:value:"$volume" -i "speaker-volume" "Volume: ${volume}%"
-  echo $volume > /tmp/wobpipe
+  echo "$volume" > /tmp/wobpipe
 }
 
 send_notification_mic() {
@@ -19,7 +19,7 @@ send_notification_mic() {
   fi
 
   #notify-send -a "changevolume" -u low -r 9993 -h int:value:"$volume" -i "mic-volume" "Volume: ${volume}%"
-  echo $volume > /tmp/wobpipe
+  echo "$volume" > /tmp/wobpipe
 }
 
 case $1 in

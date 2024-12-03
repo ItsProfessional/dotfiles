@@ -5,7 +5,7 @@ send_notification() {
   brightness=$(brightnessctl -e4 -m | awk -F, '{print substr($4, 0, length($4)-1)}')
 
   # notify-send -a "change-brightness" -u low -r 9991 -h int:value:"$brightness" -i "brightness-$1" "Brightness: $brightness%"
-  echo $brightness > /tmp/wobpipe
+  echo "$brightness" > /tmp/wobpipe
 }
 
 case $1 in

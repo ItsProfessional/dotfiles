@@ -1,0 +1,22 @@
+anchor = top
+width = 100%
+height = 20
+horizontal = true
+font-size = 11
+prompt-text = ""
+font = /usr/share/fonts/TTF/JetBrainsMonoNerdFont-Regular.ttf
+hint-font = false
+outline-width = 0
+border-width = 0
+background-color = #11111b
+selection-color = #89b4fa
+min-input-width = 80
+result-spacing = 15
+padding-top = 0
+padding-bottom = 0
+padding-left = 0
+padding-right = 0
+num-results = 20
+ascii-input = true
+late-keyboard-init = true
+

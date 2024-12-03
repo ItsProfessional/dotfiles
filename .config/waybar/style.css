@@ -6,7 +6,7 @@
 }
 
 window#waybar {
-  background-color: @base;
+  background-color: alpha(@crust, 0.5);
   /* border-bottom: 1px solid @surface0; */
   color: @text;
   /* transition-property: background-color;

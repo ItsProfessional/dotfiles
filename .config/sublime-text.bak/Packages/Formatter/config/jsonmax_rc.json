@@ -1,9 +1,0 @@
-{
-    "skipkeys": false,
-    "ensure_ascii": false,
-    "check_circular": true,
-    "allow_nan": true,
-    "indent": 4,
-    "separators": [",", ": "],
-    "sort_keys": false
-}

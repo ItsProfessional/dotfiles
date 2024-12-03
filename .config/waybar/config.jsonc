@@ -1,4 +1,6 @@
 {
+    "mode": "hide",
+    "start_hidden": true,
     "layer": "top",
     "height": 25,
     "spacing": -4,

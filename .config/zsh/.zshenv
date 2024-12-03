@@ -9,8 +9,8 @@ export XDG_CONFIG_DIRS=/etc/xdg
 
 # Path
   # Add scripts directories to path
-  path=("$HOME/scripts" "$HOME/.local/bin" $path)
-  for _dir in `find ~/scripts/ -mindepth 1 -maxdepth 1 -type d`; do
+  path=("$HOME/scripts" "$HOME/.local/bin" "$XDG_DATA_HOME/cargo/bin" $path)
+  for _dir in `find $HOME/scripts/ -type d`; do
     path=("$_dir" $path)
   done
 
@@ -18,10 +18,12 @@ export XDG_CONFIG_DIRS=/etc/xdg
 
   export PATH
 
-# Editor
+# Editors, terminal, etc.
     export VISUAL=nvim
     export EDITOR=nvim
     export DIFFPROG="nvim -d"
+    export TERMINAL=foot
+    export SHELL=${SHELL:-"/bin/sh"}
 
 # Change dotfile locations
     # History files
@@ -40,25 +42,22 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export WINEPREFIX="$XDG_DATA_HOME"/wine
     #export GNUPGHOME="$XDG_DATA_HOME"/gnupg
     export GOPATH="$XDG_DATA_HOME"/go
+    export XCURSOR_PATH=${XCURSOR_PATH}:"$XDG_DATA_HOME"/icons
     
     # Config files/directories
+    export ZDOTDIR=$XDG_CONFIG_HOME/zsh
     export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
     export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
     export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
     export DOT_SAGE="$XDG_CONFIG_HOME"/sage
     export BN_USER_DIRECTORY="$XDG_CONFIG_HOME"/binaryninja
+    export PF_SOURCE="$XDG_CONFIG_HOME"/pfetchrc
 
     
 # Program options
 
     # Enable wrap-around instead of truncating text when using journalctl
     export SYSTEMD_LESS=FRXMK
-
-    # Enable wrap-around instead of truncating text when using journalctl
-    export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-
-    # Pfetch config
-    export PF_SOURCE="$XDG_CONFIG_HOME"/pfetchrc
 
     # fzf
     export FZF_DEFAULT_OPTS=" \
@@ -67,11 +66,11 @@ export XDG_CONFIG_DIRS=/etc/xdg
     --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8" #\
     # --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 
-    # fzf
+    # bemenu
     export BEMENU_OPTS="--ignorecase --no-cursor --prompt \">\" --border 1 --hp 8 \
       --ch 20 --cw 1 \
       --fn \"JetbrainsMono 10\" \
-      --fb #1e1e2e --ff #94e2d5 --nb #1e1e2e --nf #f5e0dc --tb #1e1e2e --hb #1e1e2e --tf #cba6f7 --hf #89b4fa --nf #f5e0dc --af #f5e0dc --ab #1e1e2e --bdr #45475a \
+      --fb #11111b --ff #94e2d5 --nb #11111b --nf #f5e0dc --tb #11111b --hb #11111b --tf #cba6f7 --hf #89b4fa --nf #f5e0dc --af #f5e0dc --ab #11111b --bdr #45475a \
       --binding vim --vim-esc-exits"
 
     # man

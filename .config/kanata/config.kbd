@@ -1,0 +1,18 @@
+(defcfg
+  process-unmapped-keys yes
+  danger-enable-cmd yes
+)
+
+(defsrc)
+
+(defalias
+  escctrl (tap-hold 100 100 esc lctl)
+  nommidpaste (multi (cmd sh -c "wl-copy -fpc; xsel -npc") mmid)
+)
+
+(deflayermap (base-layer)
+  caps esc
+  ralt rmet
+  mmid @nommidpaste
+)
+
