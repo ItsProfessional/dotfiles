@@ -1,1 +1,2 @@
-This directory contains wrappers for programs
+This directory contains wrappers for programs.
+The mass directory contians symbolic links to central wrappers for lots of programs, as unified wrappers

@@ -30,7 +30,7 @@ case "$TERMINAL" in
   xterm|alacritty)
     eval exec "$TERMINAL" -e "$COMMAND";;
   foot|kitty)
-    eval exec "$TERMINAL" "$COMMAND";;
+    eval exec "$TERMINAL" -- "$COMMAND";;
   wezterm)
     eval exec "$TERMINAL" start -- "$COMMAND";;
 

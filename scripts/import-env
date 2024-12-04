@@ -5,7 +5,7 @@
 
 set -e
 
-[[ -n $HYPRLAND_DEBUG_CONF ]] && exit 0
+[ -n $HYPRLAND_DEBUG_CONF ] && exit 0
 
 _envs=(
 	# display

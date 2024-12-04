@@ -11,9 +11,10 @@ for MOUSE in $(find /sys/class/input -name mouse\*); do
     # exclude touchpad, virtual devices, or elan devices
     grep -iq -E "touchpad|elan|virtual|kanata" "$MOUSE"/device/name && continue
     ENABLED=false;
+    break
 done
 
 # enable/disable the touchpad
 TOUCHPAD=$(hyprctl devices | grep -i touchpad | xargs)
-hyprctl -r -- keyword "device[$TOUCHPAD]:enabled" "$ENABLED"
+hyprctl -r -- keyword "device["$TOUCHPAD"]:enabled" "$ENABLED"
 

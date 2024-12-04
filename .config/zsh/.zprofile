@@ -73,7 +73,7 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       gsettings set org.gnome.desktop.wm.preferences button-layout ':' # Remove titlebar buttons -- it's important to make this gsettings command run every time I log in, because if I just set it once, it will get reset when I log into a DE such as plasma.
 
       if [ "$environment" = "hyprland" ]; then
-          export HYPRCURSOR_THEME="theme_NotwaitaGray"
+          export HYPRCURSOR_THEME="theme_NotwaitaBlack"
           export HYPRCURSOR_SIZE="$XCURSOR_SIZE"
           exec Hyprland
       elif [ "$environment" = "qtile" ]; then
