@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")"/../unwrap.sh
+eval exec "$(basename "$0")" $(cat "$XDG_CONFIG_HOME"/bemenurc) "$@"
+

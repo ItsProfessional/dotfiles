@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")"/../unwrap.sh
+exec env HOME="$XDG_DATA_HOME"/android adb "$@"
+

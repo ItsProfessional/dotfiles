@@ -15,16 +15,20 @@ fi
 
 # hold (wait for any key)
 # https://stackoverflow.com/questions/43030991/korn-shell-how-can-i-make-press-any-key-to-continue
-#COMMAND="${SHELL:-"/bin/sh"} -ic '\
-  #$@; \
-  #oldstty=\$(stty -g); \
-  #stty -icanon -echo min 1 time 0; \
-  #dd bs=1 count=1 >/dev/null 2>&1; \
-  #stty "\$oldstty" \
-#'"
+# https://www.unix.com/unix-for-dummies-questions-and-answers/3197-making-sh-wait-user-input.html?s=3af7d25036436ca99b7d2204da6528fe
+COMMAND="${SHELL:-"/bin/sh"} -ic '\
+  $@; \
+  tput smso; \
+  echo \"Press any key to return\c\"; \
+  tput rmso; \
+  oldstty=\$(stty -g); \
+  stty -icanon -echo min 1 time 0; \
+  dd bs=1 count=1 >/dev/null 2>&1; \
+  stty "\$oldstty" \
+'"
 
 # enter interactive shell
-COMMAND="${SHELL:-"/bin/sh"} -ic '$@; ${SHELL:-"/bin/sh"} -i'" 
+#COMMAND="${SHELL:-"/bin/sh"} -ic '$@; ${SHELL:-"/bin/sh"} -i'" 
 
 case "$TERMINAL" in
   xterm|alacritty)

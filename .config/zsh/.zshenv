@@ -4,6 +4,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
+export XDG_STATE_DIR=$HOME/.local/state
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 
@@ -22,14 +23,13 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export VISUAL=nvim
     export EDITOR=nvim
     export DIFFPROG="nvim -d"
-    export TERMINAL=foot
-    export SHELL=${SHELL:-"/bin/sh"}
+    export TERMINAL=wezterm
 
 # Change dotfile locations
     # History files
     export HISTFILE="$XDG_STATE_HOME"/bash/history
     export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
-    export PYTHONSTARTUP="/etc/python/pythonrc"
+    export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
     export LESSHISTFILE="$XDG_STATE_HOME"/less/history
     export CALCHISTFILE="$XDG_CACHE_HOME"/calc_history
     
@@ -42,6 +42,8 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export WINEPREFIX="$XDG_DATA_HOME"/wine
     #export GNUPGHOME="$XDG_DATA_HOME"/gnupg
     export GOPATH="$XDG_DATA_HOME"/go
+    export W3M_DIR="$XDG_DATA_HOME"/w3m
+    export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
     export XCURSOR_PATH=${XCURSOR_PATH}:"$XDG_DATA_HOME"/icons
     
     # Config files/directories
@@ -52,26 +54,13 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export DOT_SAGE="$XDG_CONFIG_HOME"/sage
     export BN_USER_DIRECTORY="$XDG_CONFIG_HOME"/binaryninja
     export PF_SOURCE="$XDG_CONFIG_HOME"/pfetchrc
-
+    export FZF_DEFAULT_OPTS_FILE="$XDG_CONFIG_HOME"/fzfrc
+    export WGETRC="$XDG_CONFIG_HOME"/wgetrc
     
 # Program options
 
     # Enable wrap-around instead of truncating text when using journalctl
     export SYSTEMD_LESS=FRXMK
-
-    # fzf
-    export FZF_DEFAULT_OPTS=" \
-    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8" #\
-    # --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-
-    # bemenu
-    export BEMENU_OPTS="--ignorecase --no-cursor --prompt \">\" --border 1 --hp 8 \
-      --ch 20 --cw 1 \
-      --fn \"JetbrainsMono 10\" \
-      --fb #11111b --ff #94e2d5 --nb #11111b --nf #f5e0dc --tb #11111b --hb #11111b --tf #cba6f7 --hf #89b4fa --nf #f5e0dc --af #f5e0dc --ab #11111b --bdr #45475a \
-      --binding vim --vim-esc-exits"
 
     # man
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"

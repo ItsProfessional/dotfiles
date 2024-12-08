@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")"/../unwrap.sh
-exec env QT_QPA_PLATFORM=xcb prime
+exec rofi -pid $XDG_STATE_HOME/rofi "$@"
 

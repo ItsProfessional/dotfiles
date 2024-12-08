@@ -4,7 +4,8 @@ configuration {
  sort: true;
  matching: "fuzzy";
 
- // run-command: "/home/iprf/scripts/tmuxrun {cmd}";
+ //run-command: "{terminal} {cmd}";
+ run-command: "/home/iprf/scripts/term {cmd}";
  run-shell-command: "/home/iprf/scripts/term {cmd}";
 
  run {
@@ -28,5 +29,5 @@ configuration {
  kb-mode-complete:    "Alt+Tab";
 }
 
-@theme "~/.config/rofi/themes/mocha.rasi"
+@theme "~/.config/rofi/themes/center.rasi"
 

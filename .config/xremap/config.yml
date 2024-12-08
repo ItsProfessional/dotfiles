@@ -33,20 +33,11 @@ keymap:
   - name: Firefox
     remap:
 
-      # Enable Alt+Left/Right on firefox on linux just like windows
-      Alt-Left: Ctrl-LeftBrace
-      Alt-Right: Ctrl-RightBrace
-
       # block dumb hotkeys
       Ctrl-Q: Reserved
-      Ctrl-LeftMeta-Q: Reserved
-      Ctrl-RightMeta-Q: Reserved
 
       # for my instinct of using ctrl+shift+c in terminal
       Ctrl-Shift-C: Ctrl-C
-
-      # always force a hard page refresh
-      Ctrl-R: Ctrl-Shift-R
 
       # On windows, firefox uses ctrl+num to switch to tabs, but on linux it uses alt instead. this ports the windows hotkeys to linux
       Ctrl-1: Alt-1

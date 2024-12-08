@@ -25,19 +25,15 @@ alias treed='tree -CAFd'
 alias df='df -hT'
 alias du='du -sh'
 alias date='date "+%a %d/%m/%y %I:%M:%S:%3N %p"'
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 # other programs
 alias multitail='multitail --no-repeat -c'
-alias xsettingsd='xsettingsd -c ~/.config/xsettingsd'
 alias fd='fd -u'
-alias adb='HOME="$XDG_DATA_HOME"/android adb'
 alias dust='dust --reverse'
 
 # replace programs
 alias cat='bat'
 alias locate='plocate'
-#alias code='codium'
 alias codium='code'
 alias edit="$EDITOR"
 alias exa="eza"
@@ -56,10 +52,6 @@ alias cd='z'
 alias ufw='sudo ufw'
 alias updatedb='sudo updatedb'
 alias downgrade='sudo downgrade'
-
-
-
-
 
 # program aliases
 # core utils
@@ -96,6 +88,7 @@ alias vf='vim $(fzf)'
 alias intellij='idea'
 
 # package manager
+alias pac='pacman'
 alias pc='pacman'
 alias p='paru'
 
@@ -306,9 +299,6 @@ alias fixntfsperms='chmod -R -x+X --' # removes executable perms from files, and
 alias undirty-ntfs-device='sudo ntfsfix --clear-dirty'
 
 alias timesync='sudo chronyc -a "burst 4/4"'
-
-# fernflower
-alias fernflower='java -jar /usr/share/idea/plugins/java-decompiler/lib/java-decompiler.jar'
 
 # usage: <your command which has a colored output> | remove-colors 
 alias remove-colors='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g"'

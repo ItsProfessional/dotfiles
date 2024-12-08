@@ -1,0 +1,14 @@
+#!/bin/sh
+args="$@"
+while test $# -gt 0
+do
+    if [ "$1" = "-dmenu" ]; then
+        . "$(dirname "$0")"/../bufferedpipe.sh #"$@"
+    fi
+    shift
+done
+set -- $args
+
+. "$(dirname "$0")"/../../../unwrap.sh
+exec "$(basename "$0")" "$@"
+
