@@ -9,13 +9,18 @@ export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 
 # Path
+  typeset -U path
+
   # Add scripts directories to path
+  # prepend
   path=("$HOME/scripts" "$HOME/.local/bin" "$XDG_DATA_HOME/cargo/bin" $path)
-  for _dir in `find $HOME/scripts/ -type d`; do
+  for _dir in $(find "$HOME"/scripts/ -type d); do
     path=("$_dir" $path)
   done
-
-  typeset -U path
+  # append
+  for _dir in $(find /opt/ -mindepth 1 -maxdepth 1 -type d); do
+    path+=("$_dir")
+  done
 
   export PATH
 
@@ -23,7 +28,7 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export VISUAL=nvim
     export EDITOR=nvim
     export DIFFPROG="nvim -d"
-    export TERMINAL=wezterm
+    export TERMINAL=foot
 
 # Change dotfile locations
     # History files
@@ -80,5 +85,5 @@ export XDG_CONFIG_DIRS=/etc/xdg
     export JAVA_HOME=/usr/lib/jvm/default
 
     # GPG key: https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
-    export GPG_TTY=$(tty)
+    export GPG_TTY="$TTY"
 

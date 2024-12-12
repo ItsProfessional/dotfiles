@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")"/../unwrap.sh
-exec rofi -pid $XDG_STATE_HOME/rofi "$@"
+exec "$(basename "$0")" -pid $XDG_STATE_HOME/rofi "$@"
 

@@ -1,7 +1,7 @@
 environment=hyprland
 
 # Start the graphical environment
-if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && [ "$(tty)" = "/dev/tty1" ]; then
+if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && [ "$TTY" = "/dev/tty1" ]; then
 
     # XDG Session variables -- I don't exactly recall why I added these; probably because not every WM sets them. See: https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
     export XDG_SESSION_TYPE=wayland
@@ -40,17 +40,16 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
     # https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland#setting-values-in-gsettings
     config="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini" # this file is written to by nwg-look
     if [ -f "$config" ]; then
-      gnome_schema="org.gnome.desktop.interface"
       gtk_theme="$(grep 'gtk-theme-name' "$config" | sed 's/.*\s*=\s*//')"
       icon_theme="$(grep 'gtk-icon-theme-name' "$config" | sed 's/.*\s*=\s*//')"
       cursor_theme="$(grep 'gtk-cursor-theme-name' "$config" | sed 's/.*\s*=\s*//')"
       cursor_size="$(grep 'gtk-cursor-theme-size' "$config" | sed 's/.*\s*=\s*//')"
       font_name="$(grep 'gtk-font-name' "$config" | sed 's/.*\s*=\s*//')"
 
-      gsettings set "$gnome_schema" gtk-theme "$gtk_theme"
-      gsettings set "$gnome_schema" icon-theme "$icon_theme"
-      gsettings set "$gnome_schema" cursor-theme "$cursor_theme"
-      gsettings set "$gnome_schema" font-name "$font_name"
+      gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
+      gsettings set org.gnome.desktop.interface icon-theme "$icon_theme"
+      gsettings set org.gnome.desktop.interface cursor-theme "$cursor_theme"
+      gsettings set org.gnome.desktop.interface font-name "$font_name"
 
       export GTK_THEME="$gtk_theme"
       export XCURSOR_THEME="$cursor_theme"

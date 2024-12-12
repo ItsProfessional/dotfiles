@@ -1,12 +1,12 @@
 configuration {
- // modi: "window,drun,ssh,combi";
- // combi-modi: "window,drun,ssh";
+ modi: "window,drun,run,ssh,combi";
+ combi-modi: "window,drun,ssh";
  sort: true;
  matching: "fuzzy";
 
- //run-command: "{terminal} {cmd}";
- run-command: "/home/iprf/scripts/term {cmd}";
- run-shell-command: "/home/iprf/scripts/term {cmd}";
+ terminal: "/home/iprf/scripts/term";
+ run-command: "{terminal} {cmd}";
+ run-shell-command: "env USEHOLDMODE=2 {terminal} {cmd}";
 
  run {
   display-name: ">";
@@ -19,6 +19,7 @@ configuration {
  }
  drun-display-format: "{name}"; // By default the format includes the categories
 
+ // binds
  kb-row-up:           "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
  kb-row-down:         "Down,Control+j";
  kb-accept-entry:     "Control+m,Return,KP_Enter";

@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")"/../unwrap.sh
-exec dhex -f "$XDG_CONFIG_HOME"/dhexrc "$@"
+exec "$(basename "$0")" -f "$XDG_CONFIG_HOME"/dhexrc "$@"
 

@@ -36,6 +36,7 @@ alias cat='bat'
 alias locate='plocate'
 alias codium='code'
 alias edit="$EDITOR"
+alias bravo='brave'
 alias exa="eza"
 alias yay='paru'
 alias neofetch='fastfetch'

@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")"/../unwrap.sh
-exec dmenu -i -p ">" "$@"
+exec "$(basename "$0")" -i -p ">" "$@"
 

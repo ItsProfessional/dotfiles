@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")"/../unwrap.sh
-exec entr -p "$@"
+exec "$(basename "$0")" -p "$@"
 

@@ -10,25 +10,25 @@ fi
 #TERMINAL=$1
 #shift
 
-# hold (wait for return)
-#COMMAND="${SHELL:-"/bin/sh"} -ic '$@; read'"
-
-# hold (wait for any key)
-# https://stackoverflow.com/questions/43030991/korn-shell-how-can-i-make-press-any-key-to-continue
-# https://www.unix.com/unix-for-dummies-questions-and-answers/3197-making-sh-wait-user-input.html?s=3af7d25036436ca99b7d2204da6528fe
+# 1 -> hold (wait for return)
+# 2 -> hold (wait for any key): https://www.unix.com/unix-for-dummies-questions-and-answers/3197-making-sh-wait-user-input.html?s=3af7d25036436ca99b7d2204da6528fe
+# 3 -> enter interactive shell
+# anything else -> nothing
 COMMAND="${SHELL:-"/bin/sh"} -ic '\
   $@; \
-  tput smso; \
-  echo \"Press any key to return\c\"; \
-  tput rmso; \
-  oldstty=\$(stty -g); \
-  stty -icanon -echo min 1 time 0; \
-  dd bs=1 count=1 >/dev/null 2>&1; \
-  stty "\$oldstty" \
+  case \"\$USEHOLDMODE\" in \
+    1) read ;; \
+    2) \
+      tput smso; \
+      echo \"Press any key to return\c\"; \
+      tput rmso; \
+      oldstty=\$(stty -g); \
+      stty -icanon -echo min 1 time 0; \
+      dd bs=1 count=1 >/dev/null 2>&1; \
+      stty \"\$oldstty\" ;; \
+    3) ${SHELL:-"/bin/sh"} -i ;; \
+  esac \
 '"
-
-# enter interactive shell
-#COMMAND="${SHELL:-"/bin/sh"} -ic '$@; ${SHELL:-"/bin/sh"} -i'" 
 
 case "$TERMINAL" in
   xterm|alacritty)

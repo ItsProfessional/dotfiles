@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")"/../unwrap.sh
-exec env XDG_CURRENT_DESKTOP=sway /usr/bin/flameshot "$@"
+exec env XDG_CURRENT_DESKTOP=sway "$(basename "$0")" "$@"
 

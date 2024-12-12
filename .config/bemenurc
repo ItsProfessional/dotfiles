@@ -1,5 +1,5 @@
 --ignorecase --no-cursor --prompt ">" --border 1 --hp 8
 --ch 20 --cw 1
 --fn "JetbrainsMono 10"
---fb "#11111b" --ff "#94e2d5" --nb "#11111b" --nf "#f5e0dc" --tb "#11111b" --hb "#11111b" --tf "#cba6f7" --hf "#89b4fa" --nf "#f5e0dc" --af "#f5e0dc" --ab "#11111b" --bdr "#45475a"
+--fb "#1e1e2e" --ff "#94e2d5" --nb "#1e1e2e" --nf "#f5e0dc" --tb "#1e1e2e" --hb "#1e1e2e" --tf "#cba6f7" --hf "#89b4fa" --af "#f5e0dc" --ab "#1e1e2e" --bdr "#45475a"
 --binding vim --vim-esc-exits

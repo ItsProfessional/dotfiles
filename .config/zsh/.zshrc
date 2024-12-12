@@ -11,7 +11,7 @@
 # fi
 
 # For MacOS homebrew
-if [[ -f "/opt/homebrew/bin/brew" ]] then
+if [ -f "/opt/homebrew/bin/brew" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
@@ -145,9 +145,10 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 [ -f "${XDG_CONFIG_HOME}/zsh/functions" ] && source "${XDG_CONFIG_HOME}/zsh/functions"
 
 # Shell integrations
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
+eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/ohmyposh/base.toml)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
-eval $(thefuck --alias)
+eval "$(thefuck --alias)"
 eval "$(batman --export-env)"
 
