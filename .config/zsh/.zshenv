@@ -13,10 +13,14 @@ export XDG_CONFIG_DIRS=/etc/xdg
 
   # Add scripts directories to path
   # prepend
+  path=("$XDG_CONFIG_HOME/emacs/bin" $path)
+  path=("$XDG_CONFIG_HOME/tmux/plugins/tmux-open-nvim/scripts" $path)
+
   path=("$HOME/scripts" "$HOME/.local/bin" "$XDG_DATA_HOME/cargo/bin" $path)
   for _dir in $(find "$HOME"/scripts/ -type d); do
     path=("$_dir" $path)
   done
+
   # append
   for _dir in $(find /opt/ -mindepth 1 -maxdepth 1 -type d); do
     path+=("$_dir")

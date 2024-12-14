@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -i
 # Note: $TERMINAL is exported in .zshenv
 
 if [ "$#" -lt 1 ]; then
@@ -31,6 +31,8 @@ COMMAND="${SHELL:-"/bin/sh"} -ic '\
 '"
 
 case "$TERMINAL" in
+  "")
+    eval exec "$COMMAND";;
   xterm|alacritty)
     eval exec "$TERMINAL" -e "$COMMAND";;
   foot|kitty)

@@ -8,6 +8,8 @@ set -e
 [ -n $HYPRLAND_DEBUG_CONF ] && exit 0
 
 _envs=(
+	DBUS_SESSION_BUS_ADDRESS
+	XAUTHORITY
 	# display
 	WAYLAND_DISPLAY
 	DISPLAY

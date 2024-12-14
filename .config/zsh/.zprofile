@@ -1,29 +1,29 @@
-environment=hyprland
+environment=Hyprland
 
 # Start the graphical environment
 if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && [ "$TTY" = "/dev/tty1" ]; then
 
     # XDG Session variables -- I don't exactly recall why I added these; probably because not every WM sets them. See: https://man.sr.ht/~kennylevinsen/greetd/#how-to-set-xdg_session_typewayland
     export XDG_SESSION_TYPE=wayland
-    if [ "$environment" = "hyprland" ]; then
-      export XDG_CURRENT_DESKTOP=Hyprland
-      export XDG_SESSION_DESKTOP=Hyprland
-    elif [ "$environment" = "sway" ]; then
+    case "$environment" in
+    sway|Hyprland|qtile)
       export XDG_CURRENT_DESKTOP=$environment
       export XDG_SESSION_DESKTOP=$environment
-    elif [ "$environment" = "qtile" ]; then
-      export XDG_CURRENT_DESKTOP=$environment
-      export XDG_SESSION_DESKTOP=$environment
-    fi
+      ;;
+    *)
+      #export XDG_CURRENT_DESKTOP=sway
+      #export XDG_SESSION_DESKTOP=sway
+      ;;
+    esac
 
     # Toolkit stuff
     export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
     # Force native wayland
     export MOZ_ENABLE_WAYLAND=1
-    export GDK_BACKEND=wayland,x11,*
+    export GDK_BACKEND="wayland,x11,*"
     export QT_QPA_PLATFORM="wayland;xcb"
-    export SDL_VIDEODRIVER=wayland
+    export SDL_VIDEODRIVER="wayland,x11"
     export CLUTTER_BACKEND=wayland
     export ECORE_EVAS_ENGINE=wayland_egl
     export ELM_ENGINE=wayland_egl
@@ -71,12 +71,14 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
 
       gsettings set org.gnome.desktop.wm.preferences button-layout ':' # Remove titlebar buttons -- it's important to make this gsettings command run every time I log in, because if I just set it once, it will get reset when I log into a DE such as plasma.
 
-      if [ "$environment" = "hyprland" ]; then
+      if [ "$environment" = "Hyprland" ]; then
           export HYPRCURSOR_THEME="theme_NotwaitaBlack"
           export HYPRCURSOR_SIZE="$XCURSOR_SIZE"
           exec Hyprland
       elif [ "$environment" = "qtile" ]; then
           exec qtile start -b wayland
+      elif [ "$environment" = "river" ]; then
+          #exec river
       fi
     fi
 

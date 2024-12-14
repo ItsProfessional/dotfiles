@@ -6,7 +6,6 @@ alias cp='cp -v' #-iv
 alias mv='mv -v' #-iv
 alias rm='rm -v' #-vI
 alias mkdir='mkdir -pv'
-alias adb='HOME="$XDG_DATA_HOME"/android adb'
 alias trash='trash -v'
 alias trash-put='trash-put -v'
 alias trash-restore='echo 0 | trash-restore $(trash-list | grep $(pwd) --color=never | sed "s/^[^/]*//" | fzf) > /dev/null'
@@ -18,7 +17,6 @@ alias less='less -R --use-color -Dd+r\$Du+b\$'
 alias ip='ip -color=auto'
 
 # core stuff
-alias ps='ps auxf'
 alias ping='ping -c 10'
 alias tree='tree -CAhF --dirsfirst'
 alias treed='tree -CAFd'
@@ -30,6 +28,8 @@ alias date='date "+%a %d/%m/%y %I:%M:%S:%3N %p"'
 alias multitail='multitail --no-repeat -c'
 alias fd='fd -u'
 alias dust='dust --reverse'
+alias emacs='emacsclient -c -a emacs'
+#alias foot='footclient'
 
 # replace programs
 alias cat='bat'

@@ -5,8 +5,8 @@
     "height": 25,
     "spacing": -4,
 
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["hyprland/window"],
+    "modules-left": ["hyprland/workspaces", "river/tags"],
+    "modules-center": ["hyprland/window", "river/window"],
     "modules-right": ["idle_inhibitor", "pulseaudio", "backlight", "disk", "battery", "clock", "tray"],
 
     "backlight": {
@@ -21,10 +21,14 @@
          "all-outputs": true,
     },
 
+    "river/tags": {
+         //"num-tags": 32,
+    },
+
     "hyprland/window": {
          "max-length": 120,
          "rewrite": {
-          "^(.*) — (?:Mozilla Firefox|Firefox Developer Edition)( Private Browsing)?$": "$1",
+          "^(.*) — (Mozilla )?Firefox( Developer Edition| Nightly)?( Private Browsing)?$": "$1",
           "^(.*) - Discord$": "$1",
           "^(.*) • - Sublime Text$": "$1",
           "^(.*) - Code - OSS$": "$1"

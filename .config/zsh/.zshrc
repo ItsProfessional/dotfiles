@@ -37,7 +37,7 @@ zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
-zinit snippet OMZP::command-not-found
+#zinit snippet OMZP::command-not-found
 zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/refs/heads/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # Options
@@ -139,6 +139,13 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[6 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
+
+# https://github.com/ofirgall/tmux-window-name
+tmux-window-name() {
+  [ -n "$TMUX_PLUGIN_MANAGER_PATH" ] && ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+}
+
+add-zsh-hook chpwd tmux-window-name
 
 # Source
 [ -f "${XDG_CONFIG_HOME}/zsh/aliases" ] && source "${XDG_CONFIG_HOME}/zsh/aliases"

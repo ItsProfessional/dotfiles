@@ -1,5 +1,5 @@
 #!/bin/sh
-# Don't save passwords into clipboard history
+# Don't save passwords into clipboard history, i.e. if the current window is keepassxc
 
 . "$(dirname "$0")"/../unwrap.sh
 if [ "$1" = "store" ] && [ "$(hyprctl activewindow -j | jq -r .class)" = "org.keepassxc.KeePassXC" ]; then
