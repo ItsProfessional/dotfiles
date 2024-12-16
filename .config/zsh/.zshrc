@@ -152,8 +152,8 @@ add-zsh-hook chpwd tmux-window-name
 [ -f "${XDG_CONFIG_HOME}/zsh/functions" ] && source "${XDG_CONFIG_HOME}/zsh/functions"
 
 # Shell integrations
-#eval "$(starship init zsh)"
-eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/ohmyposh/base.toml)"
+eval "$(starship init zsh)"
+#eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/ohmyposh/base.toml)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(thefuck --alias)"
