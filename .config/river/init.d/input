@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# keyboard
+riverctl set-repeat 25 300
+
+riverctl list-inputs | while read -r input; do
+    case "$(echo -n "$input" | tr '[:upper:]' '[:lower:]')" in
+        *touch*) # touchpad
+            riverctl input "$input" accel-profile flat
+            riverctl input "$input" pointer-accel 0.30
+            riverctl input "$input" scroll-factor 0.1
+            riverctl input "$input" click-method clickfinger
+            riverctl input "$input" tap enabled
+            riverctl input "$input" drag enabled
+            riverctl input "$input" drag-lock disabled
+            riverctl input "$input" natural-scroll enabled
+            riverctl input "$input" disable-while-typing enabled
+            riverctl input "$input" middle-emulation disabled
+            riverctl input "$input" events disabled-on-external-mouse
+            ;;
+        pointer-*) # mouse (excludes touchpads)
+            riverctl input "$input" accel-profile flat
+            riverctl input "$input" pointer-accel 0.12
+            ;;
+    esac
+done
+

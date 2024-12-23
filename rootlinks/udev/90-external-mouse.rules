@@ -1,0 +1,1 @@
+SUBSYSTEM=="input", KERNEL=="mouse[0-9]*", RUN+="/usr/bin/su iprf -c /home/iprf/scripts/set-touchpad"

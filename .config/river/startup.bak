@@ -1,0 +1,87 @@
+#!/bin/sh
+
+# Allow GUI applications running as root (e.g. gparted) to connect to the session: https://wiki.archlinux.org/title/Running_GUI_applications_as_root
+xhost si:localuser:root
+
+# Import environment into systemd, dbus user session and tmux server
+~/scripts/import-env 2>&1 &
+
+# Update the desktop database
+update-desktop-database "$XDG_DATA_HOME/applications" 2>&1 &
+
+# Enable inhibit_idle when playing audio: https://github.com/ErikReider/SwayAudioIdleInhibit
+sway-audio-idle-inhibit 2>&1 &
+
+# Keep Wayland clipboard even after programs close: https://github.com/Linus789/wl-clip-persist
+# https://github.com/Linus789/wl-clip-persist/issues/12
+wl-clip-persist --clipboard regular --reconnect-tries 0 2>&1 &
+
+# XDG Desktop Portal: https://wiki.hyprland.org/Hypr-Ecosystem/xdg-desktop-portal-hyprland/
+~/scripts/fix-xdp 2>&1 &
+
+# gestures
+# this is slow so background it
+libinput-gestures-setup restart &
+
+# Wallpaper
+# swww
+
+# swww-daemon 2>&1 &
+# swww img $XDG_CONFIG_HOME/wallpaper
+# realpath $XDG_CONFIG_HOME/wallpaper | entr sh -c 'swww img $XDG_CONFIG_HOME/wallpaper 2>&1 &' 2>&1 &
+
+# swaybg
+killall swaybg; swaybg -m fill -i "$XDG_CONFIG_HOME"/wallpaper 2>&1 &
+realpath $XDG_CONFIG_HOME/wallpaper | entr sh -c "killall swaybg; swaybg -m fill -i $XDG_CONFIG_HOME/wallpaper 2>&1 &" 2>&1 &
+
+# Bar
+waybar 2>&1 &
+# killall -SIGUSR2 waybar 2>&1 &
+find "$XDG_CONFIG_HOME"/waybar/* | entr sh -c 'killall waybar; waybar 2>&1 &' 2>&1 &
+
+# On screen display
+mkfifo /tmp/wobpipe
+tail -f /tmp/wobpipe | wob 2>&1 &
+
+# Authentication agent
+/usr/lib/polkit-kde-authentication-agent-1 2>&1 & # lxpolkit
+
+# Notifications
+# dunst 2>&1 &
+# echo "$XDG_CONFIG_HOME"/dunst/dunstrc | entr sh -c 'killall dunst; dunst 2>&1 &' 2>&1 &
+# mako 2>&1 &
+# echo "$XDG_CONFIG_HOME"/mako/config | entr sh -c 'killall dunst; mako 2>&1 &' 2>&1 &
+fnott 2>&1 &
+echo "$XDG_CONFIG_HOME"/fnott/fnott.ini | entr sh -c 'killall fnott; fnott 2>&1 &' 2>&1 &
+  
+# XSETTINGS
+xsettingsd 2>&1 &
+echo "$XDG_CONFIG_HOME"/xsettingsd/xsettingsd.conf | entr sh -c 'killall xsettingsd; xsettingsd 2>&1 &' 2>&1 &
+
+# Tray applets
+nm-applet 2>&1 &
+#blueman-applet 2>&1 &
+#system-config-printer-applet 2>&1 &
+  
+# Playerctl
+playerctld daemon 2>&1 &
+ 
+# Idle management
+hypridle 2>&1 &
+echo "$XDG_CONFIG_HOME"/hypr/hypridle.conf | entr sh -c "killall hypridle; hypridle 2>&1 &" 2>&1 &
+
+# Key mapper
+kanata -n --cfg "$XDG_CONFIG_HOME"/kanata/config.kbd 2>&1 &
+echo "$XDG_CONFIG_HOME"/kanata/config.kbd | entr sh -c "killall kanata; kanata -n --cfg $XDG_CONFIG_HOME/kanata/config.kbd 2>&1 &" 2>&1 &
+(sleep 1 && . "$XDG_CONFIG_HOME"/river/init.d/input) & # reconfigure inputs as kanata adds another device
+  
+# Udiksie
+udiskie 2>&1 &
+  
+# Clipboard manager
+wl-paste --type text --watch cliphist store 2>&1 &
+wl-paste --type image --watch cliphist store 2>&1 &
+
+# Emacs
+emacs --daemon 2>&1 &
+

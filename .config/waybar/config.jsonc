@@ -23,6 +23,7 @@
 
     "river/tags": {
          //"num-tags": 32,
+        //"hide-vacant": true,
     },
 
     "hyprland/window": {
@@ -31,7 +32,7 @@
           "^(.*) — (Mozilla )?Firefox( Developer Edition| Nightly)?( Private Browsing)?$": "$1",
           "^(.*) - Discord$": "$1",
           "^(.*) • - Sublime Text$": "$1",
-          "^(.*) - Code - OSS$": "$1"
+          "^(.*) - Code - OSS$": "$1",
         },
     },
 

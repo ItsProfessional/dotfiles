@@ -1,0 +1,198 @@
+#!/bin/sh
+mod="Super"
+
+# General
+# Application launcher
+# bemenu
+# riverctl map normal $mod D spawn "bemenu-run" # binaries
+# riverctl map normal $mod+Shift D spawn "j4-dmenu-desktop --dmenu=bemenu" # desktop files
+
+# tofi
+# riverctl map normal $mod D spawn '$(tofi-run)'
+# riverctl map normal $mod+Shift D spawn '$(tofi-drun)'
+
+# rofi
+riverctl map normal $mod D spawn "rofi -show run" # binaries
+riverctl map normal $mod+Shift D spawn "rofi -show drun" # desktop files
+riverctl map normal $mod W spawn "rofi -show window" # windows
+riverctl map normal $mod T spawn "rofimoji" # emojis
+
+# fuzzel
+# riverctl map normal $mod D spawn "~/scripts/fuzzel-run" # binaries
+# riverctl map normal $mod+Shift D spawn "fuzzel" # desktop files
+
+# Bar
+riverctl map          normal $mod Semicolon spawn "killall -SIGUSR1 waybar"
+riverctl map          normal None "$mod"_L  spawn "killall -SIGUSR1 waybar"
+riverctl map          normal None "$mod"_R  spawn "killall -SIGUSR1 waybar"
+riverctl map -release normal $mod "$mod"_L  spawn "killall -SIGUSR1 waybar"
+riverctl map -release normal $mod "$mod"_R  spawn "killall -SIGUSR1 waybar"
+
+# wl-kbptr
+riverctl map normal $mod A spawn "killall wl-kbptr; wl-kbptr; wlrctl pointer click left"
+
+# Reload
+#riverctl map normal $mod+Shift R spawn "riverctl reload"
+
+# Exit
+riverctl map normal $mod+Shift E exit
+
+# Focus previous tag
+riverctl map normal $mod Tab focus-previous-tags
+
+# Focus previous view
+#riverctl map normal $mod+Shift Tab focus-follows
+
+# Clear notifications
+#riverctl map normal $mod Semicolon spawn "dunstctl close-all"
+#riverctl map normal $mod Semicolon spawn "makoctl dismiss --all"
+riverctl map normal $mod Semicolon spawn "fnottctl dismiss all"
+
+# Screenshot
+riverctl map normal $mod P spawn "grimblast --freeze --cursor copy area"
+riverctl map normal $mod+Shift P spawn "grimblast --freeze --cursor save area"
+riverctl map normal $mod+Alt P spawn "grimblast --freeze copy screen"
+
+riverctl map normal None Print spawn "grimblast --freeze --cursor copy area"
+riverctl map normal Shift Print spawn "grimblast --freeze --cursor save area"
+riverctl map normal Alt Print spawn "grimblast --freeze copy screen"
+
+# Color picker
+riverctl map normal $mod+Shift C spawn "hyprpicker | wl-copy"
+
+# Clipboard manager
+riverctl map normal $mod V spawn 'out=$(cliphist list | dmenu | cliphist decode) && echo -n "$out" | wl-copy'
+
+# Lock
+riverctl map normal $mod+Control L spawn "~/scripts/lock"
+
+# Programs
+riverctl map normal $mod Return spawn "$TERMINAL"
+riverctl map normal $mod E spawn "nemo"
+riverctl map normal $mod B spawn "firefox"
+riverctl map normal $mod+Shift P spawn "firefox --private-window"
+
+# View focus
+riverctl map normal $mod H focus left
+riverctl map normal $mod J focus down
+riverctl map normal $mod K focus up
+riverctl map normal $mod L focus right
+
+# Move focused view
+riverctl map normal $mod+Shift H move left
+riverctl map normal $mod+Shift J move down
+riverctl map normal $mod+Shift K move up
+riverctl map normal $mod+Shift L move right
+
+# Resize view
+riverctl map normal $mod+Alt H resize -15 0
+riverctl map normal $mod+Alt J resize 0 15
+riverctl map normal $mod+Alt K resize 0 -15
+riverctl map normal $mod+Alt L resize 15 0
+
+# Toggle floating (s for "stack")
+riverctl map normal $mod S toggle-float
+
+# Fullscreen view
+riverctl map normal $mod F toggle-fullscreen
+riverctl map normal $mod+Shift F toggle-fullscreen
+riverctl map normal $mod+Control F toggle-fullscreen
+#bind = $mod, f, fullscreenstate, 1, 3 # maximize (but fake a fullscreen)
+#bind = $mod+SHIFT, f, fullscreen, 0 # fullscreen
+#bind = $mod+CTRL, f, fullscreenstate, 0, 3 # normal (but fake a fullscreen)
+
+# Close view
+riverctl map normal $mod Q close
+
+# Select and kill a view
+#bind = $mod+SHIFT, q, exec, hyprctl kill
+
+# Alt dragging
+riverctl map-pointer normal $mod BTN_LEFT move-view
+riverctl map-pointer normal $mod BTN_RIGHT resize-view
+riverctl map-pointer normal $mod BTN_MIDDLE toggle-float
+
+# Swap and focus master
+#bind = $mod, m, layoutmsg, focusmaster master
+#bind = $mod+SHIFT, m, layoutmsg, swapwithmaster master
+
+# Move view in special workspace to current workspace
+#bind = $mod+SHIFT, x, movetoworkspace, e+0
+
+# Tags
+for i in $(seq 1 9)
+do
+    tags=$((1 << ($i - 1)))
+
+    # focus tag
+    riverctl map normal $mod $i set-focused-tags $tags
+
+    # tag focused view with tag
+    riverctl map normal $mod+Shift $i set-view-tags $tags
+
+    # toggle focus of tag
+    riverctl map normal $mod+Control $i toggle-focused-tags $tags
+
+    # toggle tag of focused view
+    riverctl map normal $mod+Shift+Control $i toggle-view-tags $tags
+done
+#bind = $mod, 0, workspace, 10
+#bind = $mod, F1, workspace, name:F1
+#bind = $mod, F2, workspace, name:F2
+#bind = $mod, F3, workspace, name:F3
+#bind = $mod, F4, workspace, name:F4
+#bind = $mod, F5, workspace, name:F5
+#bind = $mod, F6, workspace, name:F6
+#bind = $mod, F7, workspace, name:F7
+#bind = $mod, F8, workspace, name:F8
+#bind = $mod, F9, workspace, name:F9
+#bind = $mod, F10, workspace, name:F10
+#bind = $mod, F11, workspace, name:F11
+#bind = $mod, F12, workspace, name:F12
+#bind = $mod+SHIFT, z, movetoworkspacesilent, special:general
+
+# focus all tags
+# tag focused view with all tags
+all_tags=$(((1 << 32) - 1))
+riverctl map normal $mod 0 set-focused-tags $all_tags
+riverctl map normal $mod+Shift 0 set-view-tags $all_tags
+
+# Function keys
+for mode in normal locked
+do
+    # Backlight
+    riverctl map $mode None       XF86MonBrightnessDown spawn '~/scripts/backlight down'
+    riverctl map $mode None       XF86MonBrightnessUp   spawn '~/scripts/backlight up'
+
+    # Volume
+    riverctl map $mode None       XF86AudioMute         spawn '~/scripts/volume mute'
+    riverctl map $mode Shift      XF86AudioMute         spawn '~/scripts/volume deafen'
+    riverctl map $mode None       XF86AudioLowerVolume  spawn '~/scripts/volume down'
+    riverctl map $mode None       XF86AudioRaiseVolume  spawn '~/scripts/volume up'
+
+    # Media
+    riverctl map $mode None       XF86AudioPrev         spawn 'playerctl previous'
+    riverctl map $mode None       XF86AudioPlay         spawn 'playerctl play-pause'
+    riverctl map $mode None       XF86AudioMedia        spawn 'playerctl play-pause'
+    riverctl map $mode None       XF86AudioNext         spawn 'playerctl next'
+
+    # Alternative bindings using modifier key
+    # Backlight
+    riverctl map $mode $mod       Down                  spawn '~/scripts/backlight down'
+    riverctl map $mode $mod       Up                    spawn '~/scripts/backlight up'
+
+    # Volume
+    riverctl map $mode $mod       Left                  spawn '~/scripts/volume down'
+    riverctl map $mode $mod       Right                 spawn '~/scripts/volume up'
+
+    # Media
+    riverctl map $mode $mod       BracketLeft           spawn 'playerctl previous'
+    riverctl map $mode $mod       Period                spawn 'playerctl play-pause'
+    riverctl map $mode $mod       BracketRight          spawn 'playerctl next'
+done
+
+# modes
+riverctl declare-mode passthrough
+riverctl map normal $mod F11 enter-mode passthrough
+riverctl map passthrough $mod F11 enter-mode normal
+

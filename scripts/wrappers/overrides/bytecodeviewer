@@ -1,4 +1,5 @@
 #!/bin/sh
+# The default /usr/bin/bytecodeviewer script uses bashisms as well as the #!/bin/sh shebang and so it breaks with dash
 
 opts="
   -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel

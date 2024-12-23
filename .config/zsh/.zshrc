@@ -37,7 +37,7 @@ zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
-#zinit snippet OMZP::command-not-found
+zinit snippet OMZP::command-not-found
 zinit snippet https://raw.githubusercontent.com/catppuccin/zsh-syntax-highlighting/refs/heads/main/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # Options

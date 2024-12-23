@@ -1,0 +1,8 @@
+#!/bin/sh
+
+riverctl background-color 0x11111B
+riverctl border-color-focused 0x45475A
+riverctl border-color-unfocused 0x313244
+riverctl border-width 1
+riverctl xcursor-theme "$XCURSOR_THEME" "$XCURSOR_SIZE" # set in .zshenv
+

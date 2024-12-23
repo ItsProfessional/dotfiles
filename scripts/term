@@ -1,4 +1,4 @@
-#!/bin/sh -i
+#!/bin/sh
 # Note: $TERMINAL is exported in .zshenv
 
 if [ "$#" -lt 1 ]; then
@@ -17,7 +17,7 @@ fi
 COMMAND="${SHELL:-"/bin/sh"} -ic '\
   $@; \
   case \"\$USEHOLDMODE\" in \
-    1) read ;; \
+    1) read;; \
     2) \
       tput smso; \
       echo \"Press any key to return\c\"; \
@@ -25,8 +25,8 @@ COMMAND="${SHELL:-"/bin/sh"} -ic '\
       oldstty=\$(stty -g); \
       stty -icanon -echo min 1 time 0; \
       dd bs=1 count=1 >/dev/null 2>&1; \
-      stty \"\$oldstty\" ;; \
-    3) ${SHELL:-"/bin/sh"} -i ;; \
+      stty \"\$oldstty\";; \
+    3) ${SHELL:-"/bin/sh"} -i;; \
   esac \
 '"
 

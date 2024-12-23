@@ -1,0 +1,41 @@
+#!/bin/sh
+mod="Super"
+
+# focus the next/previous view in the layout stack
+riverctl map normal $mod J focus-view next
+riverctl map normal $mod K focus-view previous
+
+# swap the focused view with the next/previous
+# view in the layout stack
+riverctl map normal $mod+Shift J swap next
+riverctl map normal $mod+Shift K swap previous
+
+# the top of the layout stack
+#riverctl map normal $mod Return zoom
+
+# decrease/increase the main ratio of rivertile(1)
+riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
+
+# increment/decrement the main count of rivertile(1)
+riverctl map normal $mod+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal $mod+Shift L send-layout-cmd rivertile "main-count -1"
+
+# move views
+riverctl map normal $mod+Alt H move left 100
+riverctl map normal $mod+Alt J move down 100
+riverctl map normal $mod+Alt K move up 100
+riverctl map normal $mod+Alt L move right 100
+
+# resize views
+riverctl map normal $mod+Alt+Shift H resize horizontal -100
+riverctl map normal $mod+Alt+Shift J resize vertical 100
+riverctl map normal $mod+Alt+Shift K resize vertical -100
+riverctl map normal $mod+Alt+Shift L resize horizontal 100
+
+# change layout orientation
+riverctl map normal $mod Up    send-layout-cmd rivertile "main-location top"
+riverctl map normal $mod Right send-layout-cmd rivertile "main-location right"
+riverctl map normal $mod Down  send-layout-cmd rivertile "main-location bottom"
+riverctl map normal $mod Left  send-layout-cmd rivertile "main-location left"
+

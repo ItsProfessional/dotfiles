@@ -5,26 +5,33 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export XDG_STATE_DIR=$HOME/.local/state
+export XDG_BIN_HOME=$HOME/.local/bin # $XDG_DATA_HOME/../bin
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 
 # Path
+  # No duplicates
   typeset -U path
 
-  # Add scripts directories to path
-  # prepend
-  path=("$XDG_CONFIG_HOME/emacs/bin" $path)
-  path=("$XDG_CONFIG_HOME/tmux/plugins/tmux-open-nvim/scripts" $path)
+  # add to path
+  ## prepend
+  path=("$XDG_CONFIG_HOME/emacs/bin" $path) # doom emacs
+  path=("$XDG_CONFIG_HOME/tmux/plugins/tmux-open-nvim/scripts" $path) # tmux-open-nvim
 
-  path=("$HOME/scripts" "$HOME/.local/bin" "$XDG_DATA_HOME/cargo/bin" $path)
-  for _dir in $(find "$HOME"/scripts/ -type d); do
-    path=("$_dir" $path)
+  # scripts
+  path=("$HOME/scripts" "$XDG_BIN_HOME" "$XDG_DATA_HOME/cargo/bin" $path)
+  for dir in $(find "$HOME"/scripts/ -name \* -type d); do
+    path=("$dir" $path)
   done
 
-  # append
-  for _dir in $(find /opt/ -mindepth 1 -maxdepth 1 -type d); do
-    path+=("$_dir")
+  ## append
+  # /opt
+  for dir in $(find /opt/ -mindepth 1 -maxdepth 1 -type d); do
+    path+=("$dir")
   done
+
+  # /usr/lib
+  path+=("/usr/lib") # doom emacs
 
   export PATH
 

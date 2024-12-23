@@ -1,0 +1,7 @@
+#!/bin/sh
+# https://wiki.archlinux.org/title/Abduco#Limitations
+# "The process started in an abduco session retains the TERM variable it has been invoked with. While reattaching, a compatible type of terminal must be used."
+
+. "$(dirname "$0")"/../unwrap.sh
+exec env TERM=abduco "$(basename "$0")" "$@"
+

@@ -1,4 +1,8 @@
 #!/bin/sh
+# https://github.com/b3nj5m1n/xdg-ninja/blob/main/programs/android.json
+# https://github.com/b3nj5m1n/xdg-ninja/pull/293
+# https://github.com/b3nj5m1n/xdg-ninja/pull/301
+
 . "$(dirname "$0")"/../unwrap.sh
 exec env HOME="$XDG_DATA_HOME"/android "$(basename "$0")" "$@"
 

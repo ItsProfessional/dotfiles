@@ -1,0 +1,6 @@
+#!/bin/sh
+
+riverctl attach-mode bottom
+riverctl hide-cursor when-typing enabled
+# riverctl hide-cursor timeout 5
+

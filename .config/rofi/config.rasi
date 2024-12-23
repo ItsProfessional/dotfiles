@@ -5,8 +5,7 @@ configuration {
  matching: "fuzzy";
 
  terminal: "/home/iprf/scripts/term";
- //run-command: "env TERMINAL= {terminal} {cmd}";
- run-command: "foot {cmd}";
+ run-command: "env TERMINAL= {terminal} {cmd}";
  run-shell-command: "env USEHOLDMODE=2 {terminal} {cmd}";
 
  run {

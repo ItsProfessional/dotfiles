@@ -1,5 +1,6 @@
 #!/bin/sh
 # Enables the touchpad if and only if there aren't any external mice connected. 
+# Made redundant by libinput's Send Events Mode set to "disabled on external mouse", but hyprland doesn't support this libinput option
 
 # set HYPRLAND_INSTANCE_SIGNATURE from tmux
 eval "$(tmux showenv -gs HYPRLAND_INSTANCE_SIGNATURE)"
@@ -8,13 +9,13 @@ eval "$(tmux showenv -gs HYPRLAND_INSTANCE_SIGNATURE)"
 # check if mouse is connected
 ENABLED=true
 for MOUSE in $(find /sys/class/input -name mouse\*); do
-    # exclude touchpad, virtual devices, or elan devices
+    # exclude devices that aren't physically connected mice
     grep -iq -E "touchpad|elan|virtual|kanata" "$MOUSE"/device/name && continue
     ENABLED=false;
     break
 done
 
 # enable/disable the touchpad
-TOUCHPAD=$(hyprctl devices | grep -i touchpad | xargs)
+TOUCHPAD=$(hyprctl devices | grep -i touch | xargs)
 hyprctl -r -- keyword "device["$TOUCHPAD"]:enabled" "$ENABLED"
 
