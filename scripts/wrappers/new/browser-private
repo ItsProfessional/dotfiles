@@ -1,0 +1,14 @@
+#!/bin/sh
+# launch $BROWSER in private/incognito mode
+
+case "$BROWSER" in
+  firefox)
+    exec "$BROWSER" --private-window "$@";;
+  chromium|chrome|brave)
+    exec "$BROWSER" --incognito "$@";;
+
+  *)
+    echo Unsupported browser: "$BROWSER"
+    exit 1;;
+esac
+

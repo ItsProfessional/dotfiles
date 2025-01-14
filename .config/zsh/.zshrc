@@ -158,4 +158,5 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 eval "$(thefuck --alias)"
 eval "$(batman --export-env)"
+[ -n "$TMUX" ] && eval "$(tmux showenv -s)"
 

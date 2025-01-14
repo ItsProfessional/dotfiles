@@ -53,6 +53,7 @@ save_to_clipboard = false
 
 [window]
 opacity = 1
+dimensions = { columns = 140, lines = 34 }
 
 [window.class]
 general = "Alacritty"

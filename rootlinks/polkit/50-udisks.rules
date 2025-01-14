@@ -1,0 +1,10 @@
+// https://gist.github.com/Scrumplex/8f528c1f63b5f4bfabe14b0804adaba7
+
+polkit.addRule(function(action, subject) {
+    if (subject.isInGroup("wheel")) {
+        if (action.id.startsWith("org.freedesktop.udisks2.")) {
+            return polkit.Result.YES;
+        }
+    }
+});
+

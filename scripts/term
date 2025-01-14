@@ -29,16 +29,20 @@ COMMAND="${SHELL:-"/bin/sh"} -ic '\
     3) ${SHELL:-"/bin/sh"} -i;; \
   esac \
 '"
+[ "$USETMUX" = 1 ] && COMMAND="tmux new $COMMAND"
+# COMMAND="set -m; "$@" & tmux rename "'$!'"; fg"
 
 case "$TERMINAL" in
   "")
     eval exec "$COMMAND";;
-  xterm|alacritty)
+  xterm|alacritty) # note: foot, ghostty, etc. also support -e for compatibility but I prefer to use their dedicated flags
     eval exec "$TERMINAL" -e "$COMMAND";;
   foot|kitty)
     eval exec "$TERMINAL" -- "$COMMAND";;
   wezterm)
     eval exec "$TERMINAL" start -- "$COMMAND";;
+  ghostty)
+    eval exec "$TERMINAL" --initial-command='"$COMMAND"';;
 
   *)
     echo Unsupported terminal: "$TERMINAL"

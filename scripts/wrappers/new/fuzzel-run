@@ -1,5 +1,8 @@
 #!/bin/sh
 # launch fuzzel with path executables instead of desktop files as it is by default
 
-exec env TERMINAL= "$HOME"/scripts/term $(dmenu_path | fuzzel --dmenu)
+COMMAND="$(dmenu_path | fuzzel --dmenu)"
+[ $? -ne 0 ] && exit 0 # don't continue if nothing was selected
+
+eval exec env TERMINAL= "$HOME"/scripts/term "$COMMAND"
 

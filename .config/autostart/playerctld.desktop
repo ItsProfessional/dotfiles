@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=playerctld daemon
+GenericName[en_US]=
+GenericName=
+Icon=
+MimeType=
+Name[en_US]=playerctld
+Name=playerctld
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

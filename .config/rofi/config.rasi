@@ -28,6 +28,7 @@ configuration {
  kb-mode-previous:    "Shift+Left,Control+Shift+Tab,Control+h";
  kb-remove-char-back: "BackSpace";
  kb-mode-complete:    "Alt+Tab";
+ kb-cancel:           "Escape,Control+g,Control+bracketleft,Super+Escape";
 }
 
 @theme "~/.config/rofi/themes/center.rasi"

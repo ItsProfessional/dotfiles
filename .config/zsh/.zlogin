@@ -1,4 +1,4 @@
-environment=river
+environment=Hyprland
 
 # Start the graphical environment
 if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && [ "$TTY" = "/dev/tty1" ]; then
@@ -74,13 +74,18 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
 
     # Start the environment
     COMMAND=""
-    if [ "$environment" = "plasma" ]; then
+    if [ "$environment" = "plasma" ] || [ "$environment" = "kde" ]; then
       export QT_QPA_PLATFORMTHEME=kde
-      COMMAND="startplasma-wayland"
+      COMMAND="/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland"
     else
-      export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
-      #export QT_QPA_PLATFORMTHEME=kde
-      #export KDE_SESSION_VERSION=6
+      #export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
+
+      # https://www.reddit.com/r/linux/comments/1c2ts9p/guide_a_potentially_better_way_to_theme_qt_apps/
+      export XDG_CURRENT_DESKTOP=KDE
+      export QT_QPA_PLATFORMTHEME=kde
+      export QT_PLATFORM_PLUGIN=kde
+      export KDE_SESSION_VERSION=6
+      export KDE_FULL_SESSION=true
 
       # Dconf options - sometimes they get reset by DE's like plasma, so I set them on start
       if which gsettings; then
@@ -89,6 +94,7 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
         dconf write /org/gnome/desktop/wm/preferences/button-layout "':'"
       fi
 
+      # Environment specific configuration
       if [ "$environment" = "Hyprland" ]; then
           export HYPRCURSOR_THEME="theme_NotwaitaBlack"
           export HYPRCURSOR_SIZE="$XCURSOR_SIZE"
@@ -98,9 +104,9 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       elif [ "$environment" = "river" ]; then
           COMMAND="river"
       fi
-
-      eval exec "$COMMAND" > /tmp/whateverbro
     fi
+
+    eval exec "$COMMAND"
 
 fi
 

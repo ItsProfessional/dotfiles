@@ -22,7 +22,7 @@
     },
 
     "river/tags": {
-         //"num-tags": 32,
+         "num-tags": 32,
         //"hide-vacant": true,
     },
 
@@ -120,8 +120,8 @@
     "battery": {
         "states": {
             "good": 85,
-            "warning": 40,
-            "critical": 30
+            "warning": 30,
+            "critical": 25
         },
         //"format": "{capacity}%",
         //"format-charging": "{capacity}%^",

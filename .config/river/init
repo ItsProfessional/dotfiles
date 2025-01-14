@@ -1,5 +1,5 @@
 #!/bin/sh
-trap 'tmp="$(mktemp)"; jobs -p > "$tmp"; xargs kill < "$tmp"; rm "$tmp"' INT TERM HUP
+trap 'tmp="$(mktemp)"; jobs -p > "$tmp"; xargs kill < "$tmp"; rm "$tmp"' INT QUIT TERM HUP
 
 for f in $XDG_CONFIG_HOME/river/init.d/*; do
   "$f" &

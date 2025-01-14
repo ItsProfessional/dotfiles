@@ -11,8 +11,8 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.hide_mouse_cursor_when_typing = false
 config.default_cursor_style = 'SteadyBar'
-config.initial_rows = 34
 config.initial_cols = 140
+config.initial_rows = 34
 config.disable_default_mouse_bindings = true
 config.window_close_confirmation = 'NeverPrompt'
 

@@ -1,21 +1,32 @@
 #!/bin/sh
-# Enables the touchpad if and only if there aren't any external mice connected. 
-# Made redundant by libinput's Send Events Mode set to "disabled on external mouse", but hyprland doesn't support this libinput option
-
-# set HYPRLAND_INSTANCE_SIGNATURE from tmux
-eval "$(tmux showenv -gs HYPRLAND_INSTANCE_SIGNATURE)"
-[ -z "$HYPRLAND_INSTANCE_SIGNATURE" ] && exit 1
+# Toggles touchpad whether mouse is connected/disconnected.
+# Made redundant by libinput's Send Events Mode set to "disabled on external mouse", but hyprland and plasma don't support this libinput option
 
 # check if mouse is connected
-ENABLED=true
+MOUSEEXISTS=0
 for MOUSE in $(find /sys/class/input -name mouse\*); do
     # exclude devices that aren't physically connected mice
     grep -iq -E "touchpad|elan|virtual|kanata" "$MOUSE"/device/name && continue
-    ENABLED=false;
+    MOUSEEXISTS=1
     break
 done
 
-# enable/disable the touchpad
-TOUCHPAD=$(hyprctl devices | grep -i touch | xargs)
-hyprctl -r -- keyword "device["$TOUCHPAD"]:enabled" "$ENABLED"
+# find touchpad
+for INPUT in $(find /sys/class/input -name input\*); do
+    grep -iq -E "touchpad" "$INPUT"/name || continue
+    TOUCHPAD=$INPUT
+    break
+done
+
+# set inhibited setting
+echo "$MOUSEEXISTS" > "$TOUCHPAD"/inhibited
+
+# loop through each hyprland instance
+#for i in $(hyprctl instances -j | jq ".[].instance" -r); do
+    #export HYPRLAND_INSTANCE_SIGNATURE=$i
+
+    # enable/disable the touchpad
+    #TOUCHPAD="$(hyprctl devices -j | jq -r '.mice[] | select(.name | contains("touchpad")) | .name')"
+    #hyprctl -r -- keyword "device["$TOUCHPAD"]:enabled" "$ENABLED"
+#done
 

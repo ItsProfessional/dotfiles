@@ -1,0 +1,6 @@
+#!/bin/sh
+# Toggle autohide behavior of the panel
+# https://nathanupchurch.com/blog/kde-plasma-side-panel/#setting-up-the-script
+
+qdbus org.kde.plasmashell /PlasmaShell evaluateScript "panel = panelById(panelIds[0]); panel.hiding === 'autohide' ? panel.hiding = 'windowsgobelow' : panel.hiding = 'autohide';"
+

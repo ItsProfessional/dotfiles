@@ -1,22 +1,26 @@
 #!/bin/sh
+# script for running evsieve
+COMMAND="evsieve"
 
-KEYBOARD_PATH="/dev/input/by-path/platform-i8042-serio-0-event-kbd"
-MOUSE_PATH="/dev/input/by-path/pci-0000:00:14.0-usb-0:1:1.0-event-mouse"
+while read -r input; do
+    case "$input" in
+        *-mouse)
+            COMMAND="$COMMAND \\
+            --input $input grab \\
+            --hook btn:middle exec-shell=\"wl-copy -pc; xsel -nc\" \\
+            --output"
+            ;;
+        *-kbd)
+            COMMAND="$COMMAND \\
+            --input $input grab \\
+            --map key:capslock key:esc \\
+            --map key:rightalt key:rightmeta \\
+            --output"
+            ;;
+    esac
+done <<EOF
+$(find /dev/input/by-path -name \*-event-\* | while read -r symlink; do echo "$(realpath "$symlink") $symlink"; done | awk '!seen[$1]++ { print $2 }')
+EOF
 
-EVSIEVE_CMD="exec evsieve"
-
-# Check if the keyboard path exists
-[ -e "$KEYBOARD_PATH" ] && EVSIEVE_CMD="$EVSIEVE_CMD \\
---input $KEYBOARD_PATH grab \\
---map key:capslock key:esc \\
---map key:rightalt key:rightmeta \\
---output"
-
-# Check if the mouse path exists
-[ -e "$MOUSE_PATH" ] && EVSIEVE_CMD="$EVSIEVE_CMD \\
---input $MOUSE_PATH grab \\
---hook btn:middle exec-shell=\"wl-copy -pc; xsel -nc\" \\
---output"
-
-eval "$EVSIEVE_CMD"
+eval exec "$COMMAND"
 

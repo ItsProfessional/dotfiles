@@ -18,15 +18,15 @@ riverctl map normal $mod W spawn "rofi -show window" # windows
 riverctl map normal $mod T spawn "rofimoji" # emojis
 
 # fuzzel
-# riverctl map normal $mod D spawn "~/scripts/fuzzel-run" # binaries
+# riverctl map normal $mod D spawn "~/scripts/wrappers/new/fuzzel-run" # binaries
 # riverctl map normal $mod+Shift D spawn "fuzzel" # desktop files
 
 # Bar
-riverctl map          normal $mod Semicolon spawn "killall -SIGUSR1 waybar"
-riverctl map          normal None "$mod"_L  spawn "killall -SIGUSR1 waybar"
-riverctl map          normal None "$mod"_R  spawn "killall -SIGUSR1 waybar"
-riverctl map -release normal $mod "$mod"_L  spawn "killall -SIGUSR1 waybar"
-riverctl map -release normal $mod "$mod"_R  spawn "killall -SIGUSR1 waybar"
+riverctl map          normal $mod Semicolon spawn "~/scripts/wrappers/new/waybar-toggle toggle"
+riverctl map          normal None "$mod"_L  spawn "~/scripts/wrappers/new/waybar-toggle hide"
+riverctl map          normal None "$mod"_R  spawn "~/scripts/wrappers/new/waybar-toggle hide"
+riverctl map -release normal $mod "$mod"_L  spawn "~/scripts/wrappers/new/waybar-toggle show"
+riverctl map -release normal $mod "$mod"_R  spawn "~/scripts/wrappers/new/waybar-toggle show"
 
 # wl-kbptr
 riverctl map normal $mod A spawn "killall wl-kbptr; wl-kbptr; wlrctl pointer click left"

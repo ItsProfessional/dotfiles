@@ -1,0 +1,21 @@
+#!/bin/sh
+# hide/show waybar
+# https://github.com/Alexays/Waybar/issues/2516#issuecomment-2283586699
+tmp="/tmp/waybar_hidden"
+
+case $1 in
+show)
+  [ ! -f "$tmp" ] && exit 0 # don't show if already shown
+  rm "$tmp" > /dev/null 2>&1
+  ;;
+hide)
+
+  touch "$tmp"
+  ;;
+toggle)
+  [ -f "$tmp" ] && rm "$tmp" > /dev/null 2>&1 || touch "$tmp"
+  ;;
+esac
+
+killall -SIGUSR1 waybar || exec waybar
+

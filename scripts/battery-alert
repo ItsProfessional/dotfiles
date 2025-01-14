@@ -1,0 +1,56 @@
+#!/bin/sh
+# Flash mute LED when battery is low. Run from battery-alert.timer
+# Inspired by https://github.com/ericmurphyxyz/dotfiles/blob/87f92001d9ae21f2ef4f420b25a78fcbebfb19c8/.local/bin/battery-alert
+
+# Reset LED if script killed
+trap 'echo "$MIN_BRIGHTNESS" > "$BRIGHTNESS_PATH" && exit 0' INT QUIT TERM HUP
+
+# only run if no other instances of the script are running
+if pgrep -x "$(basename "$0")" | grep -v ^$$$ > /dev/null 2>&1; then
+  echo "$(basename "$0"): other instances are running"
+  exit 1
+fi
+
+# Battery percentage at which to notify
+WARNING_LEVEL=30
+CRITICAL_LEVEL=25
+
+# Flash intervals in seconds
+WARNING_DELAY=0.5
+CRITICAL_DELAY=0.1
+
+LED_PATH="/sys/class/leds/hda::mute"
+if [ ! -w "$LED_PATH" ]; then
+  echo "$0: cannot write to $LED_PATH"
+  exit 1
+fi
+
+BRIGHTNESS_PATH="$LED_PATH/brightness"
+MIN_BRIGHTNESS="0"
+MAX_BRIGHTNESS="$(cat $LED_PATH/max_brightness)"
+
+# Get current status
+BATTERY_DISCHARGING="$(acpi -b | grep 'Battery 0' | grep -c 'Discharging')"
+BATTERY_LEVEL="$(acpi -b | grep 'Battery 0' | grep -P -o '[0-9]+(?=%)')"
+
+# Function to flash the LED
+flash_led() { # pass delay as argument
+  while [ "$BATTERY_DISCHARGING" -eq 1 ]; do
+    echo "$MAX_BRIGHTNESS" > "$BRIGHTNESS_PATH"
+    sleep "$1"
+    echo "$MIN_BRIGHTNESS" > "$BRIGHTNESS_PATH"
+    sleep "$1"
+
+    # Update battery status
+    BATTERY_DISCHARGING="$(acpi -b | grep 'Battery 0' | grep -c 'Discharging')"
+  done
+  echo "$MIN_BRIGHTNESS" > "$BRIGHTNESS_PATH"
+}
+
+# Flash LED
+if [ "$BATTERY_LEVEL" -le "$WARNING_LEVEL" ] && [ "$BATTERY_LEVEL" -gt "$CRITICAL_LEVEL" ] && [ "$BATTERY_DISCHARGING" -eq 1 ]; then
+  flash_led "$WARNING_DELAY"
+elif [ "$BATTERY_LEVEL" -le "$CRITICAL_LEVEL" ] && [ "$BATTERY_DISCHARGING" -eq 1 ]; then
+  flash_led "$CRITICAL_DELAY"
+fi
+

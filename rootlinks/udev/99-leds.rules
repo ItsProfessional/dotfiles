@@ -1,0 +1,12 @@
+# Allow members of the "leds" group to write to all leds. This lets non-root users change the keyboard backlight brightness
+# https://github.com/yusefnapora/pixelbook-linux/blob/master/ansible/roles/eve-tweaks/files/keyboard-backlight-udev.rules
+# https://unix.stackexchange.com/questions/20125/how-can-i-change-the-permissions-in-sys-to-alter-the-state-of-a-led-light-using
+
+SUBSYSTEM=="leds", ACTION=="add", RUN+="/bin/chgrp -R wheel /sys%p", RUN+="/bin/chmod -R g=u /sys%p"
+SUBSYSTEM=="leds", ACTION=="change", ENV{TRIGGER}!="none", RUN+="/bin/chgrp -R wheel /sys%p", RUN+="/bin/chmod -R g=u /sys%p"
+
+
+# also touchpads
+SUBSYSTEM=="input", ATTR{name}=="*Touchpad*", ACTION=="add", RUN+="/bin/chgrp -R wheel /sys%p", RUN+="/bin/chmod -R g=u /sys%p"
+SUBSYSTEM=="input", ATTR{name}=="*Touchpad*", ACTION=="change", RUN+="/bin/chgrp -R wheel /sys%p", RUN+="/bin/chmod -R g=u /sys%p"
+

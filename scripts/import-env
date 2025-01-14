@@ -49,3 +49,5 @@ for v in "${_envs[@]}"; do
 	fi
 done
 
+#env | while IFS='=' read -r name value; do tmux setenv "$name" "$value"; done
+

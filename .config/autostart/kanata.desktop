@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=sh -c "kanata -n --cfg ~/.config/kanata/config.kbd"
+GenericName[en_US]=
+GenericName=
+Icon=
+MimeType=
+Name[en_US]=kanata
+Name=kanata
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=

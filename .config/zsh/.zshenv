@@ -9,6 +9,8 @@ export XDG_BIN_HOME=$HOME/.local/bin # $XDG_DATA_HOME/../bin
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 
+export XDG_DATA_DIRS=$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS
+
 # Path
   # No duplicates
   typeset -U path
@@ -35,11 +37,13 @@ export XDG_CONFIG_DIRS=/etc/xdg
 
   export PATH
 
-# Editors, terminal, etc.
+# Default programs
     export VISUAL=nvim
     export EDITOR=nvim
     export DIFFPROG="nvim -d"
     export TERMINAL=foot
+    export BROWSER=firefox
+    export FILE_MANAGER=dolphin
 
 # Change dotfile locations
     # History files

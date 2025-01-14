@@ -6,11 +6,9 @@
 }
 
 window#waybar {
-  background-color: alpha(@base, 0.5);
+  background: alpha(@base, 0.5);
   border-bottom: 1px solid @surface1;
   color: @text;
-  /* transition-property: background-color;
-  transition-duration: .5s; */
 }
 
 window#waybar.hidden {
@@ -32,31 +30,49 @@ button:hover {
 }
 
 #workspaces button, #tags button {
-  padding: 0 8px;
-  background-color: transparent;
+  padding: 0 16px;
+  background: transparent;
   color: @lavender;
+  transition: none; /* no animations */
 }
 
+#workspaces button.active, #tags button.focused,
 #workspaces button:hover, #tags button:hover {
   background: alpha(@surface0, 0.5);
 }
 
 #workspaces button.active, #tags button.focused {
-  background-color: alpha(@surface0, 0.5);
   box-shadow: inset 0 -1px @blue;
 }
 
 #workspaces button.urgent, #tags button.urgent {
-  background-color: @red;
+  background: @red;
+}
+
+/* Hack to hide vacant tags in River */
+/* https://github.com/Alexays/Waybar/issues/2721#issuecomment-1858826297 */
+/* https://github.com/Alexays/Waybar/discussions/2101#discussioncomment-11647572 */
+/* Remove when this option is added: https://github.com/Alexays/Waybar/pull/3823 */
+#tags button:not(.occupied):not(.focused) {
+  font-size: 0;
+  min-width: 0;
+  min-height: 0;
+  margin: -17px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  box-shadow: none;
+  background: transparent;
+  color: @base;
 }
 
 label:focus {
-  background-color: #000000;
+  background: #000000;
 }
 
 tooltip {
   color: @text;
-  background-color: @base;
+  background: @base;
   text-shadow: none;
 }
 
@@ -102,7 +118,7 @@ tooltip {
 
 @keyframes blink {
   to {
-    background-color: #ffffff;
+    background: #ffffff;
     color: #000000;
   }
 }
@@ -120,7 +136,7 @@ tooltip {
 }
 
 #battery.critical:not(.charging) {
-  background-color: #f53c3c;
+  background: #f53c3c;
   color: #ffffff;
   animation-name: blink;
   animation-duration: 0.5s;
@@ -139,11 +155,11 @@ tooltip {
 }
 
 #idle_inhibitor.activated {
-  background-color: @surface0;
+  background: @surface0;
 }
 
 #network.disconnected {
-  background-color: rgba(240, 61, 61, 0.2);
+  background: rgba(240, 61, 61, 0.2);
 }
 
 #pulseaudio, #wireplumber {
@@ -151,17 +167,17 @@ tooltip {
 }
 
 #custom-media {
-  background-color: #66cc99;
+  background: #66cc99;
   color: #2a5c45;
   min-width: 100px;
 }
 
 #custom-media.custom-spotify {
-  background-color: #66cc99;
+  background: #66cc99;
 }
 
 #custom-media.custom-vlc {
-  background-color: #ffa000;
+  background: #ffa000;
 }
 
 #tray {
@@ -174,7 +190,7 @@ tooltip {
 
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: @red;
+  background: @red;
 }
 
 

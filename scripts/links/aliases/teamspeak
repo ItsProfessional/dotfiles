@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd /opt/teamspeak3
+
+export KDEDIRS=
+export KDEDIR=
+export QTDIR=.
+export QT_PLUGIN_PATH=.
+export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
+
+./ts3client_linux_amd64 -platform xcb $@
