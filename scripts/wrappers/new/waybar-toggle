@@ -9,7 +9,6 @@ show)
   rm "$tmp" > /dev/null 2>&1
   ;;
 hide)
-
   touch "$tmp"
   ;;
 toggle)

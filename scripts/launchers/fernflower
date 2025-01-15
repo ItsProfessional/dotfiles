@@ -1,3 +1,4 @@
 #!/bin/sh
 
 exec java -jar /usr/share/idea/plugins/java-decompiler/lib/java-decompiler.jar "$@"
+

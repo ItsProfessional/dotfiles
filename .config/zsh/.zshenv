@@ -31,6 +31,10 @@ export XDG_DATA_DIRS=$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/expor
   for dir in $(find /opt/ -mindepth 1 -maxdepth 1 -type d); do
     path+=("$dir")
   done
+  # ~/portable
+  for dir in $(find $HOME/portable/ -mindepth 1 -maxdepth 1 -type d); do
+    path+=("$dir")
+  done
 
   # /usr/lib
   path+=("/usr/lib") # doom emacs

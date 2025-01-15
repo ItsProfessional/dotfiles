@@ -1,5 +1,5 @@
 #!/bin/sh
-# run program as xwayland
+# run program as xwayland. this is necessary for some programs, as otherwise they refuse to start automatically as xwayland and just crash saying that wayland isn't supported
 
 . "$(dirname "$0")"/../../../unwrap.sh
 exec env QT_QPA_PLATFORM=xcb \

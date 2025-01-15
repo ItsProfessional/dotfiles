@@ -23,7 +23,7 @@
 
     "river/tags": {
          "num-tags": 32,
-        //"hide-vacant": true,
+         "hide-vacant": true,
     },
 
     "hyprland/window": {

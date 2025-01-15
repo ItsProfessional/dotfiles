@@ -1,3 +1,4 @@
 #!/bin/sh
 
-exec wine $XDG_DATA_HOME/wine/drive_c/Program\ Files/HP/HP\ Prime\ Virtual\ Calculator/HPPrime.exe "$@"
+exec env WINEPREFIX="$HOME/portable/wineprefixes/hpprime" wine "$HOME/portable/wineprefixes/hpprime/drive_c/Program Files/HP/HP Prime Virtual Calculator/HPPrime.exe" "$@"
+

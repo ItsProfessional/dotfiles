@@ -147,6 +147,7 @@ alias lcrea='clear'
 alias iclear='clear'
 alias ckear='clear'
 alias cclear='clear'
+alias clea='clear'
 
 # ls
 alias sl='ls'

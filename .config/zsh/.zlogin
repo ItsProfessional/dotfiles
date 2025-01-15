@@ -48,14 +48,14 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       document_font_name="$font_name"
       monospace_font_name="$font_name"
 
-      if which gsettings; then
+      if [ "$(which gsettings)" != "" ]; then
         gsettings set org.gnome.desktop.interface gtk-theme             "$gtk_theme"
         gsettings set org.gnome.desktop.interface icon-theme            "$icon_theme"
         gsettings set org.gnome.desktop.interface cursor-theme          "$cursor_theme"
         gsettings set org.gnome.desktop.interface font-name             "$font_name"
         gsettings set org.gnome.desktop.interface document-font-name    "$document_font_name"
         gsettings set org.gnome.desktop.interface monospace-font-name   "$monospace_font_name"
-      elif which dconf; then
+      elif [ "$(which dconf)" != "" ]; then
         dconf write /org/gnome/desktop/interface/gtk-theme           "'$gtk_theme'"
         dconf write /org/gnome/desktop/interface/icon-theme          "'$icon_theme'"
         dconf write /org/gnome/desktop/interface/cursor-theme        "'$cursor_theme'"
@@ -88,9 +88,9 @@ if [ -z "${DISPLAY}" ] && [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]
       export KDE_FULL_SESSION=true
 
       # Dconf options - sometimes they get reset by DE's like plasma, so I set them on start
-      if which gsettings; then
+      if [ "$(which gsettings)" != "" ]; then
         gsettings set org.gnome.desktop.wm.preferences button-layout ':'
-      elif which dconf; then
+      elif [ "$(which dconf)" != "" ]; then
         dconf write /org/gnome/desktop/wm/preferences/button-layout "':'"
       fi
 

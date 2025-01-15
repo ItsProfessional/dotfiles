@@ -1,0 +1,14 @@
+#!/bin/sh
+# https://askubuntu.com/questions/287845/how-to-configure-pkexec
+
+#. "$(dirname "$0")"/../unwrap.sh
+#exec "$(basename "$0")" env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" "$@"
+
+tmp="$(mktemp)"
+export -p > "$tmp"
+
+. "$(dirname "$0")"/../unwrap.sh
+"$(basename "$0")" sh -c ". $tmp; $@"
+
+rm "$tmp"
+

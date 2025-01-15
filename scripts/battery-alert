@@ -19,6 +19,8 @@ CRITICAL_LEVEL=25
 WARNING_DELAY=0.5
 CRITICAL_DELAY=0.1
 
+BEEPSOUND="/opt/teamspeak3/sound/default/stop_talking.wav"
+
 LED_PATH="/sys/class/leds/hda::mute"
 if [ ! -w "$LED_PATH" ]; then
   echo "$0: cannot write to $LED_PATH"
@@ -37,6 +39,7 @@ BATTERY_LEVEL="$(acpi -b | grep 'Battery 0' | grep -P -o '[0-9]+(?=%)')"
 flash_led() { # pass delay as argument
   while [ "$BATTERY_DISCHARGING" -eq 1 ]; do
     echo "$MAX_BRIGHTNESS" > "$BRIGHTNESS_PATH"
+    pw-play "$BEEPSOUND" &
     sleep "$1"
     echo "$MIN_BRIGHTNESS" > "$BRIGHTNESS_PATH"
     sleep "$1"
